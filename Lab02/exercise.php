@@ -1,3 +1,10 @@
+<?php
+    $name = $_POST["name"];
+    $class = $_POST["class"];
+    $university = $_POST["university"];
+    $hobbies = $_POST["hobbies"];
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -9,13 +16,9 @@
     </head>
     <body>
         <span style="font-size:large;color:blue">Thank you: Got your Input</span>
+        <br>Hello, <?= $name ?>
+        <br>You are studying at <?= $class, $university ?>
         <?php
-            $name = $_POST["name"];
-            $class = $_POST["class"];
-            $university = $_POST["university"];
-            $hobbies = $_POST["hobbies"];
-            echo "<br>Hello, $name";
-            echo "<br>You are studying at $class, $university";
             if (empty($hobbies)) {
                 echo "<br>No hobbies!!";
             } else {
