@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>A simple form</title>
+    </head>
+    <body>
+        <h2 style="color: blue">A simple form</h2>
+        <form action="exercise.php" method="post">
+            <br>
+            Enter name: <input type="text" size="50" maxlength="100" name="name">
+            <br>
+            Enter class: <input type="text" size="50" maxlength="100" name="class">
+            <br>
+            Enter university: <input type="text" size="50" maxlength="100" name="university">
+            <br>
+            Your hobbies? <br>
+            <input type="checkbox" name="hobbies[]" value="football"> football <br>
+            <input type="checkbox" name="hobbies[]" value="basketball"> basketball <br>
+            <input type="checkbox" name="hobbies[]" value="other"> other <br>
+            <br>
+            <input type="submit" value="Click to Submit">
+            <input type="reset" value="Erase and  Restart">
+        </form>
+    </body>
+</html>
