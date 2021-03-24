@@ -1,50 +1,56 @@
+<?php
+function reformat_str_date($date_str) {
+    list($d, $m, $y) = explode('/',$date_str);
+    $new_str_date = $m . "/" . $d . "/" . $y;
+    return $new_str_date;
+}
+
+function check_dob($dob) {
+    list($d, $m, $y) = explode('/',$dob);
+    if (!is_numeric($d) || !is_numeric($m) || !is_numeric($y))
+        return 0;
+    $day = intval($d);
+    $month = intval($m);
+    $year = intval($y);
+    // print $d .  ' ' . $m . " " . $y;
+    if ($day *  $month * $year == 0) return 0;
+    return checkdate($month, $day, $year);
+}
+
+function display_dob($dob) {
+    $date_str = reformat_str_date($dob);
+    $date = strtotime($date_str);    
+    print "DOB: " . date("d, M, Y", $date);
+}
+
+function display_dob_diff($dob1, $dob2, $mode) {
+    $date_str1 = reformat_str_date($dob1);
+    $date1 = date_create($date_str1);  
+    $date_str2 = reformat_str_date($dob2);
+    $date2 = date_create($date_str2);  
+    if ($mode == 1) {
+        $interval = date_diff($date1, $date2);
+        echo "<br>" . $interval -> format("Difference between two dobs is: %a day<br>");
+    } else {
+        $year_diff = $date1 -> diff($date2);
+        echo "Difference between two dobs in year is: " . ($year_diff -> m) / 12 . " years";
+    }
+}
+
+function cal_age($date) {
+    $date_str = reformat_str_date($date);
+    $d = date_create($date_str);
+    $today = new DateTime;
+    $interval = $d -> diff($today);
+    return $interval -> y;
+}
+?>
+
 <html>
     <head><title> Birthday </title></head>
     <h1>Got your input</h1>
     <body>
     <?php
-        function reformat_str_date($date_str) {
-            list($d, $m, $y) = explode('/',$date_str);
-            $new_str_date = $m . "/" . $d . "/" . $y;
-            return $new_str_date;
-        }
-        
-        function check_dob($dob) {
-            list($d, $m, $y) = explode('/',$dob);
-            $day = intval($d);
-            $month = intval($m);
-            $year = intval($y);
-            return checkdate($month, $day, $year);
-        }
-
-        function display_dob($dob) {
-            $date_str = reformat_str_date($dob);
-            $date = strtotime($date_str);    
-            print "DOB: " . date("d, M, Y", $date);
-        }
-
-        function display_dob_diff($dob1, $dob2, $mode) {
-            $date_str1 = reformat_str_date($dob1);
-            $date1 = date_create($date_str1);  
-            $date_str2 = reformat_str_date($dob2);
-            $date2 = date_create($date_str2);  
-            if ($mode == 1) {
-                $interval = date_diff($date1, $date2);
-                echo "<br>" . $interval -> format("Difference between two dobs is: %a day<br>");
-            } else {
-                $year_diff = $date1 -> diff($date2);
-                echo "Difference between two dobs in year is: " . ($year_diff -> m) / 12 . " years";
-            }
-        }
-
-        function cal_age($date) {
-            $date_str = reformat_str_date($date);
-            $d = date_create($date_str);
-            $today = new DateTime;
-            $interval = $d -> diff($today);
-            return $interval -> y;
-        }
-        
         $name1 = $_POST["name1"];
         $dob1 = $_POST["dob1"];
         $name2 = $_POST["name2"];
@@ -52,14 +58,14 @@
 
         print "Name of the first person: " . $name1;
         echo "<br>";
-        if (check_dob($dob1) == false) {
+        if (check_dob($dob1) == 0) {
             print "DOB of the first person is invalid!!<br>";
         } else display_dob($dob1);
         echo "<br>";
 
         print "Name of the second person: " . $name2;
         echo "<br>";
-        if (check_dob($dob2) == false) {
+        if (check_dob($dob2) == 0) {
             print "DOB of the second person is invalid!!<br>";
         } else display_dob($dob2);
         echo "<br>";
