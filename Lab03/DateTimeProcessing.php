@@ -12,7 +12,7 @@
                     <td>Date:</td>
                     <td><select name="day">
                         <?php 
-                        for($i=1;$i<31;$i++)
+                        for($i=1;$i<32;$i++)
                         print("<option> $i </option>"); ?>
                     </select></td>
                     
@@ -64,9 +64,9 @@
     <?php
     if(isset($_POST['name']) && $_POST['name'] !== ''){
         $name = $_POST['name'];
-        $day = $_POST['day'];
-        $month = $_POST['month'];
-        $year = $_POST['year'];
+        $day = intval($_POST['day']);
+        $month = intval($_POST['month']) ;
+        $year = intval($_POST['year']) ;
         $hour = $_POST['hour'];
         if($hour >= 12)
             $another_hour = $hour - 12;
@@ -97,12 +97,17 @@
                     else $numOfDays = 29;
                 else $numOfDays = 28;
 
+
         }
-        print("Hi $name!<br>");
-        print("You have choose to have an appointment on $hour:$minute:$second, $day/$month/$year <br>");
-        print("More information<br>");
-        print("In 12 hours, the time and date is $another_hour:$minute:$second, $day/$month/$year <br>");
-        print("This month has $numOfDays days!");
+        if(checkdate($month,$day,$year)){
+            print("Hi $name!<br>");
+            print("You have choose to have an appointment on $hour:$minute:$second, $day/$month/$year <br>");
+            print("More information<br>");
+            print("In 12 hours, the time and date is $another_hour:$minute:$second, $day/$month/$year <br>");
+            print("This month has $numOfDays days!");
+        }
+        else
+            print("Your date is invalid!");
     }
 
     ?>
