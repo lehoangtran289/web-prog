@@ -11,12 +11,11 @@
     }
     if (!empty($_GET['restart'])) {
         session_unset();
-        $x = rand(1, 100);
+        $x = rand(1, 99);
         $guess_cnt = 1;
         $_SESSION['x'] = $x;
         $_SESSION['guess_cnt'] = $guess_cnt;
     }
-    echo "$x";
 ?>
 
 <!doctype html>
