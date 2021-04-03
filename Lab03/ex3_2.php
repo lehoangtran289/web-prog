@@ -61,6 +61,9 @@ function cal_age($date) {
             exit("Please enter dob of the first person!<br>");
         $name1 = $_POST["name1"];
         $dob1 = $_POST["dob1"];
+        echo "<br>";
+        echo $dob1;
+       
         $name2 = $_POST["name2"];
         $dob2 = $_POST["dob2"];
 
