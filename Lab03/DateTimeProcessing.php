@@ -12,7 +12,7 @@
                     <td>Date:</td>
                     <td><select name="day">
                         <?php 
-                        for($i=1;$i<31;$i++)
+                        for($i=1;$i<32;$i++)
                         print("<option> $i </option>"); ?>
                     </select></td>
                     

@@ -6,7 +6,7 @@ function reformat_str_date($date_str) {
 }
 
 function check_dob($dob) {
-    list($d, $m, $y) = explode('/',$dob);
+    list($d, $m, $y) = explode('[/-]',$dob);
     if (!is_numeric($d) || !is_numeric($m) || !is_numeric($y))
         return 0;
     $day = intval($d);
@@ -51,8 +51,19 @@ function cal_age($date) {
     <h1>Got your input</h1>
     <body>
     <?php
+        if (!isset($_POST["name1"])) 
+            exit("Please enter name of the first person!<br>");
+        if (!isset($_POST["dob1"])) 
+            exit("Please enter dob of the first person!<br>");
+        if (!isset($_POST["name2"])) 
+            exit("Please enter name of the second person!<br>");
+        if (!isset($_POST["dob2"])) 
+            exit("Please enter dob of the first person!<br>");
         $name1 = $_POST["name1"];
         $dob1 = $_POST["dob1"];
+        echo "<br>";
+        echo $dob1;
+       
         $name2 = $_POST["name2"];
         $dob2 = $_POST["dob2"];
 
