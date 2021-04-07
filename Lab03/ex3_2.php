@@ -20,7 +20,7 @@
     function display_dob($dob) {
         $date_str = reformat_str_date($dob);
         $date = strtotime($date_str);
-        print "DOB: " . date("d, M, Y", $date);
+        print "<textarea>" . "DOB: " . date("d, M, Y", $date) . "</textarea>";
     }
     
     function display_dob_diff($dob1, $dob2, $mode) {
@@ -30,10 +30,10 @@
         $date2 = date_create($date_str2);
         if ($mode == 1) {
             $interval = date_diff($date1, $date2);
-            echo "<br>" . $interval->format("Difference between two dobs is: %a day<br>");
+            echo "<textarea>" . $interval->format("Difference between two dobs is: %a day<br>") . "</textarea>";
         } else {
             $year_diff = $date1->diff($date2);
-            echo "Difference between two dobs in year is: " . ($year_diff->y) . " years";
+            echo "<textarea>" . "Difference between two dobs in year is: " . ($year_diff->y) . " years" . "</textarea>";
         }
     }
     
@@ -48,7 +48,16 @@
 ?>
 
 <html>
-    <head><title> Birthday </title></head>
+    <head>
+        <title> Birthday </title>
+        <style type="text/css">
+            textarea {
+                border-style: none;
+                border-color: Transparent;
+                width: 100%;
+            }
+        </style>
+    </head>
     <h1>Got your input</h1>
     <body>
         <?php
@@ -76,14 +85,14 @@
             }
             
             if (!$error) {
-                print "Name of the first person: " . $name1;
+                print "<textarea>Name of the first person: " . $name1 . "</textarea>";
                 echo "<br>";
                 if (check_dob($dob1) == 0) {
                     print "DOB of the first person is invalid!!<br>";
                 } else display_dob($dob1);
                 echo "<br>";
     
-                print "Name of the second person: " . $name2;
+                print "<textarea>Name of the second person: " . $name2 . "</textarea>";
                 echo "<br>";
                 if (check_dob($dob2) == 0) {
                     print "DOB of the second person is invalid!!<br>";
@@ -94,8 +103,8 @@
                     display_dob_diff($dob1, $dob2, 1);
                     $age1 = cal_age($dob1);
                     $age2 = cal_age($dob2);
-                    print $name1 . " is " . $age1 . " years old.<br>";
-                    print $name2 . " is " . $age2 . " years old.<br>";
+                    print "<textarea>" . $name1 . " is " . $age1 . " years old." . "</textarea>";
+                    print "<textarea>" . $name2 . " is " . $age2 . " years old." . "</textarea>";
                     display_dob_diff($dob1, $dob2, 2);
                 }
             }
