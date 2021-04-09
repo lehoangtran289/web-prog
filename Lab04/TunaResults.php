@@ -8,21 +8,21 @@
         <title>Document</title>
     </head>
     <body>
-        <span style="font-size: medium; color: blue; ">Tuna Cafe Results Received</span>
-        
         <?php
             $menu = array('Tuna Casserole', 'Tuna Sandwich', 'Tuna Pie', 'Grilled Tuna', 'Tuna Surprise');
             
-            $prefer = $_GET["prefer"];
-            if (count($prefer) == 0) {
-                echo "oh no!";
-            } else {
+            if (isset($_GET["prefer"])) {
+                echo "<span style=\"font-size: medium; color: blue; \">Tuna Cafe Results Received</span>";
+                $prefer = $_GET["prefer"];
                 echo '<br>Your selection were <ul>';
                 foreach ($prefer as $item) {
                     echo "<li>$menu[$item]</li>";
                 }
                 echo '</ul>';
+            } else {
+                echo "Nothing is selected!";
             }
+        
         ?>
     </body>
 </html>
