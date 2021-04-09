@@ -16,34 +16,10 @@
     
     if (isset($_POST['submitted'])) {
         $sort_type = $_POST['sort_type'];
-        
-        switch ($sort_type) {
-            case 'sort':
-                sort($values);
-                break;
-            case 'rsort':
-                rsort($values);
-                break;
-            case 'usort':
-                usort($values, 'user_sort');
-                break;
-            case 'ksort':
-                ksort($values);
-                break;
-            case 'krsort':
-                krsort($values);
-                break;
-            case 'uksort':
-                uksort($values, 'user_sort');
-                break;
-            case 'asort':
-                asort($values);
-                break;
-            case 'arsort':
-                arsort($values);
-                break;
-            default:
-                uasort($values, 'user_sort');
+        if ($sort_type == 'usort' || $sort_type == 'uksort' || $sort_type == 'uasort') {
+            $sort_type($values, 'user_sort');
+        } else {
+            $sort_type($values);
         }
     }
 ?>
@@ -59,7 +35,6 @@
         <style>
             table, th, td {
                 border: 1px solid black;
-                width: 40%;
             }
             
             th {
