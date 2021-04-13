@@ -9,14 +9,18 @@
     </head>
     <body>
         <?php
-            $servername = '172.17.0.2';
+            $servername = '127.0.0.1';
             $port = '3306';
             $username = 'root';
-            $password = '1';
-            $dbname = 'testDB';
+            $password = '';
+            $database = 'test';
             $table_name = 'Products';
+//            $username = 'b387322b6006bc';
+//            $password = '0739b344';
+//            $servername = "us-cdbr-east-03.cleardb.com";
+//            $database = 'heroku_eedca10c2fc1c8a';
             try {
-                $connect = new PDO("mysql:host=$servername;port=$port;dbname=$dbname", $username, $password);
+                $connect = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
                 // set the PDO error mode to exception
                 $connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 echo "Connected successfully<br>";
@@ -24,7 +28,7 @@
                 try {
                     $connect->query($SQLcmd);
                     print '<span style="font-size:large;color:blue"> Created Table';
-                    print "<i>$table_name</i> in database<i>$dbname</i><br></font>";
+                    print "<i>$table_name</i> in database<i>$database</i><br></font>";
                     print "<br>SQLcmd=$SQLcmd";
                 } catch (PDOException $e) {
                     die ("Table Create Creation Failed SQLcmd = $SQLcmd");
