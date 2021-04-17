@@ -1,4 +1,5 @@
 <?php
+    
     class MethodTest {
         public function __call($name, $arguments) {
             //NOTE: value of $name is case sensitive
@@ -8,7 +9,7 @@
         public static function __callStatic($name, $arguments) {
             //NOTE: value of $name is case sentitive
             echo "Calling static method '$name'" .
-                implode(', ', $arguments). "<br";
+                    implode(', ', $arguments) . "<br";
         }
     }
     
@@ -25,9 +26,9 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>MethodOverLoading</title>
     </head>
     <body>
-        
+    
     </body>
 </html>

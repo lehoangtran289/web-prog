@@ -1,4 +1,5 @@
 <?php
+    
     class PropertyTest {
         /** Location for overloaded data. */
         private array $data = array();
@@ -14,15 +15,15 @@
             if (array_key_exists($name, $this->data)) {
                 return $this->data[$name];
             } else {
-                echo "'" . $name .  "' not found or private";
+                echo "'" . $name . "' not found or private";
             }
             
             $trace = debug_backtrace();
             trigger_error(
-                'Undefined property via __get(): ' . $name .
-                ' in ' . $trace[0]['file'] .
-                ' on line ' . $trace[0]['line'],
-                E_USER_NOTICE
+                    'Undefined property via __get(): ' . $name .
+                    ' in ' . $trace[0]['file'] .
+                    ' on line ' . $trace[0]['line'],
+                    E_USER_NOTICE
             );
             return null;
         }
@@ -56,13 +57,13 @@
     var_dump(isset($obj->a));
     echo "<br>";
     
-    echo $obj->declared."<br>";
+    echo $obj->declared . "<br>";
     echo "Let's experiment with the private property named 'hidden':<br>";
     echo "Privates are visible inside the class, so __get() not used...<br>";
-    echo $obj->getHidden()."<br>";
+    echo $obj->getHidden() . "<br>";
     
     echo "Privates not visible outside of class, so __get() is used...<br>";
-    echo $obj->hidden."<br>";
+    echo $obj->hidden . "<br>";
 ?>
 
 <!doctype html>
@@ -72,7 +73,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
+        <title>AttributeOverloading</title>
     </head>
     <body>
     
