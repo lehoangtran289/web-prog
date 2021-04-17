@@ -20,6 +20,16 @@ class Page
         $this->page = $this->page . $content;
     }
 
+    private function addHeadder($header)
+    {
+        $this->title = $header;
+    }
+
+    private function addFooter($footer)
+    {
+
+    }
+
     public function get()
     {
         return
@@ -36,7 +46,7 @@ class Page
             </header>
                 {$this->page}
             <footer>
-                <p>{$this->copyright} © {$this->year} All Rights Reserved</p>
+                <p>{$this->copyright} © {$this->year} All rights reserved</p>
             </footer>
             </body>
             </html>";
