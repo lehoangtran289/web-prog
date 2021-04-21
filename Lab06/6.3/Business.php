@@ -125,11 +125,19 @@
     }
     
     function getData($conn, $categoryTitles) {
-        $sql = "SELECT *
+        if (count($categoryTitles) > 1) {
+            $sql = "SELECT *
                         FROM business b, biz_category bc, category c
                         WHERE b.business_ID = bc.business_ID AND c.category_ID = bc. category_ID
                         AND c.title IN (" . "'" . implode("', '", $categoryTitles) . "'" . ")
                  ";
+        } else {
+            $sql = "SELECT *
+                        FROM business b, biz_category bc, category c
+                        WHERE b.business_ID = bc.business_ID AND c.category_ID = bc. category_ID
+                        AND c.title = " . "'" . $categoryTitles . "'";
+        }
+        
         $result = $conn->query($sql);
         
         $bizcats = array();
@@ -176,33 +184,52 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Business Listing</title>
         <style>
+            form, table {
+                float: left;
+            }
+            
             table, th, td {
                 border: 1px solid black;
             }
             
-            form, table {
-                float: left;
+            a {
+                text-decoration: none;
+            }
+            
+            table {
+                border: 1px solid black;
+            }
+            
+            table th {
+                padding: 10px;
+                background: #eee;
+                border-left: 1px solid #ccc;
+                border-top: 1px solid #ccc;
+            }
+            
+            table td {
+                padding: 10px;
+                border-left: 1px solid #ccc;
+                border-top: 1px solid #ccc;
             }
         </style>
     </head>
     <body>
         <h1>Business Listings</h1>
-        <form action="Business.php" method="GET">
-            <select name="categoriesSelect[]" multiple="multiple" size=" <?php echo count($categories) ?> ">
-                <?php
-                    foreach ($categories as $c) {
-                        echo "<option>" . $c->getCategory() . "</option>";
-                    }
-                ?>
-            </select>
-            <br>
-            <input type="submit" value="Submit">
-            <input type="reset" value="Reset">
-        </form>
+        <table>
+            <tr>
+                <th>Click a category to search businesses</th>
+            </tr>
+            <?php
+                foreach ($categories as $c) {
+                    echo "<tr><td><a href=\"?categorySelect=" . $c->getCategory() . "\">" . $c->getCategory() . "</a></td></tr>";
+                }
+            ?>
+        </table>
         
         <?php
-            if (isset($_GET["categoriesSelect"])) {
-                $categoryTitles = $_GET["categoriesSelect"];
+            if (isset($_GET["categorySelect"])) {
+                $categoryTitles = $_GET["categorySelect"];
                 $bizcats = getData($conn, $categoryTitles);
                 displayData($bizcats);
             }
