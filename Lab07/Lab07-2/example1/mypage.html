@@ -1,46 +1,50 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-
-<html>
-
-<head>
-
-    <title>My first styled page</title>
-    <link rel="stylesheet" href="mystyle.css">
-
-</head>
-
-<body>
-
-<!-- Site navigation menu -->
-
-<ul class="navbar">
-
-    <li><a href="index.html">Home page</a>
-
-    <li><a href="musings.html">Musings</a>
-
-    <li><a href="town.html">My town</a>
-
-    <li><a href="links.html">Links</a>
-
-</ul>
-
-<!-- Main content -->
-
-<h1>My first styled page</h1>
-
-<p>Welcome to my styled page!
-
-<p>It lacks images, but at least it has style. And it has links, even if they don't go anywhere&hellip;
-
-<p>There should be more here, but I don't know what yet.
-
-    <!-- Sign and date the page, it's only polite! -->
-
-<address>Made 15 October 2009<br>
-    by myself.
-</address>
-
-</body>
-
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>My first styled page</title>
+        <link rel="stylesheet" href="mystyle2.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>My first styled page</h1>
+            <p>Welcome to my styled page!</p>
+        </div>
+        
+        <!-- Site navigation menu -->
+        <div class="navbar">
+            <a href="#">Home page</a>
+            <a href="#">Musings</a>
+            <a href="#">My town</a>
+            <a href="#">Link</a>
+        </div>
+        
+        <div class="leftcolumn">
+            <div class="card">
+                <h2>TITLE HEADING</h2>
+                <h5>Title description</h5>
+                <img class="fakeimg" src="https://lucloi.vn/wp-content/uploads/2020/08/b73-1.jpg" alt="JHenloCheems">
+                <p>It lacks images, but at least it has style. And it has links, even if they don't go anywhere&hellip;
+            </div>
+        </div>
+    
+        <div class="rightcolumn">
+            <div class="card">
+                <h2>TITLE HEADING2</h2>
+                <h5>Title description2</h5>
+                <img class="fakeimg" src="https://s.memehay.com/files/posts/20200915/cheems-cho-vang-dua-hai-ban-tay-ra-dau-vjp-rat-vip-49528c40332aafc321ee556b0412ec67.jpg" alt="JHenloCheems">
+                <p>There should be more here, but I don't know what yet.
+            </div>
+        </div>
+        
+        <div class="footer">
+            <address>Made 15 October 2009<br>
+                by myself.
+            </address>
+        </div>
+    
+    </body>
 </html>
