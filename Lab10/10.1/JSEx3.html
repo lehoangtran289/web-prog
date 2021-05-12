@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script type="text/javascript">
+            num = 0;
+            function f() {
+                num++;
+                document.myForm.outputField.value = "Called " + num + " times";
+            }
+            window.setInterval("f()", 1000);
+        </script>
+    </head>
+    <body>
+        <form name="myForm">
+            <label>
+                <input type="text" name="outputField" readonly>
+            </label>
+        </form>
+    </body>
+</html>

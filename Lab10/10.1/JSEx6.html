@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script type="text/javascript">
+            let validatePostalCode = () => {
+                let postalCodeCheck = new RegExp("([A-Z][0-9]{3})");
+                if (postalCodeCheck.test(document.myForm.postalCodeField.value)) {
+                    alert("Valid Postal Code");
+                    return true;
+                } else {
+                    alert("invalid Postal Code: " + document.myForm.postalCodeField.value);
+                    return false;
+                }
+            }
+            let validateMoney = () => {
+                let moneyCheck = new RegExp("[0-9]*[\.][0-9][0-9]");
+                if (moneyCheck.test(document.myForm.moneyField.value)) {
+                    alert("Valid Money");
+                    return true;
+                } else {
+                    alert("Invalid Money: " + document.myForm.moneyField.value);
+                    return false;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <form name="myForm">
+            Postal Code:
+            <input type="text" name="postalCodeField">
+            <input type="button" value="Check Postal Code" onclick="validatePostalCode()">
+            <br>
+            Money: $<input type="text" name="moneyField">
+            <input type="button" value="Check Money" onclick="validateMoney()">
+        </form>
+    </body>
+</html>
