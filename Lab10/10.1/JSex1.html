@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            // Create array and add three elements
+            let myArray = [];
+            myArray.push(...["Tim", "Janice", "Joe"]);
+            
+            // print out
+            document.writeln(myArray.toString());
+            document.writeln("<br>");
+
+            document.writeln(myArray[1]);
+            document.writeln("<br>");
+
+            document.writeln("Array size: " + myArray.length);
+            document.writeln("<br>");
+            
+            let who = myArray.pop();
+            document.writeln("Poped element = " + who);
+            document.writeln("<br>");
+
+            document.writeln("Array size: " + myArray.length);
+            document.writeln("<br>");
+            document.writeln("<br>");
+            
+            let otherArray = ["dog", 3, 8.4];
+            document.writeln(myArray.toString());
+            document.writeln("<br>");
+            document.writeln("<br>");
+            
+            otherArray["key"] = "value";
+            document.writeln(otherArray["key"]);
+            document.writeln("<br>");
+        </script>
+        
+    </body>
+</html>
