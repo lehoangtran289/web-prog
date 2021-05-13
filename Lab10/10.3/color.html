@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+    <script type='text/javascript'>
+        colorList = ['Black', 'Red', 'Green', 'Blue'];
+        function setColor(id) {
+            var pTag = document.getElementById('paragraph');
+            pTag.setAttribute('style', 'color:' + colorList[id]);
+        }
+    </script>
+</head>
+<body>
+    <a onmouseover="setColor(1)" onmouseout="setColor(0)" href="#">Red</a>
+    <a onmouseover="setColor(2)" onmouseout="setColor(0)" href="#">Green</a>
+    <a onmouseover="setColor(3)" onmouseout="setColor(0)" href="#">Blue</a>
+    <p id='paragraph'>
+        This paragraph will change color <br>
+        JHenloCheems
+    </p>
+</body>
+</html>
