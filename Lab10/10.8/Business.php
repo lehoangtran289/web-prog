@@ -4,21 +4,12 @@
     include './Category.php';
     
     function getData($conn, $categoryTitles) {
-        if (count($categoryTitles) > 1) {
-            $sql = "SELECT *
-                        FROM business b, biz_category bc, category c
-                        WHERE b.business_ID = bc.business_ID AND c.category_ID = bc. category_ID
-                        AND c.title IN (" . "'" . implode("', '", $categoryTitles) . "'" . ")
-                 ";
-        } else {
-            $sql = "SELECT *
+        $sql = "SELECT *
                         FROM business b, biz_category bc, category c
                         WHERE b.business_ID = bc.business_ID AND c.category_ID = bc. category_ID
                         AND c.title = " . "'" . $categoryTitles . "'";
-        }
         
         $result = $conn->query($sql);
-        
         $bizcats = array();
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -97,6 +88,14 @@
                 border-top: 1px solid #ccc;
             }
         </style>
+    </head>
+    <body>
+        <h1>Search a business</h1>
+        <form autocomplete="off" name="searchForm" action="Business.php" method="get">
+            <input id="inputText" type="text" name="inputText" placeholder="Search a business">
+            <input type="submit" value="Search">
+            <input type="reset" value="Reset">
+        </form>
         <script type="text/javascript">
             // Get the HTTP Object
             function getHTTPObject() {
@@ -110,33 +109,64 @@
                 }
             }
             
-            function doWork() {
-                httpObject = getHTTPObject();
-                let input = document.getElementById('inputText').value;
-                if (input && httpObject != null) {
-                    httpObject.open("GET", "Suggestion.php?inputText=" + input, true);
-                    httpObject.send(null);
-                    httpObject.onreadystatechange = setOutput;
-                    console.log(httpObject.responseText)
-                }
+            function inputSuggest(input) {
+                let currentFocus;
+                input.addEventListener("input", (e) => {
+                    let a, b, i, val = input.value;
+                    closeAllLists();
+                    if (!val) {
+                        return false;
+                    }
+                    currentFocus = -1;
+                    
+                    // Create a DIV element that will contain the items (values):
+                    a = document.createElement("div");
+                    a.setAttribute("id", input.id + "autocomplete-list");
+                    a.setAttribute("class", "autocomplete-items");
+                    
+                    input.parentNode.appendChild(a);
+                    
+                    // process AJAX
+                    httpObject = getHTTPObject();
+                    let obj;
+                    if (val && httpObject != null) {
+                        httpObject.open("GET", "Suggestion.php?inputText=" + val, true);
+                        httpObject.send(null);
+                        httpObject.onreadystatechange = () => {
+                            if (httpObject.readyState === 4 && httpObject.responseText) {
+                                obj = JSON.parse(httpObject.responseText);
+                                obj.forEach((i) => {
+                                    b = document.createElement("div");
+                                    b.innerHTML = i.title;
+                                    b.addEventListener("click", (e) => {
+                                        input.value = i.title;
+                                        closeAllLists();
+                                    });
+                                    a.appendChild(b);
+                                });
+                            }
+                        }
+                    }
+                    
+                    function closeAllLists(element) {
+                        let x = document.getElementsByClassName("autocomplete-items");
+                        for (let i = 0; i < x.length; i++) {
+                            if (element !== x[i] && element !== input) {
+                                x[i].parentNode.removeChild(x[i]);
+                            }
+                        }
+                    }
+                    
+                    document.addEventListener("click", () => {
+                        closeAllLists();
+                    });
+                })
             }
             
-            function setOutput() {
-                if (httpObject.readyState === 4) {
-                    document.getElementById('inputText').value = httpObject.responseText;
-                }
-            }
+            inputSuggest(document.getElementById("inputText"));
         </script>
-    </head>
-    <body>
-        <h1>Search a business</h1>
-        <form name="searchForm" action="Business.php" method="get">
-            <input type="text" onkeyup="doWork()" name="inputText" id="inputText" placeholder="Search a business"/>
-            <input type="submit" value="Search">
-            <input type="reset" value="Reset">
-        </form>
         <?php
-            if(isset($_GET["inputText"])) {
+            if (isset($_GET["inputText"])) {
                 $categoryTitles = $_GET["inputText"];
                 $bizcats = getData($conn, $categoryTitles);
                 displayData($bizcats);
