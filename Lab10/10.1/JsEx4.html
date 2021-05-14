@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script type="text/javascript">
+            let setAlign = (align) => {
+                let pTag = window.document.getElementById("paragraph");
+                pTag.setAttribute("align", align);
+            }
+        </script>
+    </head>
+    <body>
+        <form name="alignForm">
+            <select name="alignSelect">
+                <option value="left">left</option>
+                <option value="right">right</option>
+                <option value="center">center</option>
+            </select>
+            <input type="button" value="Go" onclick="setAlign(document.alignForm.alignSelect.value)">
+        </form>
+        
+        <p id="paragraph">
+            This is some sample text
+        </p>
+    
+    </body>
+</html>
