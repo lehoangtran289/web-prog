@@ -55,10 +55,6 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Business Listing</title>
         <style>
-            /*form, table {*/
-            /*    float: left;*/
-            /*}*/
-            
             table, th, td {
                 border: 1px solid black;
             }
@@ -110,14 +106,12 @@
             }
             
             function inputSuggest(input) {
-                let currentFocus;
                 input.addEventListener("input", (e) => {
                     let a, b, i, val = input.value;
                     closeAllLists();
                     if (!val) {
                         return false;
                     }
-                    currentFocus = -1;
                     
                     // Create a DIV element that will contain the items (values):
                     a = document.createElement("div");
@@ -137,6 +131,7 @@
                                 obj = JSON.parse(httpObject.responseText);
                                 obj.forEach((i) => {
                                     b = document.createElement("div");
+                                    b.setAttribute("style", "cursor:pointer");
                                     b.innerHTML = i.title;
                                     b.addEventListener("click", (e) => {
                                         input.value = i.title;
