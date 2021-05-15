@@ -1,7 +1,7 @@
 <?php
     include './common/connection.php';
-    include './BizCatComposite.php';
-    include './Category.php';
+    include './model/BizCatComposite.php';
+    include './model/Category.php';
     
     function getData($conn, $categoryTitles) {
         $sql = "SELECT *
@@ -87,7 +87,7 @@
     </head>
     <body>
         <h1>Search a business</h1>
-        <form autocomplete="off" name="searchForm" action="Business.php" method="get">
+        <form autocomplete="off" name="searchForm" action="index.php" method="get">
             <input id="inputText" type="text" name="inputText" placeholder="Search a business">
             <input type="submit" value="Search">
             <input type="reset" value="Reset">
