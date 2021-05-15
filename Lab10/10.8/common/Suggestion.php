@@ -1,7 +1,7 @@
 <?php
-    include './common/connection.php';
-    include './model/BizCatComposite.php';
-    include './model/Category.php';
+    include './connection.php';
+    include '../model/BizCatComposite.php';
+    include '../model/Category.php';
     
     if (isset($_GET['inputText'])) {
         $input = $_GET['inputText'];

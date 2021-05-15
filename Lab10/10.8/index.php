@@ -124,7 +124,7 @@
                     httpObject = getHTTPObject();
                     let obj;
                     if (val && httpObject != null) {
-                        httpObject.open("GET", "Suggestion.php?inputText=" + val, true);
+                        httpObject.open("GET", "./common/Suggestion.php?inputText=" + val, true);
                         httpObject.send(null);
                         httpObject.onreadystatechange = () => {
                             if (httpObject.readyState === 4 && httpObject.responseText) {
