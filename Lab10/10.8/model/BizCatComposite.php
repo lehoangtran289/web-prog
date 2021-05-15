@@ -1,5 +1,4 @@
 <?php
-    
     class BizCatComposite {
         private string $id;
         private string $name;
