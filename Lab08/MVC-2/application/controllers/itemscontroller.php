@@ -1,10 +1,10 @@
 <?php
     class ItemsController extends Controller {
         
+        // actions
         function view($id = null, $name = null) {
             $this->set('title', $name . ' - My Todo List App');
             $this->set('todo', $this->Item->select($id));
-            
         }
         
         function viewall() {
