@@ -1,5 +1,11 @@
 <?php
     
+    /**
+     * Class HTML -> support template class
+     * It allows you to use a few standard functions for creating links, adding javascript and css.
+     * I have also added a function to convert links to tinyurls.
+     * This class can be used only in the views e.g. $html->includeJs(’generic.js’);
+     */
     class HTML {
         private $js = array();
         

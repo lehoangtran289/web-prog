@@ -1,5 +1,10 @@
 <?php
     
+    /**
+     * Class Cache
+     * The data is stored in a flat text-file in the cache directory.
+     * Currently only the describe function of the SQLQuery class uses this cache function.
+     */
     class Cache {
         
         function get($fileName) {

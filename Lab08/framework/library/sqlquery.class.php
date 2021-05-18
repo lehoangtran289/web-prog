@@ -1,6 +1,11 @@
 <?php
+    
     include_once(ROOT . DS . 'library' . DS . 'deprecated_functions.php');
     
+    /**
+     * Class SQLQuery
+     * the heart of this framework. This class will enable you to use your tables as objects.
+     */
     class SQLQuery {
         protected $_dbHandle;
         protected $_result;
@@ -79,16 +84,15 @@
         }
         
         function search() {
-            
-            global $inflect;
+            global $inflect;    // $inflect = new Inflection();
             
             $from = '`' . $this->_table . '` as `' . $this->_model . '` ';
             $conditions = '\'1\'=\'1\' AND ';
             $conditionsChild = '';
             $fromChild = '';
             
+            // if showHasOne() has been called
             if ($this->_hO == 1 && isset($this->hasOne)) {
-                
                 foreach ($this->hasOne as $alias => $model) {
                     $table = strtolower($inflect->pluralize($model));
                     $singularAlias = strtolower($alias);
@@ -115,7 +119,7 @@
                 $offset = ($this->_page - 1) * $this->_limit;
                 $conditions .= ' LIMIT ' . $this->_limit . ' OFFSET ' . $offset;
             }
-            
+    
             $this->_query = 'SELECT * FROM ' . $from . ' WHERE ' . $conditions;
             #echo '<!--'.$this->_query.'-->';
             $this->_result = mysqli_query($this->_dbHandle, $this->_query);
@@ -124,6 +128,7 @@
             $field = array();
             $tempResults = array();
             $numOfFields = mysqli_num_fields($this->_result);
+            
             for ($i = 0; $i < $numOfFields; ++$i) {
                 array_push($table, mysqli_field_table($this->_result, $i));
                 array_push($field, mysqli_field_name($this->_result, $i));
@@ -134,6 +139,7 @@
                         $tempResults[$table[$i]][$field[$i]] = $row[$i];
                     }
                     
+                    // if showHasMany() has been called
                     if ($this->_hM == 1 && isset($this->hasMany)) {
                         foreach ($this->hasMany as $aliasChild => $modelChild) {
                             $queryChild = '';
@@ -177,7 +183,7 @@
                         }
                     }
                     
-                    
+                    // if showHMABTM() has been called
                     if ($this->_hMABTM == 1 && isset($this->hasManyAndBelongsToMany)) {
                         foreach ($this->hasManyAndBelongsToMany as $aliasChild => $tableChild) {
                             $queryChild = '';
@@ -230,6 +236,8 @@
                     
                     array_push($result, $tempResults);
                 }
+                
+                // if isset(id) -> return a single result else return an array
                 if (mysqli_num_rows($this->_result) == 1 && $this->id != null) {
                     mysqli_free_result($this->_result);
                     $this->clear();
@@ -305,7 +313,12 @@
         }
         
         /** Delete an Object **/
-        
+        /**
+         *  ex: function delete($categoryId) {
+                    $this->Category->id = $categoryId;
+                    $this->Category->delete();
+                }
+         */
         function delete() {
             if ($this->id) {
                 $query = 'DELETE FROM ' . $this->_table . ' WHERE `id`=\'' . $this->dbHandle->real_escape_string($this->id) . '\'';
@@ -322,6 +335,15 @@
         }
         
         /** Saves an Object i.e. Updates/Inserts Query **/
+        /**
+         * The save() function must be used from the controller
+         * 2 options: isset(id) ->  update the entry; !isset(id) -> create a new entry
+         * ex: function new() {
+                    $this->Category->id = $_POST['id'];
+                    $this->Category->name = $_POST['name'];
+                   $this->Category->save();
+                }
+         */
         
         function save() {
             $query = '';

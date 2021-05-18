@@ -44,7 +44,6 @@
         function query($query, $singleResult = 0) {
             
             $this->_result = mysqli_query($this->_dbHandle, $query);
-            
             // Find the string of text "select"
             // The "i" after the pattern delimiter indicates a case-insensitive search
             if (preg_match("/select/i", $query)) { // if query is "select"

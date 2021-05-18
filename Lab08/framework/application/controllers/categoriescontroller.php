@@ -34,6 +34,15 @@
         function afterAction() {
         
         }
+    
+        /**
+         * Now suppose that we are in the categories controller and we want to implement a query on the products
+        table. One way to implement this is using a custom query i.e. $this->Category->custom(’select * from
+        products where ….’);
+         */
+        function view2($categoryId = null, $categoryName = null) {
+            $categories = performAction('products', 'findProducts', array($categoryId, $categoryName));
+        }
         
         
     }

@@ -1,5 +1,9 @@
 <?php
     
+    /**
+     * Class VanillaController
+     * unchanged from mvc2
+     */
     class VanillaController {
         
         protected $_controller;

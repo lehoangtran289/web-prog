@@ -1,5 +1,12 @@
 <?php
     
+    /**
+     * Class Template
+     * new variable called doNotRenderHeader -> not output headers for a particular action
+     * can be used in AJAX calls when you don't want to return the headers.
+     * It has to be called by the controller e.g. $this->doNotRenderHeader = 1
+     */
+    
     class Template {
         protected $variables = array();
         protected $_controller;
