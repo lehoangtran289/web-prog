@@ -1,13 +1,10 @@
 <?php
-
-/** Irregular Words
-
-$irregularWords = array(
-'singular' => 'plural'
-);
-
-**/
-
-$irregularWords = array(
-
-);
+    
+    /** Irregular Words
+     * use irregular words i.e. words which do not have a standard plural name
+     * $irregularWords = array(
+     * 'singular' => 'plural'
+     * );
+     **/
+    
+    $irregularWords = array();

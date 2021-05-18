@@ -1,10 +1,10 @@
 <?php
-
-/** Configuration Variables **/
-
-define ('DEVELOPMENT_ENVIRONMENT',true);
-
-define('DB_NAME', 'todo');
-define('DB_USER', 'mysql_client');
-define('DB_PASSWORD', 'p');
-define('DB_HOST', 'db');
+    
+    /** Configuration Variables **/
+    
+    const DEVELOPMENT_ENVIRONMENT = true;
+    
+    const DB_NAME = 'test';
+    const DB_USER = 'root';
+    const DB_PASSWORD = '1';
+    const DB_HOST = '172.17.0.2.';

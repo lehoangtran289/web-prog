@@ -1,7 +1,7 @@
 <?php
     include './common/connection.php';
-    include './BizCatComposite.php';
-    include './Category.php';
+    include './model/BizCatComposite.php';
+    include './model/Category.php';
     
     function getData($conn, $categoryTitles) {
         $sql = "SELECT *
@@ -55,10 +55,6 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Business Listing</title>
         <style>
-            /*form, table {*/
-            /*    float: left;*/
-            /*}*/
-            
             table, th, td {
                 border: 1px solid black;
             }
@@ -91,7 +87,7 @@
     </head>
     <body>
         <h1>Search a business</h1>
-        <form autocomplete="off" name="searchForm" action="Business.php" method="get">
+        <form autocomplete="off" name="searchForm" action="index.php" method="get">
             <input id="inputText" type="text" name="inputText" placeholder="Search a business">
             <input type="submit" value="Search">
             <input type="reset" value="Reset">
@@ -110,14 +106,12 @@
             }
             
             function inputSuggest(input) {
-                let currentFocus;
                 input.addEventListener("input", (e) => {
                     let a, b, i, val = input.value;
                     closeAllLists();
                     if (!val) {
                         return false;
                     }
-                    currentFocus = -1;
                     
                     // Create a DIV element that will contain the items (values):
                     a = document.createElement("div");
@@ -130,13 +124,14 @@
                     httpObject = getHTTPObject();
                     let obj;
                     if (val && httpObject != null) {
-                        httpObject.open("GET", "Suggestion.php?inputText=" + val, true);
+                        httpObject.open("GET", "./common/Suggestion.php?inputText=" + val, true);
                         httpObject.send(null);
                         httpObject.onreadystatechange = () => {
                             if (httpObject.readyState === 4 && httpObject.responseText) {
                                 obj = JSON.parse(httpObject.responseText);
                                 obj.forEach((i) => {
                                     b = document.createElement("div");
+                                    b.setAttribute("style", "cursor:pointer");
                                     b.innerHTML = i.title;
                                     b.addEventListener("click", (e) => {
                                         input.value = i.title;
