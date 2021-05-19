@@ -8,7 +8,7 @@
 <?php
 $q = $_GET["q"];
 
-$con = mysqli_connect('localhost', 'root', '', 'ajax_demo');
+$con = mysqli_connect('z', 'root', '', 'ajax_demo');
 if (!$con) {
     die('Could not connect: ' . mysqli_error());
 }
