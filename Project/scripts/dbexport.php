@@ -8,7 +8,8 @@
 #$backupFile = DB_NAME.'_data'.date("-YmdHis").'.db';
 #$command = 'mysqldump --opt -h'.DB_HOST.' -u'.DB_USER.' -p'.DB_PASSWORD.' '.DB_NAME.' no-data add-drop-table > '.$backupFile;
 #system($command);
-    
     $backupFile = ROOT . DS . 'db' . DS . DB_NAME . date("-YmdHis") . '.sql';
-    $command = 'mysqldump --opt -h' . DB_HOST . ' -u' . DB_USER . ' -p' . DB_PASSWORD . ' ' . DB_NAME . ' > ' . $backupFile;
+    $command = '/opt/lampp/bin/mysqldump --opt -h' . " " . DB_HOST . ' -u' . " " . DB_USER . ' -p' . DB_PASSWORD . ' ' . DB_NAME . ' > ' . $backupFile;
+    
+    echo $command;
     system($command);
