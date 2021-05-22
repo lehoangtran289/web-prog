@@ -1,4 +1,4 @@
-<div><h2><strong><?php echo $category['Category']['name'] ?></strong>
+<!--<div><h2><strong>--><?php //echo $category['Category']['name'] ?><!--</strong>-->
 </div>
 
 <?php if (!empty($subcategories)): ?>

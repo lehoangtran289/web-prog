@@ -2,7 +2,10 @@
     <?php foreach ($categories as $category): ?>
         <div class="category">
             
-            <?php echo $html->link($category['Category']['name'], 'categories/view/' . $category['Category']['id'] . '/' . $category['Category']['name']) ?>
+            <?php
+            echo 'Hey Im here why dont notice me';
+            var_dump($category);
+            echo $html->link($category['Category']['brand'], 'categories/view/' . $category['Category']['id'] . '/' . $category['Category']['brand']) ?>
         
         </div>
     <?php endforeach ?>
