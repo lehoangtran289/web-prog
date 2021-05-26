@@ -20,8 +20,7 @@
             $this->set('category', $category);
             
         }
-        
-        
+
         function index() {
             $this->Category->orderBy('name', 'ASC');
             $this->Category->showHasOne();
