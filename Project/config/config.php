@@ -12,7 +12,7 @@
     const DB_HOST = 'localhost';
 
     
-    const BASE_PATH = 'http://dangvh.com/webprog/dangvhtest';
+    const BASE_PATH = 'http://dangvh.com/webprog/Project';
 
     
     const PAGINATE_LIMIT = '5';

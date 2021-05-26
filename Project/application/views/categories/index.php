@@ -8,3 +8,4 @@
         </div>
     <?php endforeach ?>
 </div>
+<a href="login.php" >Sign in</a>
