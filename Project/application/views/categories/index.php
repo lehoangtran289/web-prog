@@ -8,4 +8,5 @@
         </div>
     <?php endforeach ?>
 </div>
-<a href= "../Project/users/login" >Sign in</a>
+<button><a href= "../Project/users/login" >Sign in</a> <br></button>
+<button><a href= "../Project/users/register" >Register</a></button>
