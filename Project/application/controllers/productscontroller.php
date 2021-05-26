@@ -9,6 +9,7 @@
             $this->Product->id = $id;
             $this->Product->showHasOne();
             $this->Product->showHMABTM();
+            $this->Product->showHasMany();
             $product = $this->Product->search();
             
             $this->set('product', $product);

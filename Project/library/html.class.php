@@ -45,7 +45,7 @@
         }
         
         function includeCss($fileName) {
-            $data = '<style href="' . BASE_PATH . '/css/' . $fileName . '.css"></script>';
+            $data = '<style href="' . BASE_PATH . '/css/' . $fileName . '.css"></style>';
             return $data;
         }
     }
