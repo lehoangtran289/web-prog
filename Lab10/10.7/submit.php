@@ -1,7 +1,7 @@
 <html>
 <head>
     <script>
-        function GEEKFORGEEKS() {
+        function validate() {
             var name =
                 document.forms["RegForm"]["Name"];
             var email =
@@ -11,6 +11,9 @@
             var password =
                 document.forms["RegForm"]["Password"];
             var confirmPassword = document.forms["RegForm"]["ConfirmPassword"];
+            var re_email = /^\S+@\S+$/;
+            var re_phone = /^\d{10}$/;
+
 
             if (name.value == "") {
                 window.alert("Please enter your name.");
@@ -18,16 +21,16 @@
                 return false;
             }
 
-            if (email.value == "") {
+            if (email.value == "" || !re_email.test(email.value)) {
                 window.alert(
                     "Please enter a valid e-mail address.");
                 email.focus();
                 return false;
             }
 
-            if (phone.value == "") {
+            if (phone.value == "" || !re_phone.test(phone.value)) {
                 window.alert(
-                    "Please enter your telephone number.");
+                    "Please enter valid telephone number.");
                 phone.focus();
                 return false;
             }
@@ -75,7 +78,7 @@
 <body>
 <h1 style="text-align: center;">REGISTRATION FORM</h1>
 <form name="RegForm" action="submit.php"
-      onsubmit="return GEEKFORGEEKS()" method="post">
+      onsubmit="return validate()" method="post">
     <p>Name: <input type="text"
                     size="65" name="Name" /></p>
     <br />
