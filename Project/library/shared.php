@@ -73,7 +73,7 @@
         global $default;
         
         $queryString = array();
-        
+
         if (!isset($url)) {
             $controller = $default['controller'];
             $action = $default['action'];
