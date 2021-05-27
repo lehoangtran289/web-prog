@@ -260,7 +260,7 @@
             
             global $inflect;
             
-            $this->_result = mysqli_query($query, $this->_dbHandle);
+            $this->_result = mysqli_query($this->_dbHandle, $query);
             
             $result = array();
             $table = array();
@@ -322,7 +322,7 @@
         function delete() {
             if ($this->id) {
                 $query = 'DELETE FROM ' . $this->_table . ' WHERE `id`=\'' . $this->dbHandle->real_escape_string($this->id) . '\'';
-                $this->_result = mysqli_query($query, $this->_dbHandle);
+                $this->_result = mysqli_query($this->_dbHandle, $query);
                 $this->clear();
                 if ($this->_result == 0) {
                     /** Error Generation **/
@@ -370,9 +370,9 @@
                 $values = substr($values, 0, -1);
                 $fields = substr($fields, 0, -1);
                 
-                $query = 'INSERT INTO ' . $this->_table . ' (' . $fields . ') VALUES (' . $values . ')';
+                $query = 'INSERT INTO ' . $this->_table . ' (' . $fields . ') VALUES (' . $values . ');';
             }
-            $this->_result = mysqli_query($query, $this->_dbHandle);
+            $this->_result = mysqli_query($this->_dbHandle, $query);
             echo '<h1>'.$query.'</h1>';
             $this->clear();
             if ($this->_result == 0) {
@@ -405,7 +405,7 @@
                 $pattern = '/SELECT (.*?) FROM (.*)LIMIT(.*)/i';
                 $replacement = 'SELECT COUNT(*) FROM $2';
                 $countQuery = preg_replace($pattern, $replacement, $this->_query);
-                $this->_result = mysqli_query($countQuery, $this->_dbHandle);
+                $this->_result = mysqli_query($this->_dbHandle, $countQuery);
                 $count = mysqli_fetch_row($this->_result);
                 $totalPages = ceil($count[0] / $this->_limit);
                 return $totalPages;

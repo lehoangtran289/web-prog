@@ -9,37 +9,7 @@ session_start();
     <title>Login</title>
 </head>
 <body>
-<?php
-//include 'lib/connection.php';
-//if(isset($_POST['submit'])){
-//    $username = $_POST['username'];
-//    $password = $_POST['pass'];
-//
-//    // counter sql injection
-//
-//    $username = strip_tags($username);
-//    $username = addslashes($username);
-//    $password = strip_tags($password);
-//    $password = addslashes($password);
-//    if($username == '' || $password == ''){
-//        echo 'Please fill in all blank!';
-//    }
-//    else{
-//        $sql = "select * from user where username = '$username' and password = '$password' ";
-//        $result = mysqli_query($conn,$sql);
-//        $num_rows = mysqli_num_rows($result);
-//        if ($num_rows==0) {
-//            echo "username or password incorrect !";
-//        }else{
-//            //save username to session
-//            $_SESSION['username'] = $username;
-//            // redirect index.php
-//            header('Location: index.php');
-//        }
-//    }
-//}
-//
-?>
+
 <form action="../users/login" method="POST" >
     <fieldset>
         <legend>Login</legend>
@@ -58,7 +28,7 @@ session_start();
 
         </table>
     </fieldset>
-    <div><a href="../../../public/index.php">You dont have an account? Create one!</a></div>
+    <div><a href="../users/register">You dont have an account? Create one!</a></div>
 </form>
 </body>
 </html>
