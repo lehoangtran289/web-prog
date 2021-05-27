@@ -4,7 +4,7 @@
 <div><h2>Price: $<?php echo $product['Product']['price'] ?></h2>
 <div><h2>Quantity: <?php echo $product['Product']['quantity'] ?></h2>
 <div><h2>Description: <?php echo $product['Product']['description'] ?></h2>
-<div><img src="<?php echo ROOT.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$product['Product']['image'].'.png' ?>">
+<div><img src="<?php echo '../../../public/images/'.$product['Product']['image'].'.png' ?>">
 
     
 <!--    --><?php //if (!empty($product['Tag'])): ?>
