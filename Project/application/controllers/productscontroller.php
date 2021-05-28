@@ -3,6 +3,7 @@
     class ProductsController extends VanillaController {
         
         function beforeAction() {
+        
         }
         
         function view($id = null) {
@@ -25,7 +26,7 @@
             $this->set('products', $products);
             $this->set('currentPageNumber', $pageNumber);
         }
-
+        
         function index() {
             $this->Product->orderBy('id', 'ASC');
             $this->Product->showHasOne();

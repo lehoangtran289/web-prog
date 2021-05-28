@@ -3,15 +3,20 @@
     class CategoriesController extends VanillaController {
         
         function beforeAction() {
+        
+        }
+        
+        function afterAction() {
+        
         }
         
         function view($categoryId = null) {
-
+            
             $this->Category->id = $categoryId;
             $this->Category->showHasOne();
             $this->Category->showHasMany();
             $category = $this->Category->search();
-
+            
             $this->set('category', $category);
             
         }
@@ -26,14 +31,10 @@
             $this->set('categories', $categories);
         }
         
-        function afterAction() {
-        
-        }
-    
         /**
          * Now suppose that we are in the categories controller and we want to implement a query on the products
-        table. One way to implement this is using a custom query i.e. $this->Category->custom(’select * from
-        products where ….’);
+         * table. One way to implement this is using a custom query i.e. $this->Category->custom(’select * from
+         * products where ….’);
          */
         function view2($categoryId = null, $categoryName = null) {
             $categories = performAction('products', 'findProducts', array($categoryId, $categoryName));
