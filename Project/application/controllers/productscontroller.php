@@ -25,6 +25,14 @@
             $this->set('products', $products);
             $this->set('currentPageNumber', $pageNumber);
         }
+
+        function index() {
+            $this->Product->orderBy('id', 'ASC');
+            $this->Product->showHasOne();
+            $this->Product->showHasMany();
+            $products = $this->Product->search();
+            $this->set('products', $products);
+        }
         
         function findProducts($categoryId = null, $categoryName = null) {
             $this->Product->where('category_id', $categoryId);
