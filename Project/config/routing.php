@@ -12,5 +12,5 @@
     );
     
     // define a 2d array
-    $default['controller'] = 'categories';
-    $default['action'] = 'index';
+$default['controller'] = 'products';
+$default['action'] = 'index';
