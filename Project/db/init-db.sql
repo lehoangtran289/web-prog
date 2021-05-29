@@ -9,7 +9,7 @@ drop table if exists reviews;
 create table if not exists users
 (
     id         int primary key auto_increment,
-    username   varchar(20) not null,
+    username   varchar(20) unique not null,
     password   varchar(30) not null,
     name       varchar(30),
     email      varchar(40),
