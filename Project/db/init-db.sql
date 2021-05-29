@@ -10,16 +10,22 @@ create table if not exists users
 (
     id         int primary key auto_increment,
     username   varchar(20) unique not null,
-    password   varchar(30) not null,
+    password   varchar(30)        not null,
     name       varchar(30),
     email      varchar(40),
     role       varchar(20) default 'user',
     address    varchar(50),
     phone      varchar(10),
-    created_at datetime default current_timestamp,
+    created_at datetime    default current_timestamp,
     updated_at datetime on update current_timestamp
 );
-insert into users(id, username, password, name, email, role, address, phone) values(1, 'dangvh', '6711','Vu Hai Dang','dangvh@gmail.com','admin','Bac Ninh Bac Ninh','0911989755');
+insert into users(username, password, name, email, role, address, phone)
+values ('dangvh', '1', 'Vu Hai Dang', 'dangvh@gmail.com', 'admin', 'Bac Ninh Bac Ninh', '0911989755'),
+       ('hoangtl', '1', 'Tran Le Hoang', 'hoangtl@gmail.com', 'admin', 'Ha Noi Ha Noi', '0911989756'),
+       ('van', '1', 'Van H', 'van@gmail.com', 'admin', 'Ha Noi Ha Noi', '0911989757'),
+       ('xon', '1', 'Xon T', 'xon@gmail.com', 'admin', 'Ha Noi Ha Noi', '0911989758'),
+       ('user1', '1', 'User U1', 'user1@gmail.com', 'user', 'BHa Noi Ha Noi', '0911989759'),
+       ('user2', '1', 'User U2', 'user2@gmail.com', 'user', 'BHa Noi Ha Noi', '0911989751');
 
 create table if not exists categories
 (
@@ -29,21 +35,40 @@ create table if not exists categories
     updated_at datetime on update current_timestamp
 );
 
-insert into categories(id, brand) values (1, 'Oppo');
+insert into categories(brand)
+values ('IPhone'),
+       ('Samsung'),
+       ('Xiaomi'),
+       ('Oppo');
+
 
 create table if not exists products
 (
     id          int primary key auto_increment,
     name        varchar(50) not null,
+    quantity    int         not null,
     category_id int,
-    price       double      not null,
+    OS          varchar(30),
+    chipset     varchar(256),
+    ram         varchar(20),
+    display     varchar(30),
+    resolution  varchar(30),
+    camera      varchar(30),
+    memory      varchar(30),
+    pin         varchar(20),
     image       text,
     description text,
-    quantity    int         not null,
+    price       double      not null,
     created_at  datetime default current_timestamp,
     updated_at  datetime on update current_timestamp
 );
-insert into products(id, name, category_id, price, image, description, quantity) values (1, 'Oppo hehe', 1, 1100, 'abc', 'This is oppo phone', 10);
+
+insert into products(name, category_id, description,price, quantity)
+values ('Oppo 5x', '4', 'abcoppo', 1000, 10),
+       ('Samsung Galaxy X', '2', 'abcoppo', 1500, 3),
+       ('IPhone XS', '1', 'abcoppo', 2100, 5),
+       ('IPhone XS Max', '1', 'abcoppo', 2500, 12),
+       ('Xiaomi ABC', '3', 'abcoppo', 1000, 15);
 
 create table if not exists reviews
 (
@@ -55,14 +80,15 @@ create table if not exists reviews
     created_at datetime default current_timestamp
 );
 
-create table if not exists order_product
+create table if not exists orders_products
 (
     id          int primary key auto_increment,
     order_id    int not null,
     product_id  int not null,
     product_qty int not null
 );
-insert into order_product(id, order_id, product_id, product_qty) values (1, 1, 1, 1);
+insert into orders_products(id, order_id, product_id, product_qty)
+values (1, 1, 1, 1);
 
 create table if not exists orders
 (
@@ -75,7 +101,8 @@ create table if not exists orders
     date        datetime default current_timestamp,
     total_bill  double
 );
-insert into orders(id, user_id, phone, address, shipment_id, payment_id, total_bill) values (1, 1, '09','abc',1, 1,1100);
+insert into orders(id, user_id, phone, address, shipment_id, payment_id, total_bill)
+values (1, 1, '09', 'abc', 1, 1, 1100);
 
 create table if not exists shipments
 (
@@ -86,7 +113,9 @@ create table if not exists shipments
     created_at  datetime default current_timestamp,
     updated_at  datetime on update current_timestamp
 );
-insert into shipments(id, method, fee, description) values (1, 'By bike', '5', 'Delivery by bike');
+insert into shipments(method, fee, description)
+values ('By bike', '5', 'Delivery by bike');
+
 create table if not exists payments
 (
     id          int primary key auto_increment,
@@ -95,4 +124,5 @@ create table if not exists payments
     created_at  datetime default current_timestamp,
     updated_at  datetime on update current_timestamp
 );
-insert into payments(id, method, description) values (1, 'COD', 'Cash on delivery');
+insert into payments(method, description)
+values ('COD', 'Cash on delivery');
