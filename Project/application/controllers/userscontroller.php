@@ -38,7 +38,7 @@ class UsersController extends VanillaController
                 //var_dump($user);
                 if ($user) {
                     // save username to session
-                    $_SESSION['username'] = $username;
+                    $_SESSION['user']['username'] = $username;
                     header('Location: ../orders/index');    //redirect to payout page
                 } else echo "Username or password incorrect !";
                 $this->set('user', $user); // maybe dont need this

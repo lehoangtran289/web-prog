@@ -215,6 +215,7 @@
                             
                             if (mysqli_num_rows($resultChild) > 0) {
                                 $numOfFieldsChild = mysqli_num_fields($resultChild);
+                                var_dump($queryChild);
                                 for ($j = 0; $j < $numOfFieldsChild; ++$j) {
                                     array_push($tableChild, mysqli_field_table($resultChild, $j));
                                     array_push($fieldChild, mysqli_field_name($resultChild, $j));
