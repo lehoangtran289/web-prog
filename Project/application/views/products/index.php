@@ -49,7 +49,7 @@
     </div>
 </div>
 <br />
-<button><a href= "../Project/users/login" >Sign in</a> <br></button>
-<button><a href= "../Project/users/register" >Register</a></button>
-<button><a href= "../Project/orders/index" >Pay out</a></button>
+<button><a href= "../users/login" >Sign in</a> <br></button>
+<button><a href= "../users/register" >Register</a></button>
+<button><a href= "../orders/index" >Pay out</a></button>
 <div><a href=""><button>Update your profile</button></a></div>

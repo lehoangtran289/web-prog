@@ -20,6 +20,7 @@ class OrdersController extends VanillaController {
 
     function index() {
         // check if user not login -> redirect to login page
+
         if(!isset($_SESSION['username']))
             header('Location: ../users/login');
         $this->Order->showHasOne();
