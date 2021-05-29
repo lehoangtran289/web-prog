@@ -121,7 +121,6 @@
             }
     
             $this->_query = 'SELECT * FROM ' . $from . ' WHERE ' . $conditions;
-            #echo '<!--'.$this->_query.'-->';
             $this->_result = mysqli_query($this->_dbHandle, $this->_query);
             $result = array();
             $table = array();
@@ -236,7 +235,6 @@
                     
                     array_push($result, $tempResults);
                 }
-                
                 // if isset(id) -> return a single result else return an array
                 if (mysqli_num_rows($this->_result) == 1 && $this->id != null) {
                     mysqli_free_result($this->_result);
