@@ -1,8 +1,16 @@
-<form action=<?php echo BASE_PATH . '/admin/users' ?>>
-    <input type="submit" value="User Management"/>
-</form>
+<!--<form action=--><?php //echo BASE_PATH . '/admin/users' ?>
+<!--    <input type="submit" value="User Management"/>-->
+<!--</form>-->
 
 <script type="text/javascript">
+    let config = {
+        users: ['username', 'name', 'role', 'email', 'address', 'phone', 'created_at', 'updated_at'],
+        products: [],
+        categories: [],
+        shipment: [],
+        payments: []
+    };
+
     // Get the HTTP Object
     function getHTTPObject() {
         if (window.ActiveXObject) {
@@ -15,19 +23,58 @@
         }
     }
     
+    function getHtmlTable(value, obj) {
+        let res = '';
+        //res += "<form action=\"<?php //echo BASE_PATH . '/admin/users/add' ?>//\"><input type=\"submit\" value=\"Add new User\"/> </form>";
+        let addurl = "<?php echo BASE_PATH . "/admin/users/add"?>";
+        res += "<a href=" + addurl + ">Add New User</a>";
+        res += "<table border='1' style='width:100%'>";
+        if (value === 'users') {
+            // table header
+            res += "<tr><th>Username</th> <th>Name</th> <th>Role</th> <th>Email</th> <th>Address</th> <th>Phone</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
+            // table content
+            obj.forEach(o => {
+                res += "<tr>";
+                for (let cf in config[value]) {
+                    let field = config[value][cf];
+                    res += o[field] ? "<td>" + o[field] + "</td>" : "<td></td>";
+                }
+                res += "<td>";
+                let updateUrl = "<?php echo BASE_PATH . "/admin/users/update/"?>" + o.id;
+                let deleteUrl = "<?php echo BASE_PATH . "/admin/users/delete/"?>" + o.id;
+                res += "<a href=" + updateUrl + ">Update</a> <a href=" + deleteUrl +">Delete</a>";
+                res += "</td>";
+                res += "</tr>";
+            })
+        } else if (value === 'products') {
+        
+        } else if (value === 'categories') {
+    
+        } else if (value === 'shipments') {
+    
+        } else if (value === 'payments') {
+    
+        } else {
+            return;
+        }
+        res += "</table>"
+        return res;
+    }
+    
     function processAction(value) {
         // call ajax
         httpObject = getHTTPObject();
-        let obj;
+        let obj, res = '';
         if (value && httpObject != null) {
             let url = "<?php echo BASE_PATH . "/admin/processAction/" ?>" + value;
             httpObject.onreadystatechange = () => {
                 if (httpObject.readyState === 4 && httpObject.status === 200) {
-                    // obj = httpObject.responseText;
+                    // obj = httpObject.responseText; // debug purpose
                     obj = JSON.parse(httpObject.responseText);
-                    console.log(obj);
                     
-                    //TODO: create view table
+                    // create view table
+                    res = getHtmlTable(value, obj);
+                    document.getElementById("table").innerHTML = res;
                 }
             }
             httpObject.open("GET", url, true);
@@ -39,7 +86,7 @@
 <form>
     <label>Choose an action</label>
     <label>
-        <select name="action" onchange="processAction(this.value)">
+        <select name="action" onclick="processAction(this.value)">
             <option disabled selected value> -- select an option --</option>
             <option value="users">User management</option>
             <option value="products">Product management</option>
@@ -51,6 +98,6 @@
 </form>
 <br>
 <div id="table">
-
+<!-- TO APPEND ELEMENTS FROM AJAX -->
 </div>
 <br>

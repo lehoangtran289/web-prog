@@ -8,7 +8,8 @@
      */
     
     $routing = array(
-        '/admin\/(.*?)\/(.*?)\/(.*)/' => 'admin/\1_\2/\3'
+        '/admin\/(.*?)\/(.*?)\/(.*)/' => 'admin/\1_\2/\3',
+        '/admin\/users\/add/' => 'admin/users_add'
     );
     
     // define a 2d array

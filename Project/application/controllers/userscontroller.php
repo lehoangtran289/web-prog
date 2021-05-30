@@ -120,4 +120,11 @@
             return $this->User->search();
         }
         
+        function findById($id = '') {
+            if ($id != '') {
+                $this->User->where('id', $id);
+                return $this->User->search();
+            }
+        }
+        
     }

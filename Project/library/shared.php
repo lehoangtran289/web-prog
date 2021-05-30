@@ -114,7 +114,7 @@
             call_user_func_array(array($dispatch, "afterAction"), $queryString);
         } else {
             /* Error Generation Code Here */
-            echo "Internal error in callHook()";
+            header('Location: ' . BASE_PATH . '/public/404.php');
         }
     }
     
@@ -130,7 +130,7 @@
             require_once(ROOT . DS . 'application' . DS . 'models' . DS . strtolower($className) . '.php');
         } else {
             /* Error Generation Code Here */
-            echo "spl_autoload_register error";
+            header('Location: ' . BASE_PATH . '/public/404.php');
         }
     });
     
