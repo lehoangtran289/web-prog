@@ -5,7 +5,7 @@
     
     if (isset($_GET['url'])) {
         $url = $_GET['url'];
-        echo $url;
+//        echo $url;
     }
     
     require_once(ROOT . DS . 'library' . DS . 'bootstrap.php');

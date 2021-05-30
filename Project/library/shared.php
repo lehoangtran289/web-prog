@@ -86,7 +86,7 @@
         global $default;
         
         $queryString = array();
-
+        
         if (!isset($url)) {
             $controller = $default['controller'];
             $action = $default['action'];
@@ -153,7 +153,7 @@
     }
     
     /** Get Required Files **/
-    
+
 //    gzipOutput() || ob_start("ob_gzhandler");
     
     

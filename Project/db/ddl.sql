@@ -64,7 +64,7 @@ create table if not exists products
     updated_at  datetime on update current_timestamp
 );
 
-insert into products(name, category_id, description,price, quantity)
+insert into products(name, category_id, description, price, quantity)
 values ('Oppo 5x', '4', 'abcoppo', 1000, 10),
        ('Samsung Galaxy X', '2', 'abcoppo', 1500, 3),
        ('IPhone XS', '1', 'abcoppo', 2100, 5),

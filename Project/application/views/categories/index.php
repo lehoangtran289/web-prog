@@ -3,10 +3,10 @@
         <div class="category">
             
             <?php
-            echo $html->link($category['Category']['brand'], 'categories/view/' . $category['Category']['id'] . '/' . $category['Category']['brand']) ?>
+                echo $html->link($category['Category']['brand'], 'categories/view/' . $category['Category']['id'] . '/' . $category['Category']['brand']) ?>
         
         </div>
     <?php endforeach ?>
 </div>
-<button><a href= "../Project/users/login" >Sign in</a> <br></button>
-<button><a href= "../Project/users/register" >Register</a></button>
+<button><a href="../Project/users/login">Sign in</a> <br></button>
+<button><a href="../Project/users/register">Register</a></button>
