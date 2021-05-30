@@ -95,4 +95,3 @@
 <div id="table">
 <!-- TO APPEND ELEMENTS FROM AJAX -->
 </div>
-<br>

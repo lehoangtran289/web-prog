@@ -9,6 +9,7 @@
     </head>
     <h1>Admin Site</h1>
     <body>
+        <button><a href="<?php echo BASE_PATH?>/users/logout">Log out</a></button>
         <p>//TODO: header buttons ~ logout -> nav to home; edit profile </p>
 
 
