@@ -28,6 +28,11 @@
         $_COOKIE = stripSlashesDeep($_COOKIE);
     }
     
+    /** pretty print data */
+    function pprint($data) {
+        print("<pre>" . print_r($data, true) . "</pre>");
+    }
+    
     /** Check register globals and remove them **/
     
     function unregisterGlobals() {
