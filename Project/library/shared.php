@@ -46,11 +46,18 @@
     /** Secondary Call Function **/
     
     function performAction($controller, $action, $queryString = null, $render = 0) {
-        
         $controllerName = ucfirst($controller) . 'Controller';
         $dispatch = new $controllerName($controller, $action);
         $dispatch->render = $render;
         return call_user_func_array(array($dispatch, $action), $queryString);
+    }
+    
+    function redirectAction($controller, $action, $queryString = null, $render = 1) {
+        $controllerName = ucfirst($controller) . 'Controller';
+        $dispatch = new $controllerName($controller, $action);
+        $dispatch->render = $render;
+        call_user_func_array(array($dispatch, $action), $queryString);
+        exit();
     }
     
     /** Routing **/
@@ -80,7 +87,6 @@
             $action = $default['action'];
         } else {
             $url = routeURL($url);
-            $urlArray = array();
             $urlArray = explode("/", $url);
             $controller = $urlArray[0];
             array_shift($urlArray);
@@ -103,6 +109,7 @@
             call_user_func_array(array($dispatch, "afterAction"), $queryString);
         } else {
             /* Error Generation Code Here */
+            echo "Internal error in callHook()";
         }
     }
     
@@ -118,6 +125,7 @@
             require_once(ROOT . DS . 'application' . DS . 'models' . DS . strtolower($className) . '.php');
         } else {
             /* Error Generation Code Here */
+            echo "spl_autoload_register error";
         }
     });
     
