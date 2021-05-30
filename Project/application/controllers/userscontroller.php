@@ -67,63 +67,76 @@
 
 
         function register() {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $phone = $_POST['phone'];
-            $address = $_POST['address'];
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            if ($username == '' || $password == '' || $name == '' || $email == '' || $phone == '' || $address == '') {
-                echo 'Please fill in all blank';
-            } else {
-                // Check if there exists an account
-                $this->User->where('username', $username);
-                if ($this->User->search($username)) {
-                    echo '<h1>Already exist this username</h1>';
+            if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['phone']) && isset($_POST['address']) && isset($_POST['email']) && isset($_POST['name']))
+            {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $phone = $_POST['phone'];
+                $address = $_POST['address'];
+                $name = $_POST['name'];
+                $email = $_POST['email'];
+                if ($username == '' || $password == '' || $name == '' || $email == '' || $phone == '' || $address == '') {
+                    echo 'Please fill in all blank';
                 } else {
-                    echo '<h1>Register successfully!!!</h1>';
-                    $this->User->id = NULL;
-                    $this->User->username = $username;
-                    $this->User->password = password_hash($password, PASSWORD_BCRYPT);
-                    $this->User->email = $email;
-                    $this->User->phone = $phone;
-                    $this->User->name = $name;
-                    $this->User->address = $address;
-                    $this->User->save();
-                    header('Location: '.BASE_PATH.'/users/login');
+                    // Check if there exists an account
+                    $this->User->where('username', $username);
+                    if ($this->User->search($username)) {
+                        echo '<h1>Already exist this username</h1>';
+                    } else {
+                        echo '<h1>Register successfully!!!</h1>';
+                        $this->User->id = NULL;
+                        $this->User->username = $username;
+                        $this->User->password = password_hash($password, PASSWORD_BCRYPT);
+                        $this->User->email = $email;
+                        $this->User->phone = $phone;
+                        $this->User->name = $name;
+                        $this->User->address = $address;
+                        $this->User->save();
+                        header('Location: '.BASE_PATH.'/users/login');
 //                    redirectAction('users','login',array());
+                    }
                 }
             }
-
         }
 
         function update()   // just a copy of register function, haven't dev yet
         {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $phone = $_POST['phone'];
-            $address = $_POST['address'];
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            if ($username == '' || $password == '' || $name == '' || $email == '' || $phone == '' || $address == '') {
-                echo 'Please fill in all blank';
-            } else {
-                // Check if there exists an account
-                $this->User->where('username', $username);
-                if ($this->User->search($username)) {
-                    echo '<h1>Already exist this username</h1>';
+            if(!isset($_SESSION['user']))
+                header('Location: '.BASE_PATH.'/users/login');
+            $this->User->where('username', $_SESSION['user']['username']);
+            $currentUser = $this->User->search($_SESSION['user']['username'])[0]['User'];
+            $this->set('currentUser', $currentUser);
+            if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['phone']) && isset($_POST['address']) && isset($_POST['email']) && isset($_POST['name']))
+            {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $phone = $_POST['phone'];
+                $address = $_POST['address'];
+                $name = $_POST['name'];
+                $email = $_POST['email'];
+                if ($username == '' || $password == '' || $name == '' || $email == '' || $phone == '' || $address == '') {
+                    echo 'Please fill in all blank';
                 } else {
-                    echo '<h1>Register successfully!!!</h1>';
-                    $this->User->id = NULL;
-                    $this->User->username = $username;
-                    $this->User->password = $password;
-                    $this->User->email = $email;
-                    $this->User->phone = $phone;
-                    $this->User->name = $name;
-                    $this->User->address = $address;
-                    $this->User->save();
-                    header('Location: '.BASE_PATH.'/users/update');  // redirect to update
-//                    redirectAction('users','update', array());
+                    // Check if there exists an account
+                    $this->User->where('username', $username);
+                    $user = $this->User->search($username)[0]['User'];
+
+                    if ($user && $user['username'] != $_SESSION['user']['username']) {
+                        echo '<h1>You can\'t change to that username, there already has one</h1>';
+                    } else {
+                        echo '<h1>Update successfully!!!</h1>';
+                        $this->User->id = $currentUser['id'];
+                        $this->User->username = $username;
+                        $this->User->password = password_hash($password, PASSWORD_BCRYPT);
+                        $this->User->email = $email;
+                        $this->User->phone = $phone;
+                        $this->User->name = $name;
+                        $this->User->address = $address;
+                        $this->User->save();
+                        $_SESSION['user']['username'] = $username;
+                            header('Location: '.BASE_PATH.'/users/update');  // redirect to update
+                    }
+
                 }
             }
 
