@@ -320,7 +320,7 @@
          */
         function delete() {
             if ($this->id) {
-                $query = 'DELETE FROM ' . $this->_table . ' WHERE `id`=\'' . $this->dbHandle->real_escape_string($this->id) . '\'';
+                $query = 'DELETE FROM ' . $this->_table . ' WHERE `id`=\'' . $this->_dbHandle->real_escape_string($this->id) . '\'';
                 $this->_result = mysqli_query($this->_dbHandle, $query);
                 $this->clear();
                 if ($this->_result == 0) {
@@ -372,7 +372,7 @@
                 $query = 'INSERT INTO ' . $this->_table . ' (' . $fields . ') VALUES (' . $values . ');';
             }
             $this->_result = mysqli_query($this->_dbHandle, $query);
-            echo '<h1>' . $query . '</h1>';
+//            echo '<h1>' . $query . '</h1>';
             $this->clear();
             if ($this->_result == 0) {
                 /** Error Generation **/

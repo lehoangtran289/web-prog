@@ -32,7 +32,30 @@
         }
         
         function users_update($id) {
-            // TODO: performAction in usercontroller
+            $user = performAction('users', 'findById', array($id));
+            $this->set('user', $user[0]);
+            if (isset($_POST['submit'])) {
+                $updated_user = new User();
+                $updated_user->id = $id;
+                $updated_user->username = $_POST['username'];
+                $updated_user->name = $_POST['name'];
+                $updated_user->email = $_POST['email'];
+                $updated_user->address = $_POST['address'];
+                $updated_user->phone = $_POST['phone'];
+                $updated_user->save();
+                header('Location: ' . BASE_PATH . '/admin');
+            }
+        }
+        
+        function users_delete($id) {
+            $deleted_user = new User();
+            $deleted_user->id = $id;
+            $deleted_user->delete();
+            header('Location: ' . BASE_PATH . '/admin');
+        }
+        
+        function users_add() {
+            echo "add";
         }
     
         function products_update($id) {
@@ -49,10 +72,5 @@
     
         function payments_update($id) {
             // TODO: performAction in paymentscontroller
-        }
-        
-        function users() {
-            $users = performAction('users', 'findAll', array());
-            $this->set('users', $users);
         }
     }
