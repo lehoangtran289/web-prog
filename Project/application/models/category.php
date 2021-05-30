@@ -1,5 +1,5 @@
 <?php
-
-class Category extends VanillaModel {
-    var $hasMany = array('Product' => 'Product');
-}
+    
+    class Category extends VanillaModel {
+        var $hasMany = array('Product' => 'Product');
+    }

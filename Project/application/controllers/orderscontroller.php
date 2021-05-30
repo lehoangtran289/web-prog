@@ -1,11 +1,11 @@
 <?php
-session_start();
-
-class OrdersController extends VanillaController {
-
-    function beforeAction() {
-
-    }
+    session_start();
+    
+    class OrdersController extends VanillaController {
+        
+        function beforeAction() {
+        
+        }
 
 //    function view($id = null) {
 //        $this->Product->id = $id;
@@ -17,17 +17,17 @@ class OrdersController extends VanillaController {
 //        $this->set('product', $product);
 //
 //    }
-
-    function index() {
-        // check if user not login -> redirect to login page
-
-        if(!isset($_SESSION['username']))
-            header('Location: ../users/login');
-        $this->Order->showHasOne();
-        $this->Order->showHasMany();
-        $orders = $this->Order->search();
-        $this->set('orders', $orders);
-    }
+        
+        function index() {
+            // check if user not login -> redirect to login page
+            
+            if (!isset($_SESSION['username']))
+                header('Location: ../users/login');
+            $this->Order->showHasOne();
+            $this->Order->showHasMany();
+            $orders = $this->Order->search();
+            $this->set('orders', $orders);
+        }
 
 
 //    function findProducts($categoryId = null, $categoryName = null) {
@@ -35,9 +35,9 @@ class OrdersController extends VanillaController {
 //        $this->Product->orderBy('name');
 //        return $this->Product->search();
 //    }
-
-
-    function afterAction() {
-
+        
+        
+        function afterAction() {
+        
+        }
     }
-}

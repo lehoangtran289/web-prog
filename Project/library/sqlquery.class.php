@@ -119,7 +119,7 @@
                 $offset = ($this->_page - 1) * $this->_limit;
                 $conditions .= ' LIMIT ' . $this->_limit . ' OFFSET ' . $offset;
             }
-    
+            
             $this->_query = 'SELECT * FROM ' . $from . ' WHERE ' . $conditions;
             $this->_result = mysqli_query($this->_dbHandle, $this->_query);
             $result = array();
@@ -314,9 +314,9 @@
         /** Delete an Object **/
         /**
          *  ex: function delete($categoryId) {
-                    $this->Category->id = $categoryId;
-                    $this->Category->delete();
-                }
+         * $this->Category->id = $categoryId;
+         * $this->Category->delete();
+         * }
          */
         function delete() {
             if ($this->id) {
@@ -338,10 +338,10 @@
          * The save() function must be used from the controller
          * 2 options: isset(id) ->  update the entry; !isset(id) -> create a new entry
          * ex: function new() {
-                    $this->Category->id = $_POST['id'];
-                    $this->Category->name = $_POST['name'];
-                   $this->Category->save();
-                }
+         * $this->Category->id = $_POST['id'];
+         * $this->Category->name = $_POST['name'];
+         * $this->Category->save();
+         * }
          */
         
         function save() {
@@ -372,7 +372,7 @@
                 $query = 'INSERT INTO ' . $this->_table . ' (' . $fields . ') VALUES (' . $values . ');';
             }
             $this->_result = mysqli_query($this->_dbHandle, $query);
-            echo '<h1>'.$query.'</h1>';
+            echo '<h1>' . $query . '</h1>';
             $this->clear();
             if ($this->_result == 0) {
                 /** Error Generation **/

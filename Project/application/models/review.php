@@ -1,4 +1,4 @@
 <?php
-
-class Review extends VanillaModel {
-}
+    
+    class Review extends VanillaModel {
+    }
