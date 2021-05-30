@@ -17,17 +17,36 @@
             // navigate link to edit page
         }
         
-        function processAction($controller_value = null) {
+        function processAction($controller = null) {
             $this->render = 0;
             error_reporting(0);
-            if (isset($controller_value)) {
+            if (isset($controller)) {
                 global $inflect;
-//                $data = $this->Admin->custom("SELECT * FROM " . $controller_value);
-                $data = performAction($controller_value, 'findAll', array());
-                $data = array_map(function ($x) use ($inflect, $controller_value) {
-                    return $x[ucfirst($inflect->singularize($controller_value))];
+                if ($controller == 'users') {
+                    $data = $this->Admin->custom("SELECT * FROM users where role != 'admin'");
+                } else {
+                    $data = performAction($controller, 'findAll', array());
+                }
+                $data = array_map(function ($x) use ($inflect, $controller) {
+                    return $x[ucfirst($inflect->singularize($controller))];
                 }, $data);
                 echo json_encode($data);
+            }
+        }
+        
+        // USER CRUD
+        function users_add() {
+            if (isset($_POST['submit'])) {
+                $add_user = new User();
+                $add_user->id = null;
+                $add_user->username = $_POST['username'];
+                $add_user->password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                $add_user->name = $_POST['name'];
+                $add_user->email = $_POST['email'];
+                $add_user->address = $_POST['address'];
+                $add_user->phone = $_POST['phone'];
+                $add_user->save();
+                header('Location: ' . BASE_PATH . '/admin');
             }
         }
         
@@ -54,22 +73,22 @@
             header('Location: ' . BASE_PATH . '/admin');
         }
         
-        function users_add() {
-            echo "add";
-        }
-    
+        // PRODUCTS CRUD
         function products_update($id) {
             // TODO: performAction in productsontroller
         }
     
+        // CATEGORIES CRUD
         function categories_update($id) {
             // TODO: performAction in categoriescontroller
         }
-    
+        
+        // SHIPMENTS CRUD
         function shipments_update($id) {
             // TODO: performAction in shipmentscontroller
         }
-    
+        
+        // PAYMENTS CRUD
         function payments_update($id) {
             // TODO: performAction in paymentscontroller
         }

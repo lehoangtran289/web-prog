@@ -1,7 +1,3 @@
-<!--<form action=--><?php //echo BASE_PATH . '/admin/users' ?>
-<!--    <input type="submit" value="User Management"/>-->
-<!--</form>-->
-
 <script type="text/javascript">
     let config = {
         users: ['username', 'name', 'role', 'email', 'address', 'phone', 'created_at', 'updated_at'],
@@ -25,9 +21,7 @@
     
     function getHtmlTable(value, obj) {
         let res = '';
-        //res += "<form action=\"<?php //echo BASE_PATH . '/admin/users/add' ?>//\"><input type=\"submit\" value=\"Add new User\"/> </form>";
-        let addurl = "<?php echo BASE_PATH . "/admin/users/add"?>";
-        res += "<a href=" + addurl + ">Add New User</a>";
+        res += "<form action=\"<?php echo BASE_PATH . '/admin/users/add' ?>\"><input type=\"submit\" value=\"Add new User\"/> </form>";
         res += "<table border='1' style='width:100%'>";
         if (value === 'users') {
             // table header
@@ -42,7 +36,8 @@
                 res += "<td>";
                 let updateUrl = "<?php echo BASE_PATH . "/admin/users/update/"?>" + o.id;
                 let deleteUrl = "<?php echo BASE_PATH . "/admin/users/delete/"?>" + o.id;
-                res += "<a href=" + updateUrl + ">Update</a> <a href=" + deleteUrl +">Delete</a>";
+                res += "<a href=" + updateUrl + ">Update</a> " +
+                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">Delete</a>";
                 res += "</td>";
                 res += "</tr>";
             })

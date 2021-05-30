@@ -1,4 +1,19 @@
-<form action="<?php echo BASE_PATH . '/admin/users/update/' . $user['User']['id'] ?>" method="post">
+<script type="text/javascript">
+    let validateForm = () => {
+        let username = document.getElementsByName('username')[0].value;
+        let name = document.getElementsByName("name")[0].value;
+        let email = document.getElementsByName("email")[0].value;
+        let address = document.getElementsByName("address")[0].value;
+        let phone = document.getElementsByName("phone")[0].value;
+        
+        if (!username || !name || !email || !address || !phone) {
+            alert("Some fields are missing. Please fill out all blank!");
+            return false;
+        }
+    }
+</script>
+
+<form action="<?php echo BASE_PATH . '/admin/users/update/' . $user['User']['id'] ?>" method="post" onsubmit="return validateForm()">
     <table>
         <tr>
             <td>Username</td>
