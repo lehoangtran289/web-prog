@@ -376,7 +376,7 @@
             $this->clear();
             if ($this->_result == 0) {
                 /** Error Generation **/
-                echo '<h1>I am in sqlquery class. Something wrong</h1>';
+                echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
                 return -1;
             }
         }
