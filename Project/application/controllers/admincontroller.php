@@ -4,8 +4,8 @@
     class AdminController extends VanillaController {
         
         function beforeAction() {
-            if (!isset($_SESSION['user']['username'])) { //TODO: admin authenticate
-                header('Location: ' . BASE_PATH . '/users/login');
+            if (!isset($_SESSION['user']['username']) || $_SESSION['username']['role'] != 'admin') {
+                header('Location: '.BASE_PATH.'/users/login');
             }
         }
         

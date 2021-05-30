@@ -1,6 +1,6 @@
 <?php
     session_start();
-    
+
     class UsersController extends VanillaController {
 
 //    function index() {
@@ -11,48 +11,61 @@
 //        $categories = $this->Category->search();
 //        $this->set('categories', $categories);
 //    }
-        
+
         function beforeAction() {
-        
+//            if(isset($_SESSION['user']))
+//            {
+//                if($_SESSION['user']['role'] == 'admin')
+//                    header('Location: ../'.BASE_PATH.'/admin/index');
+//                else if($_SESSION['user']['role'] == 'user')
+//                    header('Location: ../'.BASE_PATH.'/orders/index');
+//            }else
+//                header('Location: '.BASE_PATH.'/users/login');
         }
-        
+
         function afterAction() {
-        
+
         }
-        
+
         function login() {
             if (isset($_POST['username']) && isset($_POST['password'])) {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
-                
+
                 if ($username == '' || $password == '') {
                     echo 'Please fill in all blank!';
                 } else {
                     $this->User->where('username', $username);
-                    $this->User->where('password', $password);
-                    $user = $this->User->search($username, $password);
-                    //var_dump($user);
+                    $user = $this->User->search($username)[0]['User'];
+
+                    if(!password_verify($password, $user['password'] )) unset($user);
                     if ($user) {
                         // save username to session
                         $_SESSION['user']['username'] = $username;
-                        header('Location: ../orders/index');    //redirect to payout page
+                        $_SESSION['user']['role'] = $user['role'];
+
+                        if($user['role'] == 'user')
+                            header('Location: '.BASE_PATH.'/orders/index');
+                        else if($user['role'] == 'admin')
+                            header('Location: '.BASE_PATH.'/admin/index');
                     } else echo "Username or password incorrect !";
                     $this->set('user', $user); // maybe dont need this
                 }
-                
+
             }
-            
+
         }
-        
+
         function logout() {
-            if (isset($_SESSION['username'])) {
-                unset($_SESSION['username']);
-                header('Location: ../../products/index');
+            if (isset($_SESSION['user'])) {
+                unset($_SESSION['user']);
+                header('Location: '.BASE_PATH.'/products/index');
+//                redirectAction('products','index',array());
             }
-            
+
         }
-        
-        
+
+
         function register() {
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -71,19 +84,19 @@
                     echo '<h1>Register successfully!!!</h1>';
                     $this->User->id = NULL;
                     $this->User->username = $username;
-                    $this->User->password = $password;
+                    $this->User->password = password_hash($password, PASSWORD_BCRYPT);
                     $this->User->email = $email;
                     $this->User->phone = $phone;
                     $this->User->name = $name;
                     $this->User->address = $address;
                     $this->User->save();
-                    //header('Location: index.php');  // redirect to order page
+                    header('Location: '.BASE_PATH.'/users/login');
+//                    redirectAction('users','login',array());
                 }
             }
-            
-            //$this->set('user', $user);
+
         }
-        
+
         function update()   // just a copy of register function, haven't dev yet
         {
             $username = $_POST['username'];
@@ -109,15 +122,16 @@
                     $this->User->name = $name;
                     $this->User->address = $address;
                     $this->User->save();
-                    //header('Location: index.php');  // redirect to order page
+                    header('Location: '.BASE_PATH.'/users/update');  // redirect to update
+//                    redirectAction('users','update', array());
                 }
             }
-            
-            //$this->set('user', $user);
+
         }
-        
+
         function findAll() {
             return $this->User->search();
         }
-        
+
+
     }

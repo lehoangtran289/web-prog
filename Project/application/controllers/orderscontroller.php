@@ -21,8 +21,8 @@
         function index() {
             // check if user not login -> redirect to login page
             
-            if (!isset($_SESSION['username']))
-                header('Location: ../users/login');
+            if (!isset($_SESSION['user']))
+                header('Location: '.BASE_PATH.'/users/login');
             $this->Order->showHasOne();
             $this->Order->showHasMany();
             $orders = $this->Order->search();
