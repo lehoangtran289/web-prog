@@ -48,9 +48,9 @@
     </div>
 </div>
 <br/>
-<button><a href="../users/login">Sign in</a> <br></button>
-<button><a href="../users/register">Register</a></button>
-<button><a href="../orders/index">Pay out</a></button>
+<button><a href="<?php echo BASE_PATH?>/users/login">Sign in</a> <br></button>
+<button><a href="<?php echo BASE_PATH?>/users/register">Register</a></button>
+<button><a href="<?php echo BASE_PATH?>/orders/index">Pay out</a></button>
 <div><a href="">
         <button>Update your profile</button>
     </a></div>

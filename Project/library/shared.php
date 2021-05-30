@@ -4,8 +4,8 @@
     
     function setReporting() {
         if (DEVELOPMENT_ENVIRONMENT == true) {
-            error_reporting(E_ALL);
-//            error_reporting(E_ERROR | E_PARSE);
+//            error_reporting(E_ALL);
+            error_reporting(E_ERROR | E_PARSE);
             ini_set('display_errors', 'On');
         } else {
             error_reporting(E_ALL);
@@ -57,13 +57,13 @@
         return call_user_func_array(array($dispatch, $action), $queryString);
     }
     
-    function redirectAction($controller, $action, $queryString = null, $render = 1) {
-        $controllerName = ucfirst($controller) . 'Controller';
-        $dispatch = new $controllerName($controller, $action);
-        $dispatch->render = $render;
-        call_user_func_array(array($dispatch, $action), $queryString);
-        exit();
-    }
+//    function redirectAction($controller, $action, $queryString = null, $render = 1) {
+//        $controllerName = ucfirst($controller) . 'Controller';
+//        $dispatch = new $controllerName($controller, $action);
+//        $dispatch->render = $render;
+//        call_user_func_array(array($dispatch, $action), $queryString);
+//        exit();
+//    }
     
     /** Routing **/
     
