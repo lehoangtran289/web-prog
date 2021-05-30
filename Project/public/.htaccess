@@ -10,5 +10,5 @@ RewriteRule ^(.*)$ index.php?url=$1 [PT,L]
 
 </IfModule>
 <IfModule !mod_rewrite.c>
-	ErrorDocument 404 index.php
+	ErrorDocument 404 public/404.php
 </IfModule>

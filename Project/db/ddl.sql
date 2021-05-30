@@ -1,6 +1,7 @@
 drop table if exists users;
 drop table if exists products;
-drop table if exists order_product;
+drop table if exists orders_products;
+drop table if exists categories;
 drop table if exists orders;
 drop table if exists shipments;
 drop table if exists payments;
@@ -10,23 +11,23 @@ create table if not exists users
 (
     id         int primary key auto_increment,
     username   varchar(20) unique not null,
-    password   varchar(30)        not null,
+    password   varchar(256)        not null,
     name       varchar(30),
     email      varchar(40),
     role       varchar(20) default 'user',
     address    varchar(50),
-    phone      varchar(10),
+    phone      varchar(20),
     created_at datetime    default current_timestamp,
     updated_at datetime on update current_timestamp
 );
 insert into users(username, password, name, email, role, address, phone)
-values ('dangvh', '1', 'Vu Hai Dang', 'dangvh@gmail.com', 'user', 'Bac Ninh Bac Ninh', '0911989755'),
-       ('hoangtl', '1', 'Tran Le Hoang', 'hoangtl@gmail.com', 'user', 'Ha Noi Ha Noi', '0911989756'),
-       ('van', '1', 'Van H', 'van@gmail.com', 'user', 'Ha Noi Ha Noi', '0911989757'),
-       ('xon', '1', 'Xon T', 'xon@gmail.com', 'user', 'Ha Noi Ha Noi', '0911989758'),
-       ('user1', '1', 'User U1', 'user1@gmail.com', 'user', 'BHa Noi Ha Noi', '0911989759'),
-       ('user2', '1', 'User U2', 'user2@gmail.com', 'user', 'BHa Noi Ha Noi', '0911989751'),
-       ('admin', '1', 'Admin admin', 'admin@gmail.com', 'admin', 'admin home', '01686868686');
+values ('dangvh', '$2y$10$2jWElpzfcMw9mi6p.uZr5e7IA1Mjo7yTNYJEYbzgexPssafiY9U0S', 'Vu Hai Dang', 'dangvh@gmail.com', 'user', 'Bac Ninh Bac Ninh', '0911989755'),
+       ('hoangtl', '$2y$10$2jWElpzfcMw9mi6p.uZr5e7IA1Mjo7yTNYJEYbzgexPssafiY9U0S', 'Tran Le Hoang', 'hoangtl@gmail.com', 'user', 'Ha Noi Ha Noi', '0911989756'),
+       ('van', '$2y$10$2jWElpzfcMw9mi6p.uZr5e7IA1Mjo7yTNYJEYbzgexPssafiY9U0S', 'Van H', 'van@gmail.com', 'user', 'Ha Noi Ha Noi', '0911989757'),
+       ('xon', '$2y$10$2jWElpzfcMw9mi6p.uZr5e7IA1Mjo7yTNYJEYbzgexPssafiY9U0S', 'Xon T', 'xon@gmail.com', 'user', 'Ha Noi Ha Noi', '0911989758'),
+       ('user1', '$2y$10$2jWElpzfcMw9mi6p.uZr5e7IA1Mjo7yTNYJEYbzgexPssafiY9U0S', 'User U1', 'user1@gmail.com', 'user', 'BHa Noi Ha Noi', '0911989759'),
+       ('user2', '$2y$10$2jWElpzfcMw9mi6p.uZr5e7IA1Mjo7yTNYJEYbzgexPssafiY9U0S', 'User U2', 'user2@gmail.com', 'user', 'BHa Noi Ha Noi', '0911989751'),
+       ('admin', '$2y$10$2jWElpzfcMw9mi6p.uZr5e7IA1Mjo7yTNYJEYbzgexPssafiY9U0S', 'Admin admin', 'admin@gmail.com', 'admin', 'admin home', '01686868686');
 
 create table if not exists categories
 (
