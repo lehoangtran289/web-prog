@@ -101,3 +101,5 @@
 <!-- TO APPEND ELEMENTS FROM AJAX -->
 </div>
 <br>
+<br>
+<button><a href="<?php echo BASE_PATH?>/users/logout">Log out</a></button>
