@@ -76,4 +76,8 @@ class ProductsController extends VanillaController
     {
 
     }
+    
+    function findAll() {
+        return $this->Product->search();
+    }
 }

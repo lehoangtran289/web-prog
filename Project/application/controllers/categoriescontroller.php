@@ -40,5 +40,9 @@
             $categories = performAction('products', 'findProducts', array($categoryId, $categoryName));
         }
         
+        function findAll() {
+            return $this->Category->search();
+        }
+        
         
     }

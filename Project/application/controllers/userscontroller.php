@@ -121,5 +121,9 @@ class UsersController extends VanillaController
 
         //$this->set('user', $user);
     }
+    
+    function findAll() {
+        return $this->User->search();
+    }
 
 }
