@@ -17,13 +17,14 @@
             // navigate link to edit page
         }
         
+        // AJAX FUNCTIONS
         function processAction($controller = null) {
             $this->render = 0;
             error_reporting(0);
             if (isset($controller)) {
                 global $inflect;
                 if ($controller == 'users') {
-                    $data = $this->Admin->custom("SELECT * FROM users where role != 'admin'");
+                    $data = $this->Admin->custom("SELECT * FROM users WHERE role != 'admin'");
                 } else {
                     $data = performAction($controller, 'findAll', array());
                 }
@@ -45,7 +46,9 @@
                 $add_user->email = $_POST['email'];
                 $add_user->address = $_POST['address'];
                 $add_user->phone = $_POST['phone'];
-                $add_user->save();
+                if ($add_user->save() == -1) {
+                    return;
+                }
                 header('Location: ' . BASE_PATH . '/admin');
             }
         }
@@ -61,7 +64,9 @@
                 $updated_user->email = $_POST['email'];
                 $updated_user->address = $_POST['address'];
                 $updated_user->phone = $_POST['phone'];
-                $updated_user->save();
+                if ($updated_user->save() == -1) {
+                    return;
+                }
                 header('Location: ' . BASE_PATH . '/admin');
             }
         }

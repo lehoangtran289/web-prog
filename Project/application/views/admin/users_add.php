@@ -21,7 +21,7 @@
 </script>
 
 <h2>Add new user</h2>
-<form name="addUserForm" action="<?php echo BASE_PATH . '/admin/users/add' ?>" method="post" onsubmit="return validateForm();">
+<form name="addUserForm" action="<?php echo BASE_PATH . '/admin/users/add' ?>" method="post" onsubmit="return validateForm()">
     <table>
         <tr>
             <td>Username</td>
