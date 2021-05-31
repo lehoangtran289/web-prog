@@ -69,4 +69,11 @@
             $this->Product->showHasOne();
             return $this->Product->search();
         }
+    
+        function findById($id = '') {
+            if ($id != '') {
+                $this->Product->where('id', $id);
+                return $this->Product->search();
+            }
+        }
     }
