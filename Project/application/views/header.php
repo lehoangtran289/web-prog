@@ -125,4 +125,11 @@
     </head>
     
     <body>
-        <div class="navigation"><h1>My E-Commerce Website</h1>
+        <div class="navigation">
+            <div class="logo">
+
+            </div>
+            <h1>My E-Commerce Website</h1>
+        <div>
+
+        </div>
