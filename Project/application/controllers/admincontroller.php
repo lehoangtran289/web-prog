@@ -5,7 +5,7 @@
         
         function beforeAction() {
             if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
-                header('Location: '.BASE_PATH.'/users/login');
+                header('Location: ' . BASE_PATH . '/users/login');
             }
         }
         
@@ -25,13 +25,24 @@
                 global $inflect;
                 if ($controller == 'users') {
                     $data = $this->Admin->custom("SELECT * FROM users WHERE role != 'admin'");
+                    $data = array_map(function ($x) use ($inflect, $controller) {
+                        return $x[ucfirst($inflect->singularize($controller))];
+                    }, $data);
+                    echo json_encode($data);
+                } else if ($controller == "products") {
+                    $data = performAction($controller, 'findAll', array());
+                    $data = array_map(function ($x) {
+                        $x['Product']['brand'] = $x['Category']['brand'];
+                        return $x['Product'];
+                    }, $data);
+                    echo json_encode($data);
                 } else {
                     $data = performAction($controller, 'findAll', array());
+                    $data = array_map(function ($x) use ($inflect, $controller) {
+                        return $x[ucfirst($inflect->singularize($controller))];
+                    }, $data);
+                    echo json_encode($data);
                 }
-                $data = array_map(function ($x) use ($inflect, $controller) {
-                    return $x[ucfirst($inflect->singularize($controller))];
-                }, $data);
-                echo json_encode($data);
             }
         }
         
@@ -81,22 +92,131 @@
         }
         
         // PRODUCTS CRUD
-        function products_update($id) {
-            // TODO: performAction in productsontroller
+        function products_add() {
+            $categories = performAction('categories', 'findAll', array());
+            $this->set("categories", $categories);
+            
+            if (isset($_POST['submit'])) {
+                $add_product = new Product();
+                $add_product->id = null;
+                $add_product->name = $_POST['name'];
+                $add_product->quantity = $_POST['quantity'];
+                $add_product->category_id = $_POST['category'];
+                $add_product->OS = $_POST['OS'];
+                $add_product->chipset = $_POST['chipset'];
+                $add_product->ram = $_POST['ram'];
+                $add_product->display = $_POST['display'];
+                $add_product->resolution = $_POST['resolution'];
+                $add_product->camera = $_POST['camera'];
+                $add_product->memory = $_POST['memory'];
+                $add_product->pin = $_POST['pin'];
+                $add_product->description = $_POST['description'];
+                $add_product->price = $_POST['price'];
+                $add_product->image = $_FILES['image']['name'];
+                pprint($_FILES['image']);
+                if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+//                    $target_path = "../../public/images/" . basename($_FILES['image']['name']);
+                    $target_path = "/opt/lampp/htdocs/IT4552E-ICT03-K62/Project/public/images/";
+                    move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
+                } else {
+                    echo "false";
+                }
+                pprint($add_product);
+                if ($_FILES['image']['error'] > 0 || $_FILES['image']['size'] > 5000000) {
+                    echo "<script type='text/javascript'>alert('Error uploading file!');</script>";
+                    return;
+                }
+//                if ($add_product->save() == -1) {
+//                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
+//                    return;
+//                }
+//                header('Location: ' . BASE_PATH . '/admin');
+            }
         }
-    
+        
+        function products_update($id) {
+        }
+        
+        function products_delete($id) {
+            $deleted_product = new Product();
+            $deleted_product->id = $id;
+            $deleted_product->delete();
+            header('Location: ' . BASE_PATH . '/admin');
+        }
+        
         // CATEGORIES CRUD
+        function categories_add() {
+            if (isset($_POST['submit'])) {
+                $add_category = new Category();
+                $add_category->id = null;
+                $add_category->brand = $_POST['brand'];
+                if ($add_category->save() == -1) {
+                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
+                    return;
+                }
+                header('Location: ' . BASE_PATH . '/admin');
+            }
+        }
+        
         function categories_update($id) {
-            // TODO: performAction in categoriescontroller
+        }
+        
+        function categories_delete($id) {
+            $deleted_category = new Category();
+            $deleted_category->id = $id;
+            $deleted_category->delete();
+            header('Location: ' . BASE_PATH . '/admin');
+            
         }
         
         // SHIPMENTS CRUD
+        function shipments_add() {
+            if (isset($_POST['submit'])) {
+                $add_shipment = new Shipment();
+                $add_shipment->id = null;
+                $add_shipment->method = $_POST['method'];
+                $add_shipment->fee = $_POST['fee'];
+                $add_shipment->description = $_POST['description'];
+                if ($add_shipment->save() == -1) {
+                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
+                    return;
+                }
+                header('Location: ' . BASE_PATH . '/admin');
+            }
+        }
+        
         function shipments_update($id) {
-            // TODO: performAction in shipmentscontroller
+        }
+        
+        function shipments_delete($id) {
+            $deleted_shipment = new Shipment();
+            $deleted_shipment->id = $id;
+            $deleted_shipment->delete();
+            header('Location: ' . BASE_PATH . '/admin');
         }
         
         // PAYMENTS CRUD
+        function payments_add() {
+            if (isset($_POST['submit'])) {
+                $add_payment = new Payment();
+                $add_payment->id = null;
+                $add_payment->method = $_POST['method'];
+                $add_payment->description = $_POST['description'];
+                if ($add_payment->save() == -1) {
+                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
+                    return;
+                }
+                header('Location: ' . BASE_PATH . '/admin');
+            }
+        }
+        
         function payments_update($id) {
-            // TODO: performAction in paymentscontroller
+        }
+        
+        function payments_delete($id) {
+            $delete_payment = new Payment();
+            $delete_payment->id = $id;
+            $delete_payment->delete();
+            header('Location: ' . BASE_PATH . '/admin');
         }
     }

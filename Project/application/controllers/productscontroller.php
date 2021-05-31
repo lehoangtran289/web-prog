@@ -66,6 +66,7 @@
         }
         
         function findAll() {
+            $this->Product->showHasOne();
             return $this->Product->search();
         }
     }
