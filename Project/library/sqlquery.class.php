@@ -376,7 +376,6 @@
             $this->clear();
             if ($this->_result == 0) {
                 /** Error Generation **/
-                echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
                 return -1;
             }
         }

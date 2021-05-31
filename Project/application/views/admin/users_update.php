@@ -13,6 +13,9 @@
     }
 </script>
 
+<br>
+<button><a href="<?php echo BASE_PATH?>/admin">Back to admin page</a></button>
+<h2>Edit user <?php echo $user['User']['username'] ?></h2>
 <form action="<?php echo BASE_PATH . '/admin/users/update/' . $user['User']['id'] ?>" method="post" onsubmit="return validateForm()">
     <table>
         <tr>

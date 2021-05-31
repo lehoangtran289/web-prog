@@ -47,6 +47,7 @@
                 $add_user->address = $_POST['address'];
                 $add_user->phone = $_POST['phone'];
                 if ($add_user->save() == -1) {
+                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
                     return;
                 }
                 header('Location: ' . BASE_PATH . '/admin');
@@ -60,11 +61,12 @@
                 $updated_user = new User();
                 $updated_user->id = $id;
                 $updated_user->username = $_POST['username'];
-                $updated_user->name = $_POST['name'];
                 $updated_user->email = $_POST['email'];
+                $updated_user->name = $_POST['name'];
                 $updated_user->address = $_POST['address'];
                 $updated_user->phone = $_POST['phone'];
                 if ($updated_user->save() == -1) {
+                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
                     return;
                 }
                 header('Location: ' . BASE_PATH . '/admin');
