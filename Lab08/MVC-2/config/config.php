@@ -11,6 +11,6 @@
     
     const DB_NAME = 'test';
     const DB_USER = 'root';
-    const DB_PASSWORD = '1';
-    const DB_HOST = '172.17.0.2';
+    const DB_PASSWORD = '';
+    const DB_HOST = '127.0.0.1';
 
