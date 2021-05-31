@@ -154,22 +154,20 @@
                 $updated_product->description = $_POST['description'];
                 $updated_product->pin = $_POST['pin'];
                 $updated_product->price = $_POST['price'];
-                if ($_FILES['image']['error'] > 0 || $_FILES['image']['size'] > 5000000) {
+                if ($_FILES['image']['size'] > 5000000) {
                     echo "<script type='text/javascript'>alert('Error uploading filee!');</script>";
                     return;
                 }
-                pprint($_FILES['image']);
-                if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+                if ($_FILES['image']['error'] <= 0 && is_uploaded_file($_FILES['image']['tmp_name'])) {
                     $updated_product->image = $_POST['name'] . ".jpg";
                     $target_path = PUBLIC_PATH . "/images/" . $updated_product->image;
                     move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
-                    echo "here";
                 }
                 if ($updated_product->save() == -1) {
                     echo "<script type='text/javascript'>alert('Update fail, try again!');</script>";
                     return;
                 }
-//                header('Location: ' . BASE_PATH . '/admin');
+                header('Location: ' . BASE_PATH . '/admin');
             }
         }
         

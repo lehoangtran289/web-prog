@@ -27,7 +27,8 @@
 <button><a href="<?php echo BASE_PATH?>/admin">Back to admin page</a></button>
 <h2>Edit user <?php echo $product['Product']['name'] ?></h2>
 <?php echo "<img src=" . BASE_PATH . '/public/images/' . $product['Product']['image'] . ">"; ?>
-<form action="<?php echo BASE_PATH . '/admin/products/update/' . $product['Product']['id'] ?>" method="post" onsubmit="return validateForm()">
+<form action="<?php echo BASE_PATH . '/admin/products/update/' . $product['Product']['id'] ?>" method="post"
+    onsubmit="return validateForm()" enctype="multipart/form-data">
     <table>
         <tr>
             <td>Product name</td>
@@ -45,13 +46,11 @@
                         foreach ($categories as $c) {
                             if ($c['Category']['id'] == $product['Product']['category_id']) {
                                 echo "<option selected='selected' value=" . $c['Category']['id'] . ">";
-                                echo $c['Category']['brand'];
-                                echo "</option>";
                             } else {
                                 echo "<option value=" . $c['Category']['id'] . ">";
-                                echo $c['Category']['brand'];
-                                echo "</option>";
                             }
+                            echo $c['Category']['brand'];
+                            echo "</option>";
                         }
                     ?>
                 </select>
