@@ -93,6 +93,7 @@
         
         // PRODUCTS CRUD
         function products_add() {
+            //TODO
             $categories = performAction('categories', 'findAll', array());
             $this->set("categories", $categories);
             
@@ -115,9 +116,9 @@
                 $add_product->image = $_FILES['image']['name'];
                 pprint($_FILES['image']);
                 if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-//                    $target_path = "../../public/images/" . basename($_FILES['image']['name']);
-                    $target_path = "/opt/lampp/htdocs/IT4552E-ICT03-K62/Project/public/images/";
+                    $target_path = dirname(__FILE__) . "/../../public/images/" . $_POST['name'] . ".jpg";
                     move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
+                    echo "true";
                 } else {
                     echo "false";
                 }
@@ -126,11 +127,11 @@
                     echo "<script type='text/javascript'>alert('Error uploading file!');</script>";
                     return;
                 }
-//                if ($add_product->save() == -1) {
-//                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
-//                    return;
-//                }
-//                header('Location: ' . BASE_PATH . '/admin');
+                if ($add_product->save() == -1) {
+                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
+                    return;
+                }
+                header('Location: ' . BASE_PATH . '/admin');
             }
         }
         

@@ -265,7 +265,7 @@
             $table = array();
             $field = array();
             $tempResults = array();
-            echo $query;
+//            echo $query;
             if (substr_count(strtoupper($query), "SELECT") > 0) {
                 if (mysqli_num_rows($this->_result) > 0) {
                     $numOfFields = mysqli_num_fields($this->_result);
