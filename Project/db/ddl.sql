@@ -62,7 +62,8 @@ create table if not exists products
     description text,
     price       double      not null,
     created_at  date default current_date,
-    updated_at  datetime on update current_timestamp
+    updated_at  datetime on update current_timestamp,
+    foreign key (category_id) references categories(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 insert into products(name, category_id, description, price, quantity)
