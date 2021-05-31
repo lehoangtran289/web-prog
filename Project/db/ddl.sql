@@ -47,7 +47,7 @@ values ('IPhone'),
 create table if not exists products
 (
     id          int primary key auto_increment,
-    name        varchar(50) not null,
+    name        varchar(50) unique not null,
     quantity    int         not null,
     category_id int,
     OS          varchar(30),
@@ -66,12 +66,12 @@ create table if not exists products
     foreign key (category_id) references categories(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-insert into products(name, category_id, description, price, quantity)
-values ('Oppo 5x', '4', 'abcoppo', 1000, 10),
-       ('Samsung Galaxy X', '2', 'abcoppo', 1500, 3),
-       ('IPhone XS', '1', 'abcoppo', 2100, 5),
-       ('IPhone XS Max', '1', 'abcoppo', 2500, 12),
-       ('Xiaomi ABC', '3', 'abcoppo', 1000, 15);
+insert into products(name, category_id, description, price, image, quantity)
+values ('Oppo 5x', '4', 'abcoppo', 1000, 'abc.png', 10),
+       ('Samsung Galaxy X', '2', 'abcoppo', 1500, 'def.png', 3),
+       ('IPhone XS', '1', 'abcoppo', 2100, 'ghk.png', 5),
+       ('IPhone XS Max', '1', 'abcoppo', 2500, 'abc.png', 12),
+       ('Xiaomi ABC', '3', 'abcoppo', 1000, 'abc.png', 15);
 
 create table if not exists reviews
 (
