@@ -1,17 +1,12 @@
-<html>
-<head>
-    <title>A sample form</title>
-</head>
-<body>
 
-<form action="../users/register" method="post">
+<form action="../users/update" method="post">
     <table>
         <tr>
-            <td colspan="2">Register form</td>
+            <td colspan="2">Update form</td>
         </tr>
         <tr>
             <td>Username :</td>
-            <td><input type="text" id="username" name="username"></td>
+            <td><input type="text" id="username" name="username" value="<?php echo $currentUser['username'] ?>"></td>
         </tr>
         <tr>
             <td>Password :</td>
@@ -19,27 +14,26 @@
         </tr>
         <tr>
             <td>Full name :</td>
-            <td><input type="text" id="name" name="name"></td>
+            <td><input type="text" id="name" name="name" value="<?php echo $currentUser['name'] ?>"></td>
         </tr>
         <tr>
             <td>Email :</td>
-            <td><input type="email" id="email" name="email"></td>
+            <td><input type="email" id="email" name="email" value="<?php echo $currentUser['email'] ?>"></td>
         </tr>
         <tr>
             <td>Address :</td>
-            <td><input type="text" id="address" name="address"></td>
+            <td><input type="text" id="address" name="address" value="<?php echo $currentUser['address'] ?>"></td>
         </tr>
         <tr>
             <td>Phone :</td>
-            <td><input type="tel" id="phone" name="phone"></td>
+            <td><input type="tel" id="phone" name="phone" value="<?php echo $currentUser['phone'] ?>"></td>
         </tr>
 
         <tr>
-            <td colspan="2" align="center"><input type="submit" name="submit" value="Register"></td>
+            <td colspan="2" align="center"><input type="submit" name="submit" value="Save changes"></td>
         </tr>
 
     </table>
 
 </form>
-</body>
-</html>
+<button><a href="<?php echo BASE_PATH?>/users/logout">Log out</a></button>

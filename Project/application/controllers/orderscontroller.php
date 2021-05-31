@@ -29,6 +29,14 @@
             $this->set('orders', $orders);
         }
 
+        function payout() {
+            // check if user not login -> redirect to login page
+
+            if (!isset($_SESSION['user']))
+                header('Location: '.BASE_PATH.'/users/login');
+
+        }
+
 
 //    function findProducts($categoryId = null, $categoryName = null) {
 //        $this->Product->where('category_id', $categoryId);
