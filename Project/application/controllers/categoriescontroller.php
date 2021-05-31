@@ -43,6 +43,13 @@
         function findAll() {
             return $this->Category->search();
         }
+    
+        function findById($id = '') {
+            if ($id != '') {
+                $this->Category->where('id', $id);
+                return $this->Category->search();
+            }
+        }
         
         
     }

@@ -93,7 +93,6 @@
         
         // PRODUCTS CRUD
         function products_add() {
-            //TODO
             $categories = performAction('categories', 'findAll', array());
             $this->set("categories", $categories);
             
@@ -113,22 +112,20 @@
                 $add_product->pin = $_POST['pin'];
                 $add_product->description = $_POST['description'];
                 $add_product->price = $_POST['price'];
-                $add_product->image = $_FILES['image']['name'];
-                pprint($_FILES['image']);
-                if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-                    $target_path = dirname(__FILE__) . "/../../public/images/" . $_POST['name'] . ".jpg";
-                    move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
-                    echo "true";
-                } else {
-                    echo "false";
-                }
-                pprint($add_product);
                 if ($_FILES['image']['error'] > 0 || $_FILES['image']['size'] > 5000000) {
                     echo "<script type='text/javascript'>alert('Error uploading file!');</script>";
                     return;
                 }
+                if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+                    $add_product->image = $_POST['name'] . ".jpg";
+                    $target_path = PUBLIC_PATH . "/images/" . $add_product->image;
+                    move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
+                } else {
+                    echo "<script type='text/javascript'>alert('Uploading file failed!');</script>";
+                    return;
+                }
                 if ($add_product->save() == -1) {
-                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
+                    echo "<script type='text/javascript'>alert('Add fail, try again!');</script>";
                     return;
                 }
                 header('Location: ' . BASE_PATH . '/admin');
@@ -136,6 +133,44 @@
         }
         
         function products_update($id) {
+            $product = performAction('products', 'findById', array($id));
+            $categories = performAction('categories', 'findAll', array());
+            $this->set('product', $product[0]);
+            $this->set("categories", $categories);
+            
+            if (isset($_POST['submit'])) {
+                $updated_product = new Product();
+                $updated_product->id = $id;
+                $updated_product->name = $_POST['name'];
+                $updated_product->category_id = $_POST['category'];
+                $updated_product->quantity = $_POST['quantity'];
+                $updated_product->OS = $_POST['OS'];
+                $updated_product->ram = $_POST['ram'];
+                $updated_product->chipset = $_POST['chipset'];
+                $updated_product->display = $_POST['display'];
+                $updated_product->camera = $_POST['camera'];
+                $updated_product->resolution = $_POST['resolution'];
+                $updated_product->memory = $_POST['memory'];
+                $updated_product->description = $_POST['description'];
+                $updated_product->pin = $_POST['pin'];
+                $updated_product->price = $_POST['price'];
+                if ($_FILES['image']['error'] > 0 || $_FILES['image']['size'] > 5000000) {
+                    echo "<script type='text/javascript'>alert('Error uploading filee!');</script>";
+                    return;
+                }
+                pprint($_FILES['image']);
+                if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+                    $updated_product->image = $_POST['name'] . ".jpg";
+                    $target_path = PUBLIC_PATH . "/images/" . $updated_product->image;
+                    move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
+                    echo "here";
+                }
+                if ($updated_product->save() == -1) {
+                    echo "<script type='text/javascript'>alert('Update fail, try again!');</script>";
+                    return;
+                }
+//                header('Location: ' . BASE_PATH . '/admin');
+            }
         }
         
         function products_delete($id) {
@@ -160,6 +195,18 @@
         }
         
         function categories_update($id) {
+            $category = performAction('categories', 'findById', array($id));
+            $this->set('category', $category[0]);
+            if (isset($_POST['submit'])) {
+                $updated_category = new Category();
+                $updated_category->id = $id;
+                $updated_category->brand = $_POST['brand'];
+                if ($updated_category->save() == -1) {
+                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
+                    return;
+                }
+                header('Location: ' . BASE_PATH . '/admin');
+            }
         }
         
         function categories_delete($id) {
@@ -187,6 +234,20 @@
         }
         
         function shipments_update($id) {
+            $shipment = performAction('shipments', 'findById', array($id));
+            $this->set('shipment', $shipment[0]);
+            if (isset($_POST['submit'])) {
+                $updated_shipment = new Shipment();
+                $updated_shipment->id = $id;
+                $updated_shipment->method = $_POST['method'];
+                $updated_shipment->fee = $_POST['fee'];
+                $updated_shipment->description = $_POST['description'];
+                if ($updated_shipment->save() == -1) {
+                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
+                    return;
+                }
+                header('Location: ' . BASE_PATH . '/admin');
+            }
         }
         
         function shipments_delete($id) {
@@ -212,6 +273,19 @@
         }
         
         function payments_update($id) {
+            $payment = performAction('payments', 'findById', array($id));
+            $this->set('payment', $payment[0]);
+            if (isset($_POST['submit'])) {
+                $updated_payment = new Payment();
+                $updated_payment->id = $id;
+                $updated_payment->method = $_POST['method'];
+                $updated_payment->description = $_POST['description'];
+                if ($updated_payment->save() == -1) {
+                    echo "<script type='text/javascript'>alert('Add/Update fail, try again!');</script>";
+                    return;
+                }
+                header('Location: ' . BASE_PATH . '/admin');
+            }
         }
         
         function payments_delete($id) {
