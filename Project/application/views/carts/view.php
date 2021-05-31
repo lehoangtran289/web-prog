@@ -32,7 +32,7 @@
                 echo '</tr>';
             }
             echo '</table>';
-            echo '<button><a href="<?php echo BASE_PATH?>/orders/index">Buy</a></button>';
+            echo "<button><a href='" . BASE_PATH . "/orders/index'" . ">Buy</a></button>";
         } else {
             echo 'Cart empty';
         }
