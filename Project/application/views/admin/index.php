@@ -20,7 +20,7 @@
             return null;
         }
     }
-
+    
     /**
      * build html table based on selected "value"
      */
@@ -48,7 +48,7 @@
         } else if (value === 'products') {
             result += "<form action=\"<?php echo BASE_PATH . '/admin/products/add' ?>\"><input type=\"submit\" value=\"Add new Product\"/> </form>";
             result += "<table border='1' style='width:100%'>";
-            result += "<tr><th>Name</th><th>Quantity</th><th>Category</th><th>OS</th><th>Chipset</th><th>Ram</th><th>Display</th><th>Resolution</th><th>Camera</th><th>Memory</th><th>Pin</th><th>Description</th><th>Price</th><th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
+            result += "<tr><th>Name</th><th>Quantity</th><th>Category</th><th>OS</th><th>Chipset</th><th>Ram</th><th>Display</th><th>Resolution</th><th>Camera</th><th>Memory</th><th>Pin</th><th>Description</th><th>Price</th><th>CreateAt</th> <th>UpdateAt</th><th>Image</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
                 result += "<tr>";
@@ -56,6 +56,11 @@
                     let field = config[value][cf];
                     result += o[field] ? "<td>" + o[field] + "</td>" : "<td></td>";
                 }
+                // image
+                let image_path = "<?php echo BASE_PATH . '/public/images/'?>" + o['image'];
+                result += o['image'] ? "<td><img src='" + image_path + "'></td>" : "<td></td>";
+
+                // action
                 result += "<td>";
                 let updateUrl = "<?php echo BASE_PATH . "/admin/products/update/"?>" + o.id;
                 let deleteUrl = "<?php echo BASE_PATH . "/admin/products/delete/"?>" + o.id;
@@ -127,7 +132,7 @@
         result += "</table>"
         return result;
     }
-
+    
     /**
      * AJAX Call to get data
      */
