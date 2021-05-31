@@ -49,10 +49,6 @@
             $this->set('products', $products);
         }
         
-        function removeFromCart() {
-        
-        }
-        
         function delete() {
         
         }
