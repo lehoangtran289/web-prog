@@ -68,10 +68,8 @@
             error_reporting(0);
             $_SESSION['cart'][$id] -= 1;
             if ($_SESSION['cart'][$id] == 0) {
-                removeFromCart($id);
-                return;
+                unset($_SESSION['cart'][$id]);
             }
-            $cart = array();
             $cart = array();
             foreach ($_SESSION['cart'] as $id => $quantity) {
                 $item = $this->Cart->custom('SELECT * FROM products WHERE id='.$id);
@@ -79,8 +77,12 @@
                 $item = json_encode($item['0']);
                 array_push($cart, $item);
             }
-            echo json_encode($cart);
             $this->set('cart', $cart);
+            if (count($_SESSION['cart']) == 0) {
+                echo '{}';
+            } else {
+                echo json_encode($cart);
+            }
         }
 
         function addToCart() {
