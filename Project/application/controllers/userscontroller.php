@@ -57,12 +57,10 @@
         }
 
         function logout() {
-            if (isset($_SESSION['user'])) {
+            if (isset($_SESSION['user']))
                 unset($_SESSION['user']);
-                header('Location: '.BASE_PATH.'/products/index');
 //                redirectAction('products','index',array());
-            }
-
+            header('Location: '.BASE_PATH.'/products/index');
         }
 
 

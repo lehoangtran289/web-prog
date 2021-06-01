@@ -25,6 +25,9 @@
                 header('Location: '.BASE_PATH.'/users/login');
             $this->Order->showHasOne();
             $this->Order->showHasMany();
+            $this->User->where('username', $username);
+            $userId =$this->Order->custom('SELECT * FROM users WHERE username='.$_SESSION['user']['username']);
+
             $orders = $this->Order->search();
             $this->set('orders', $orders);
         }

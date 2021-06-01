@@ -33,19 +33,6 @@
             $this->Product->showHasOne();
             $this->Product->showHasMany();
             $products = $this->Product->search();
-            
-            
-            if (isset($_POST["add_to_cart"]))   // if user add something to cart
-            {
-                if (isset($_SESSION["cart"]))   // check if cart has something
-                {
-                
-                } else      // if cart is empty
-                {
-                
-                }
-            }
-            
             $this->set('products', $products);
         }
         
