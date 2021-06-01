@@ -39,10 +39,12 @@
                 $item = json_encode($item['0']);
                 array_push($cart, $item);
             }
-            echo json_encode($cart);
+            
             $this->set('cart', $cart);
             if (count($_SESSION['cart']) == 0) {
                 echo '{}';
+            } else {
+                echo json_encode($cart);
             }
         }
 

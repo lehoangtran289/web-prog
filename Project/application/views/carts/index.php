@@ -5,7 +5,7 @@
         res = fetch(url)
         .then(response => response.json())
         .then(data => {
-            //console.log(data);
+            console.log(data);
             displayCart(data);
         });
     }
@@ -15,7 +15,7 @@
         res = fetch(url)
         .then(response => response.json())
         .then(data => {
-            //console.log(data);
+            console.log(data);
             displayCart(data);
         });
     }
@@ -24,7 +24,7 @@
         res = fetch(url)
         .then(response => response.json())
         .then(data => {
-            //console.log(data);
+            console.log(data);
             displayCart(data);
         });
     }
@@ -39,12 +39,9 @@
             html += "<table border='1' style='width:100%'>";
             Array.prototype.forEach.call(products, product => {
                 info = JSON.stringify(product);
-                
-                //info = "\"" + info.slice(14, -16) + "\"";
-                //console.log(info);
                 info = JSON.parse(info);
                 info = JSON.parse(info);
-                console.log(typeof(info.Product));
+                //console.log(typeof(info.Product));
                 let segment = '<tr><th>';
                 segment += JSON.stringify(info.Product) + "</th>";
                 segment += "<th><button type=\"button\" onclick=\"decreaseQty(" + info.Product.id + ")\">-</button></th>";
