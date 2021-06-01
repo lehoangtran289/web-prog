@@ -10,14 +10,16 @@
         
         }
 
-        function view() {
+        function index() {
             var_dump($_SESSION['cart']);
             if (isset($_SESSION['cart']) && count($_SESSION['cart']) != 0) {
                 $cart = array();
                 foreach ($_SESSION['cart'] as $id => $quantity) {
-                    $data = $this->Cart->custom('SELECT * FROM products WHERE id='.$id);
-                    $data['buy_quantity'] = $quantity; 
-                    array_push($cart, $data);
+                    $item = $this->Cart->custom('SELECT * FROM products WHERE id='.$id);
+                    $item['0']['buy_qty'] = $quantity; 
+                    $item = json_encode($item['0']);
+                    #echo $item;
+                    array_push($cart, $item);
                 }
                 $this->set('cart', $cart);
             } else {
@@ -25,13 +27,63 @@
             }
         }
 
-        function removeFromCart() {
-            $id = $_POST['id'];
+        function removeFromCart($id) {
+            $this->render = 0;
+            error_reporting(0);
+
             unset($_SESSION['cart'][$id]);
+            $cart = array();
+            foreach ($_SESSION['cart'] as $id => $quantity) {
+                $item = $this->Cart->custom('SELECT * FROM products WHERE id='.$id);
+                $item['0']['buy_qty'] = $quantity; 
+                $item = json_encode($item['0']);
+                array_push($cart, $item);
+            }
+            echo json_encode($cart);
+            $this->set('cart', $cart);
+            if (count($_SESSION['cart']) == 0) {
+                echo '{}';
+            }
+        }
+
+        function increaseItemQty($id) {
+            $this->render = 0;
+            error_reporting(0);
+            $_SESSION['cart'][$id] += 1;
+            $cart = array();
+            foreach ($_SESSION['cart'] as $id => $quantity) {
+                $item = $this->Cart->custom('SELECT * FROM products WHERE id='.$id);
+                $item['0']['buy_qty'] = $quantity; 
+                $item = json_encode($item['0']);
+                array_push($cart, $item);
+            }
+            echo json_encode($cart);
+            $this->set('cart', $cart);
+        }
+
+        function decreaseItemQty($id) {
+            $this->render = 0;
+            error_reporting(0);
+            $_SESSION['cart'][$id] -= 1;
+            if ($_SESSION['cart'][$id] == 0) {
+                removeFromCart($id);
+                return;
+            }
+            $cart = array();
+            $cart = array();
+            foreach ($_SESSION['cart'] as $id => $quantity) {
+                $item = $this->Cart->custom('SELECT * FROM products WHERE id='.$id);
+                $item['0']['buy_qty'] = $quantity; 
+                $item = json_encode($item['0']);
+                array_push($cart, $item);
+            }
+            echo json_encode($cart);
+            $this->set('cart', $cart);
         }
 
         function addToCart() {
-
+            $this->render = 0;
+            error_reporting(0);
             $id = $_POST['id'];
             if (isset($_SESSION['cart'])) {
                 if (isset($_SESSION['cart'][$id])) {
@@ -42,6 +94,7 @@
             } else {
                 $_SESSION['cart'][$id] = 1;
             }
+            header("Location: " . BASE_PATH . "/carts/index");
         }
 
     

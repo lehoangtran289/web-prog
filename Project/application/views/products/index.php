@@ -35,7 +35,7 @@
 <br/>
 <button><a href="<?php echo BASE_PATH?>/users/login">Sign in</a> <br></button>
 <button><a href="<?php echo BASE_PATH?>/users/register">Register</a></button>
-<button><a href="<?php echo BASE_PATH?>/carts/view">Cart</a></button>
+<button><a href="<?php echo BASE_PATH?>/carts/index">Cart</a></button>
 <div><a href="">
         <button>Update your profile</button>
     </a></div>
