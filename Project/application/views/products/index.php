@@ -1,7 +1,15 @@
-<div><h2>Welcome, this is the home page</h2></div>
+<div class="row">
+    <div class="col-2">
+        <h1>Welcome To,<br>J Henlo Cheems Mobile Shop!</h1>
+        <p>"The mobile phone is used from when you get up in the morning and is often the last thing you interact with at night.”</p>
+    </div>
+    <div class="col-2">
+        <img src="<?php echo BASE_PATH.'/public/images/Banner.jpg'?>" >
+    </div>
+</div>
 
-<br/>
-<div class="container" style="width:700px;">
+
+<div class="" style="width:700px;">
     <?php
         foreach ($products as $product) {
             ?>
@@ -17,7 +25,6 @@
             </div>
             <?php
         }
-    
     ?>
     <div style="clear:both"></div>
     <br/>
@@ -38,4 +45,7 @@
 <button><a href="<?php echo BASE_PATH?>/carts/index">Cart</a></button>
 <div><a href="">
         <button>Update your profile</button>
-    </a></div>
+    </a>
+</div>
+
+</div>
