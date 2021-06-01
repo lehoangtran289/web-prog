@@ -10,15 +10,19 @@
             a {
                 text-decoration: none;
             }
+
+            h1 > a:visited, button > a:visited, h1 > a:hover, button > a:hover, h1 > a:active, button > a:active {
+                color: #000;
+            }
+
             img {
                 width: 80px;
                 height: auto;
             }
         </style>
     </head>
-    <h1>Admin Site</h1>
+    <h1><a href="<?php echo BASE_PATH ?>/admin">Admin Site</a></h1>
     <body>
-        <button><a href="<?php echo BASE_PATH?>/users/logout">Log out</a></button>
-        <p>//TODO: header buttons edit profile </p>
+        <button><a href="<?php echo BASE_PATH ?>/users/logout">Log out</a></button>
 
 
