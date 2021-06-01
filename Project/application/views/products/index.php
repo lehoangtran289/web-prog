@@ -9,7 +9,7 @@
                 <form method="post" action="index">
                     <div style="border:1px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px;"
                          align="center">
-                        <div><img src="<?php echo BASE_PATH.'/public/images/' . $product['Product']['image'] . '.png' ?>">
+                        <div><img src="<?php echo BASE_PATH.'/public/images/' . $product['Product']['image']?>">
                             <?php echo $html->link($product['Product']['name'], 'products/view/' . $product['Product']['id'] . '/' . $product['Product']['name']); ?>
                             <h4>$ <?php echo $product['Product']["price"]; ?></h4>
                         </div>
