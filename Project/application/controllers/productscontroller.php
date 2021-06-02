@@ -13,7 +13,8 @@
             $this->Product->showHMABTM();
             $this->Product->showHasMany();
             $product = $this->Product->search();
-            
+            $review = performAction('reviews', 'findAll', array());
+            pprint($review);
             $this->set('product', $product);
             
         }
