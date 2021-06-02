@@ -17,7 +17,7 @@ create table if not exists users
     role       varchar(20) default 'user',
     address    varchar(50),
     phone      varchar(20),
-    created_at date    default current_date,
+    created_at datetime    default current_timestamp,
     updated_at datetime on update current_timestamp
 );
 insert into users(username, password, name, email, role, address, phone)
@@ -33,7 +33,7 @@ create table if not exists categories
 (
     id         int primary key auto_increment,
     brand      varchar(50),
-    created_at date default current_date,
+    created_at datetime default current_timestamp,
     updated_at datetime on update current_timestamp
 );
 
@@ -61,7 +61,7 @@ create table if not exists products
     image       text,
     description text,
     price       double      not null,
-    created_at  date default current_date,
+    created_at  datetime default current_timestamp,
     updated_at  datetime on update current_timestamp,
     foreign key (category_id) references categories(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -80,7 +80,7 @@ create table if not exists reviews
     product_id int not null,
     content    text,
     rating     int,
-    created_at date default current_date
+    created_at datetime default current_timestamp
 );
 
 create table if not exists orders_products
@@ -101,7 +101,7 @@ create table if not exists orders
     address     text        not null,
     shipment_id int         not null,
     payment_id  int         not null,
-    date        date default current_date,
+    date        datetime default current_timestamp,
     total_bill  double
 );
 insert into orders(id, user_id, phone, address, shipment_id, payment_id, total_bill)
@@ -113,7 +113,7 @@ create table if not exists shipments
     method      text   not null,
     fee         double not null,
     description text,
-    created_at  date default current_date,
+    created_at  datetime default current_timestamp,
     updated_at  datetime on update current_timestamp
 );
 insert into shipments(method, fee, description)
@@ -124,7 +124,7 @@ create table if not exists payments
     id          int primary key auto_increment,
     method      text not null,
     description text,
-    created_at  date default current_date,
+    created_at  datetime default current_timestamp,
     updated_at  datetime on update current_timestamp
 );
 insert into payments(method, description)
