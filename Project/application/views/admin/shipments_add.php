@@ -13,7 +13,6 @@
 </script>
 
 <br>
-<button><a href="<?php echo BASE_PATH?>/admin">Back to admin page</a></button>
 <h2>Add new user</h2>
 <form name="addShipmentForm" action="<?php echo BASE_PATH . '/admin/shipments/add' ?>" method="post" onsubmit="return validateForm()">
     <table>

@@ -27,8 +27,8 @@
     function getHtmlTable(value, obj) {
         let result = '';
         if (value === 'users') {
-            result += "<form action=\"<?php echo BASE_PATH . '/admin/users/add' ?>\"><input type=\"submit\" value=\"Add new User\"/> </form>";
-            result += "<table border='1' style='width:100%'>";
+            result += "<form action=\"<?php echo BASE_PATH . '/admin/users/add' ?>\"><input type=\"submit\" value=\"Add new User\"></input> </form>";
+            result += "<br><table class='index-table' border='1' style='width:100%'>";
             result += "<tr><th>Username</th> <th>Name</th> <th>Role</th> <th>Email</th> <th>Address</th> <th>Phone</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
@@ -40,21 +40,25 @@
                 result += "<td>";
                 let updateUrl = "<?php echo BASE_PATH . "/admin/users/update/"?>" + o.id;
                 let deleteUrl = "<?php echo BASE_PATH . "/admin/users/delete/"?>" + o.id;
-                result += "<a href=" + updateUrl + ">Update</a> " +
-                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">Delete</a>";
+                result += "<a href=" + updateUrl + ">" + "<span class=\"material-icons md-24 md-blue\">edit</span>" + "</a>" +
+                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">" + "<span class=\"material-icons md-24 md-red\">delete_forever</span>" + "</a>";
                 result += "</td>";
                 result += "</tr>";
             })
         } else if (value === 'products') {
             result += "<form action=\"<?php echo BASE_PATH . '/admin/products/add' ?>\"><input type=\"submit\" value=\"Add new Product\"/> </form>";
-            result += "<table border='1' style='width:100%'>";
+            result += "<br><table class='index-table' border='1' style='width:100%'>";
             result += "<tr><th>Name</th><th>Quantity</th><th>Category</th><th>OS</th><th>Chipset</th><th>Ram</th><th>Display</th><th>Resolution</th><th>Camera</th><th>Memory</th><th>Pin</th><th>Description</th><th>Price</th><th>CreateAt</th> <th>UpdateAt</th><th>Image</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
                 result += "<tr>";
                 for (let cf in config[value]) {
                     let field = config[value][cf];
-                    result += o[field] ? "<td>" + o[field] + "</td>" : "<td></td>";
+                    if (o[field]) {
+                        if (field === 'description') {
+                            result += "<td><div class='div-description'>" + o[field] + "</div></td>"
+                        } else result += "<td>" + o[field] + "</td>";
+                    } else result += "<td></td>";
                 }
                 // image
                 let image_path = "<?php echo BASE_PATH . '/public/images/'?>" + o['image'];
@@ -64,14 +68,14 @@
                 result += "<td>";
                 let updateUrl = "<?php echo BASE_PATH . "/admin/products/update/"?>" + o.id;
                 let deleteUrl = "<?php echo BASE_PATH . "/admin/products/delete/"?>" + o.id;
-                result += "<a href=" + updateUrl + ">Update</a> " +
-                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">Delete</a>";
+                result += "<a href=" + updateUrl + ">" + "<span class=\"material-icons md-24 md-blue\">edit</span>" + "</a>" +
+                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">" + "<span class=\"material-icons md-24 md-red\">delete_forever</span>" + "</a>";
                 result += "</td>";
                 result += "</tr>";
             })
         } else if (value === 'categories') {
             result += "<form action=\"<?php echo BASE_PATH . '/admin/categories/add' ?>\"><input type=\"submit\" value=\"Add new Category\"/> </form>";
-            result += "<table border='1' style='width:100%'>";
+            result += "<br><table class='index-table' border='1' style='width:100%'>";
             result += "<tr><th>Brand name</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
@@ -83,46 +87,54 @@
                 result += "<td>";
                 let updateUrl = "<?php echo BASE_PATH . "/admin/categories/update/"?>" + o.id;
                 let deleteUrl = "<?php echo BASE_PATH . "/admin/categories/delete/"?>" + o.id;
-                result += "<a href=" + updateUrl + ">Update</a> " +
-                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">Delete</a>";
+                result += "<a href=" + updateUrl + ">" + "<span class=\"material-icons md-24 md-blue\">edit</span>" + "</a>" +
+                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">" + "<span class=\"material-icons md-24 md-red\">delete_forever</span>" + "</a>";
                 result += "</td>";
                 result += "</tr>";
             })
         } else if (value === 'shipments') {
             result += "<form action=\"<?php echo BASE_PATH . '/admin/shipments/add' ?>\"><input type=\"submit\" value=\"Add new Shipment method\"/> </form>";
-            result += "<table border='1' style='width:100%'>";
+            result += "<br><table class='index-table' border='1' style='width:100%'>";
             result += "<tr><th>Method name</th> <th>Fee</th> <th>Description</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
                 result += "<tr>";
                 for (let cf in config[value]) {
                     let field = config[value][cf];
-                    result += o[field] ? "<td>" + o[field] + "</td>" : "<td></td>";
+                    if (o[field]) {
+                        if (field === 'description') {
+                            result += "<td><div class='div-description'>" + o[field] + "</div></td>"
+                        } else result += "<td>" + o[field] + "</td>";
+                    } else result += "<td></td>";
                 }
                 result += "<td>";
                 let updateUrl = "<?php echo BASE_PATH . "/admin/shipments/update/"?>" + o.id;
                 let deleteUrl = "<?php echo BASE_PATH . "/admin/shipments/delete/"?>" + o.id;
-                result += "<a href=" + updateUrl + ">Update</a> " +
-                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">Delete</a>";
+                result += "<a href=" + updateUrl + ">" + "<span class=\"material-icons md-24 md-blue\">edit</span>" + "</a>" +
+                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">" + "<span class=\"material-icons md-24 md-red\">delete_forever</span>" + "</a>";
                 result += "</td>";
                 result += "</tr>";
             })
         } else if (value === 'payments') {
             result += "<form action=\"<?php echo BASE_PATH . '/admin/payments/add' ?>\"><input type=\"submit\" value=\"Add new Payment method\"/> </form>";
-            result += "<table border='1' style='width:100%'>";
+            result += "<br><table class='index-table' border='1' style='width:100%'>";
             result += "<tr><th>Method name</th> <th>Description</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
                 result += "<tr>";
                 for (let cf in config[value]) {
                     let field = config[value][cf];
-                    result += o[field] ? "<td>" + o[field] + "</td>" : "<td></td>";
+                    if (o[field]) {
+                        if (field === 'description') {
+                            result += "<td><div class='div-description'>" + o[field] + "</div></td>"
+                        } else result += "<td>" + o[field] + "</td>";
+                    } else result += "<td></td>";
                 }
-                result += "<td>";
+                result += "<td class='td-action'>";
                 let updateUrl = "<?php echo BASE_PATH . "/admin/payments/update/"?>" + o.id;
                 let deleteUrl = "<?php echo BASE_PATH . "/admin/payments/delete/"?>" + o.id;
-                result += "<a href=" + updateUrl + ">Update</a> " +
-                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">Delete</a>";
+                result += "<a href=" + updateUrl + ">" + "<span class=\"material-icons md-24 md-blue\">edit</span>" + "</a>" +
+                        "<a href=" + deleteUrl + " onclick=\"return confirm('Are you sure?')\">" + "<span class=\"material-icons md-24 md-red\">delete_forever</span>" + "</a>";
                 result += "</td>";
                 result += "</tr>";
             })
@@ -172,7 +184,7 @@
         </select>
     </label>
 </form>
-<br>
+<br><br>
 <div id="table">
     <!-- TO APPEND ELEMENTS FROM AJAX -->
 </div>
