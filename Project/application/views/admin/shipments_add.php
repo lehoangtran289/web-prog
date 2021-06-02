@@ -13,7 +13,7 @@
 </script>
 
 <br>
-<h2>Add new user</h2>
+<h2>Add new user</h2><br>
 <form name="addShipmentForm" action="<?php echo BASE_PATH . '/admin/shipments/add' ?>" method="post" onsubmit="return validateForm()">
     <table>
         <tr>

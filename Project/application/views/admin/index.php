@@ -27,7 +27,7 @@
     function getHtmlTable(value, obj) {
         let result = '';
         if (value === 'users') {
-            result += "<form action=\"<?php echo BASE_PATH . '/admin/users/add' ?>\"><input type=\"submit\" value=\"Add new User\"></input> </form>";
+            result += "<form style=\"margin-left:30px\" action=\"<?php echo BASE_PATH . '/admin/users/add' ?>\"><input type=\"submit\" value=\"Add new User\"></input> </form>";
             result += "<br><table class='index-table' border='1' style='width:100%'>";
             result += "<tr><th>Username</th> <th>Name</th> <th>Role</th> <th>Email</th> <th>Address</th> <th>Phone</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
@@ -46,7 +46,7 @@
                 result += "</tr>";
             })
         } else if (value === 'products') {
-            result += "<form action=\"<?php echo BASE_PATH . '/admin/products/add' ?>\"><input type=\"submit\" value=\"Add new Product\"/> </form>";
+            result += "<form style=\"margin-left:30px\" action=\"<?php echo BASE_PATH . '/admin/products/add' ?>\"><input type=\"submit\" value=\"Add new Product\"/> </form>";
             result += "<br><table class='index-table' border='1' style='width:100%'>";
             result += "<tr><th>Name</th><th>Quantity</th><th>Category</th><th>OS</th><th>Chipset</th><th>Ram</th><th>Display</th><th>Resolution</th><th>Camera</th><th>Memory</th><th>Pin</th><th>Description</th><th>Price</th><th>CreateAt</th> <th>UpdateAt</th><th>Image</th> <th>Action</th></tr>";
             // table content
@@ -74,7 +74,7 @@
                 result += "</tr>";
             })
         } else if (value === 'categories') {
-            result += "<form action=\"<?php echo BASE_PATH . '/admin/categories/add' ?>\"><input type=\"submit\" value=\"Add new Category\"/> </form>";
+            result += "<form style=\"margin-left:30px\" action=\"<?php echo BASE_PATH . '/admin/categories/add' ?>\"><input type=\"submit\" value=\"Add new Category\"/> </form>";
             result += "<br><table class='index-table' border='1' style='width:100%'>";
             result += "<tr><th>Brand name</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
@@ -93,7 +93,7 @@
                 result += "</tr>";
             })
         } else if (value === 'shipments') {
-            result += "<form action=\"<?php echo BASE_PATH . '/admin/shipments/add' ?>\"><input type=\"submit\" value=\"Add new Shipment method\"/> </form>";
+            result += "<form style=\"margin-left:30px\" action=\"<?php echo BASE_PATH . '/admin/shipments/add' ?>\"><input type=\"submit\" value=\"Add new Shipment method\"/> </form>";
             result += "<br><table class='index-table' border='1' style='width:100%'>";
             result += "<tr><th>Method name</th> <th>Fee</th> <th>Description</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
@@ -116,7 +116,7 @@
                 result += "</tr>";
             })
         } else if (value === 'payments') {
-            result += "<form action=\"<?php echo BASE_PATH . '/admin/payments/add' ?>\"><input type=\"submit\" value=\"Add new Payment method\"/> </form>";
+            result += "<form style=\"margin-left:30px\" action=\"<?php echo BASE_PATH . '/admin/payments/add' ?>\"><input type=\"submit\" value=\"Add new Payment method\"/> </form>";
             result += "<br><table class='index-table' border='1' style='width:100%'>";
             result += "<tr><th>Method name</th> <th>Description</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
@@ -172,7 +172,7 @@
 </script>
 
 <form>
-    <label>Choose an action</label>
+    <label style="margin-left: 30px">Choose an action</label>
     <label>
         <select name="action" onclick="processAction(this.value)">
             <option disabled selected value> -- select an option --</option>
@@ -184,7 +184,7 @@
         </select>
     </label>
 </form>
-<br><br>
+<br>
 <div id="table">
     <!-- TO APPEND ELEMENTS FROM AJAX -->
 </div>

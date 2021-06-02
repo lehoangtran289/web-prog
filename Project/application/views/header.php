@@ -29,6 +29,7 @@
             margin: auto;
             padding-left: 10px;
             padding-right: 10px;
+            background: #f5f5f5;
         }
 
         .navbar {

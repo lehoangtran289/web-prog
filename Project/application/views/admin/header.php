@@ -17,8 +17,7 @@
                 box-sizing: border-box;
             }
     
-            body,
-            html {
+            body, html {
                 height: 100%;
                 margin: 0;
                 font-family: 'Poppins', sans-serif;
@@ -29,6 +28,7 @@
                 margin: auto;
                 padding-left: 10px;
                 padding-right: 10px;
+                background: #f5f5f5;
             }
     
             .navbar {
