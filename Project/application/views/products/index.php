@@ -5,6 +5,20 @@
 
 <!-- JS code -->
 <script type="text/javascript">
+    let getHtmlProductList = (data) => {
+        console.log(data);
+        let result = '';
+        data.forEach((item) => {
+            result += "<form method='post' action='index'> <div style='border:1px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px;'align='center'>";
+            result += "<div><img src='<?php echo BASE_PATH. '/public/images/' ?>" + item['image'] + "'/>";
+            result += "<a href='<?php echo BASE_PATH . '/products/view/' ?>" + item['id'] + "'>" + item['name'] + "</a>";
+            result += "<h4>$ " + item['price'] + "</h4>"
+            result += "</div></div></form>";
+        });
+        console.log(result);
+        return result;
+    }
+    
     window.addEventListener('DOMContentLoaded', (event) => {
         const form = document.getElementById("searchForm");
         form.addEventListener('submit', function (e) {
@@ -31,6 +45,10 @@
                     .then(response => response.text())
                     .then(data => {
                         console.log(data);
+                        let obj = JSON.parse(data);
+                        // create product list html
+                        let res = getHtmlProductList(obj);
+                        document.getElementById("productList").innerHTML = res;
                     });
         })
     });
@@ -65,23 +83,26 @@
 
 <!--Products list-->
 <div class="container" style="width:700px;">
-    <?php
-        foreach ($products as $product) {
-            ?>
-            <div class="col-md-4">
-                <form method="post" action="index">
-                    <div style="border:1px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px;"
-                         align="center">
-                        <div><img src="<?php echo BASE_PATH.'/public/images/' . $product['Product']['image']?>">
-                            <?php echo $html->link($product['Product']['name'], 'products/view/' . $product['Product']['id'] . '/' . $product['Product']['name']); ?>
-                            <h4>$ <?php echo $product['Product']["price"]; ?></h4>
-                        </div>
-                </form>
-            </div>
-            <?php
-        }
+    <div id="productList">
+        <?php
+            foreach ($products as $product) {
+                ?>
+                <div class="col-md-4">
+                    <form method="post" action="index">
+                        <div style="border:1px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px;"
+                             align="center">
+                            <div><img src="<?php echo BASE_PATH.'/public/images/' . $product['Product']['image']?>">
+                                <?php echo $html->link($product['Product']['name'], 'products/view/' . $product['Product']['id'] . '/' . $product['Product']['name']); ?>
+                                <h4>$ <?php echo $product['Product']["price"]; ?></h4>
+                            </div>
+                    </form>
+                </div>
+                <?php
+            }
     
-    ?>
+        ?>
+    </div>
+    
     <div style="clear:both"></div>
     <br/>
     <h3>Cart Details</h3>
