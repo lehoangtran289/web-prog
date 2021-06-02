@@ -124,118 +124,62 @@
 <div class="categories">
     <div class="small-container">
         <div class="row">
-            <!-- Replace by real categories -->
-            <div class="col-3">
-                <img src="public/images/apple-logo.png">
-            </div>
-            <div class="col-3">
-                <img src="public/images/samsung-logo.png">
-            </div>
-            <div class="col-3">
-                <img src="public/images/xiaomi-logo.png">
-            </div>
+            <?php
+            foreach ($categories as $category) {
+            ?>
+                <div class="col-3" id="categories">
+                    <img src="<?php echo BASE_PATH . '/public/images/' . $category['Category']['brand'] . '-logo.png'; ?>">
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </div>
 
-<!-- Featured products -->
 <div class="small-container">
+    <!-- Featured products -->
     <h2 class="title">Featured Products</h2>
     <div class="row">
-        <!-- Replace by real products -->
-        <div class="col-4">
-            <img src="public/images/product-1.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
-        <div class="col-4">
-            <img src="public/images/product-2.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
-        <div class="col-4">
-            <img src="public/images/product-3.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
-        <div class="col-4">
-            <img src="public/images/product-4.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
+        <?php
+        foreach ($featuredProducts as $featuredProduct) {
+        ?>
+            <div class="col-4" id="featuredProducts">
+                <img src="<?php echo BASE_PATH . '/public/images/' . $featuredProduct['Product']['image']; ?>">
+                <h4><?php echo $featuredProduct['Product']['name']; ?></h4>
+                <p>$<?php echo $featuredProduct['Product']['price']; ?></p>
+            </div>
+        <?php
+        }
+        ?>
     </div>
+
+    <!-- Latest products -->
     <h2 class="title">Latest Products</h2>
     <div class="row">
-        <!-- Replace by real products -->
-        <div class="col-4">
-            <img src="public/images/product-3.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
-        <div class="col-4">
-            <img src="public/images/product-2.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
-        <div class="col-4">
-            <img src="public/images/product-1.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
-        <div class="col-4">
-            <img src="public/images/product-4.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
+        <?php
+        for ($i = 0; $i < count($featuredProducts) / 2; $i++) {
+        ?>
+            <div class="col-4" id="latestProducts">
+                <img src="<?php echo BASE_PATH . '/public/images/' . $featuredProducts[$i]['Product']['image']; ?>">
+                <h4><?php echo $featuredProducts[$i]['Product']['name']; ?></h4>
+                <p>$<?php echo $featuredProducts[$i]['Product']['price']; ?></p>
+            </div>
+        <?php
+        }
+        ?>
     </div>
     <div class="row">
-        <!-- Replace by real products -->
-        <div class="col-4">
-            <img src="public/images/product-4.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
-        <div class="col-4">
-            <img src="public/images/product-1.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
-        <div class="col-4">
-            <img src="public/images/product-2.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
-        <div class="col-4">
-            <img src="public/images/product-3.jpg">
-            <h4>IPhone 12 Pro Max</h4>
-            <p>$1000</p>
-        </div>
+        <?php
+        for ($i = count($featuredProducts) / 2; $i < count($featuredProducts); $i++) {
+        ?>
+            <div class="col-4" id="latestProducts">
+                <img src="<?php echo BASE_PATH . '/public/images/' . $featuredProducts[$i]['Product']['image']; ?>">
+                <h4><?php echo $featuredProducts[$i]['Product']['name']; ?></h4>
+                <p>$<?php echo $featuredProducts[$i]['Product']['price']; ?></p>
+            </div>
+        <?php
+        }
+        ?>
     </div>
 </div>
-
-
-<!-- <div class="" style="width:700px;">
-    <?php
-    foreach ($products as $product) {
-    ?>
-        <div class="col-md-4">
-            <form method="post" action="index">
-                <div style="border:1px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px;" align="center">
-                    <div>
-                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] ?>">
-                        <?php echo $html->link($product['Product']['name'], 'products/view/' . $product['Product']['id'] . '/' . $product['Product']['name']); ?>
-                        <h4>$ <?php echo $product['Product']["price"]; ?></h4>
-                    </div>
-            </form>
-        </div>
-    <?php
-    }
-    ?>
-    <div style="clear:both"></div>
-    <br />
-    
-</div>
-
-<br /> -->
-<!-- <button><a href="<?php echo BASE_PATH ?>/users/login">Sign in</a> <br></button>
-<button><a href="<?php echo BASE_PATH ?>/users/register">Register</a></button> -->
