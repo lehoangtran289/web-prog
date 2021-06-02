@@ -29,6 +29,7 @@
             margin: auto;
             padding-left: 10px;
             padding-right: 10px;
+            background: #ffffff;
         }
 
         .navbar {
@@ -84,7 +85,7 @@
                     <li><a href="<?php echo BASE_PATH.'/users/update' ?>">Account</a></li>
                 </ul>
             </nav>
-            <a href="<?php echo BASE_PATH ?>/carts/view">
+            <a href="<?php echo BASE_PATH ?>/carts/index">
                 <a href="<?php echo BASE_PATH.'/carts/index' ?>"><img src="<?php echo BASE_PATH ?>/images/cart.png" width="30px" height="30px">
             </a>
         </div>

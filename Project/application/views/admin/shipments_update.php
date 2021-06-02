@@ -13,7 +13,6 @@
 </script>
 
 <br>
-<button><a href="<?php echo BASE_PATH?>/admin">Back to admin page</a></button>
 <h2>Edit shipment <?php echo $shipment['Shipment']['method'] ?></h2>
 <form action="<?php echo BASE_PATH . '/admin/shipments/update/' . $shipment['Shipment']['id'] ?>" method="post" onsubmit="return validateForm()">
     <table>
