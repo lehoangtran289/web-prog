@@ -57,6 +57,16 @@
             text-decoration: none;
             color: #555;
         }
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -69,13 +79,13 @@
             <nav>
                 <ul>
                     <!-- Put something here -->
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Products</a></li>
+                    <li><a href="<?php echo BASE_PATH ?>">Home</a></li>
+                    <li><a href="<?php echo BASE_PATH.'/products/page' ?>">Products</a></li>
                     <li><a href="<?php echo BASE_PATH.'/users/update' ?>">Account</a></li>
                 </ul>
             </nav>
             <a href="<?php echo BASE_PATH ?>/carts/view">
-                <a href="<?php echo BASE_PATH.'/carts/index' ?>"><img src="public/images/cart.png" width="30px" height="30px">
+                <a href="<?php echo BASE_PATH.'/carts/index' ?>"><img src="<?php echo BASE_PATH ?>/images/cart.png" width="30px" height="30px">
             </a>
         </div>
     </div>
