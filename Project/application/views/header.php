@@ -29,7 +29,7 @@
             margin: auto;
             padding-left: 10px;
             padding-right: 10px;
-            background: #f5f5f5;
+            background: #ffffff;
         }
 
         .navbar {
@@ -72,11 +72,11 @@
                     <!-- Put something here -->
                     <li><a href="">Home</a></li>
                     <li><a href="">Products</a></li>
-                    <li><a href="<?php echo BASE_PATH.'/users/update' ?>">Account</a></li>
+                    <li><a href="<?php echo BASE_PATH . '/users/update' ?>">Account</a></li>
                 </ul>
             </nav>
-            <a href="<?php echo BASE_PATH ?>/carts/view">
-                <a href="<?php echo BASE_PATH.'/carts/index' ?>"><img src="public/images/cart.png" width="30px" height="30px">
+            <a href="<?php echo BASE_PATH . '/carts/index' ?>">
+                <img src="<?php echo BASE_PATH . '/public/images/cart.png' ?>" width="30px" height="30px">
             </a>
         </div>
     </div>

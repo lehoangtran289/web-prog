@@ -61,8 +61,8 @@
     }
 
     .col-3 img {
-        width: 100%;
-        max-height: 400px;
+        width: 80%;
+        height: 80%;
     }
 
     .title {
@@ -145,7 +145,9 @@
         foreach ($featuredProducts as $featuredProduct) {
         ?>
             <div class="col-4" id="featuredProducts">
-                <a href="<?php echo BASE_PATH.'/products/view/'.$featuredProduct['Product']['id'] ?>"><img src="<?php echo BASE_PATH . '/public/images/' . $featuredProduct['Product']['image']; ?>"></a>
+                <a href="<?php echo BASE_PATH . '/products/view/' . $featuredProduct['Product']['id'] ?>">
+                    <img src="<?php echo BASE_PATH . '/public/images/' . $featuredProduct['Product']['image']; ?>">
+                </a>
                 <h4><?php echo $featuredProduct['Product']['name']; ?></h4>
                 <p>$<?php echo $featuredProduct['Product']['price']; ?></p>
             </div>
@@ -158,12 +160,14 @@
     <h2 class="title">Latest Products</h2>
     <div class="row">
         <?php
-        for ($i = 0; $i < count($featuredProducts) / 2; $i++) {
+        for ($i = 0; $i < count($latestProducts) / 2; $i++) {
         ?>
             <div class="col-4" id="latestProducts">
-                <a href="<?php echo BASE_PATH.'/products/view/'.$featuredProducts[$i]['Product']['id'] ?>"><img src="<?php echo BASE_PATH . '/public/images/' . $featuredProducts[$i]['Product']['image']; ?>"></a>
-                <h4><?php echo $featuredProducts[$i]['Product']['name']; ?></h4>
-                <p>$<?php echo $featuredProducts[$i]['Product']['price']; ?></p>
+                <a href="<?php echo BASE_PATH . '/products/view/' . $latestProducts[$i]['Product']['id'] ?>">
+                    <img src="<?php echo BASE_PATH . '/public/images/' . $latestProducts[$i]['Product']['image']; ?>">
+                </a>
+                <h4><?php echo $latestProducts[$i]['Product']['name']; ?></h4>
+                <p>$<?php echo $latestProducts[$i]['Product']['price']; ?></p>
             </div>
         <?php
         }
@@ -171,12 +175,14 @@
     </div>
     <div class="row">
         <?php
-        for ($i = count($featuredProducts) / 2; $i < count($featuredProducts); $i++) {
+        for ($i = count($latestProducts) / 2; $i < count($latestProducts); $i++) {
         ?>
             <div class="col-4" id="latestProducts">
-                <a href="<?php echo BASE_PATH.'/products/view/'.$featuredProducts[$i]['Product']['id'] ?>"><img src="<?php echo BASE_PATH . '/public/images/' . $featuredProducts[$i]['Product']['image']; ?>"></a>
-                <h4><?php echo $featuredProducts[$i]['Product']['name']; ?></h4>
-                <p>$<?php echo $featuredProducts[$i]['Product']['price']; ?></p>
+                <a href="<?php echo BASE_PATH . '/products/view/' . $latestProducts[$i]['Product']['id'] ?>">
+                    <img src="<?php echo BASE_PATH . '/public/images/' . $latestProducts[$i]['Product']['image']; ?>">
+                </a>
+                <h4><?php echo $latestProducts[$i]['Product']['name']; ?></h4>
+                <p>$<?php echo $latestProducts[$i]['Product']['price']; ?></p>
             </div>
         <?php
         }
