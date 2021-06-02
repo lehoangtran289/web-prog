@@ -34,7 +34,6 @@
             $this->Product->showHasMany();
             $products = $this->Product->search();
             
-            
             if (isset($_POST["add_to_cart"]))   // if user add something to cart
             {
                 if (isset($_SESSION["cart"]))   // check if cart has something
@@ -47,6 +46,18 @@
             }
             
             $this->set('products', $products);
+
+            // Get the list of category
+            $categories = $this->Product->custom('SELECT * FROM categories LIMIT 3');
+            $this->set('categories', $categories);
+
+            // Get list of featured products
+            $featuredProducts = $this->Product->custom('SELECT * FROM products ORDER BY price DESC LIMIT 4');
+            $this->set('featuredProducts', $featuredProducts);
+
+            // Get list of latest products
+            $latestProducts = $this->Product->custom('SELECT * FROM products ORDER BY created_at DESC LIMIT 8');
+            $this->set('latestProducts', $latestProducts);
         }
         
         function delete() {
