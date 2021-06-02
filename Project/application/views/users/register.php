@@ -11,27 +11,27 @@
                 </tr>
                 <tr>
                     <td>Username :</td>
-                    <td><input type="text" id="username" name="username"></td>
+                    <td><input required type="text" id="username" name="username"></td>
                 </tr>
                 <tr>
                     <td>Password :</td>
-                    <td><input type="password" id="password" name="password"></td>
+                    <td><input required type="password" id="password" name="password"></td>
                 </tr>
                 <tr>
                     <td>Full name :</td>
-                    <td><input type="text" id="name" name="name"></td>
+                    <td><input required type="text" id="name" name="name"></td>
                 </tr>
                 <tr>
                     <td>Email :</td>
-                    <td><input type="email" id="email" name="email"></td>
+                    <td><input required type="email" id="email" name="email"></td>
                 </tr>
                 <tr>
                     <td>Address :</td>
-                    <td><input type="text" id="address" name="address"></td>
+                    <td><input required type="text" id="address" name="address"></td>
                 </tr>
                 <tr>
                     <td>Phone :</td>
-                    <td><input type="tel" id="phone" name="phone"></td>
+                    <td><input required type="tel" id="phone" name="phone"></td>
                 </tr>
                 
                 <tr>
