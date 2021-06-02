@@ -205,7 +205,7 @@
                             $fromChild = substr($fromChild, 0, -1);
                             
                             $queryChild = 'SELECT * FROM ' . $fromChild . ' WHERE ' . $conditionsChild;
-                            #echo '<!--'.$queryChild.'-->';
+                            //echo '<script>console.log("'. $queryChild . '")</script>';
                             $resultChild = mysqli_query($this->_dbHandle, $queryChild);
                             
                             $tableChild = array();
@@ -372,7 +372,7 @@
                 $query = 'INSERT INTO ' . $this->_table . ' (' . $fields . ') VALUES (' . $values . ');';
             }
             $this->_result = mysqli_query($this->_dbHandle, $query);
-//            echo '<h1>' . $query . '</h1>';
+        //    echo '<h1>' . $query . '</h1>';
             $this->clear();
             if ($this->_result == 0) {
                 /** Error Generation **/

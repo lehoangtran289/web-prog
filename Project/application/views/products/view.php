@@ -8,6 +8,10 @@
                 <input type="hidden" id="id" name="id" value=<?php echo $product['Product']['id'] ?>>
                 <input type="submit" value="Buy">
             </form>
+                <?php
+                pprint($product);
+                echo '<br> '
+                ?>
                 <button><a href="<?php echo BASE_PATH?>/users/login">Sign in</a> <br></button>
                 <button><a href="<?php echo BASE_PATH?>/users/register">Register</a></button>
                 <button><a href="<?php echo BASE_PATH?>/carts/index">Cart</a></button>
