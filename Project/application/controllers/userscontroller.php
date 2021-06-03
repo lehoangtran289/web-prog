@@ -13,31 +13,11 @@
 //    }
 
         function beforeAction() {
-//            if(isset($_SESSION['user']))
-//            {
-//                if($_SESSION['user']['role'] == 'admin')
-//                    header('Location: ../'.BASE_PATH.'/admin/index');
-//                else if($_SESSION['user']['role'] == 'user')
-//                    header('Location: ../'.BASE_PATH.'/orders/index');
-//            }else
-//                header('Location: '.BASE_PATH.'/users/login');
+//
         }
 
         function afterAction() {
 
-        }
-
-        function processHeader() {
-            $this->render = 0;
-            error_reporting(0);
-            // process check o day -> return true false hay nhu nao day
-//            echo '<ul>
-//                <!-- Put something here -->
-/*                <li><a href="<?php echo BASE_PATH . '/products/page' ?>">Products</a></li>*/
-/*                <li><a href="<?php echo BASE_PATH . '/users/update' ?>">Account</a></li>*/
-/*                <li id="login"><a href="<?php echo BASE_PATH ?>/users/login">Log in</a> <br></li>*/
-/*                <li id="logout"><a href="<?php echo BASE_PATH ?>/users/logout">Log out</a></li>*/
-//            </ul>';
         }
 
         function login() {
