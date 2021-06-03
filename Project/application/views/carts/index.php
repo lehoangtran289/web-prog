@@ -36,14 +36,14 @@
         } else {
             str = JSON.stringify(data);
             products = JSON.parse(str);            
-            html += "<table border='1' style='width:100%'>";
+            html += "<table border='1'>";
             Array.prototype.forEach.call(products, product => {
                 info = JSON.stringify(product);
                 info = JSON.parse(info);
                 info = JSON.parse(info);
                 //console.log(typeof(info.Product));
                 let segment = '<tr><td>';
-                segment += JSON.stringify(info.Product) + "</td>";
+                segment += info.Product.name + ", price is " + info.Product.price + "</td>";
                 segment += "<td><button type=\"button\" onclick=\"decreaseQty(" + info.Product.id + ")\">-</button></td>";
                 segment += "<td>" + info.buy_qty +"</td>";
                 segment += "<td><button type=\"button\" onclick=\"increaseQty(" + info.Product.id+ ")\">+</button></td>";
@@ -62,7 +62,7 @@ Your Cart:
 <?php
     session_start();
     if ($cart != 'None') {
-        echo "<table border=\"1\" style=\"widtd:100%\">";
+        echo "<table border=\"1\">";
         foreach ($cart as $item) {
             $item = json_decode((json_encode(json_decode($item))), true);
             ?>
