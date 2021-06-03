@@ -10,10 +10,14 @@
         
         }
 
-        function findAll()
+        function findAll($product_id = NULL)
         {
-            $this->Review->showHasOne();
-            return $this->Review->search();
+            if($product_id != NULL)
+            {
+                $this->Review->where('product_id', $product_id);
+                $this->Review->showHasOne();
+                return $this->Review->search();
+            }
         }
 
         function addReview() {
