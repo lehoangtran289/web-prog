@@ -83,6 +83,7 @@
                     <li><a href="<?php echo BASE_PATH ?>">Home</a></li>
                     <li><a href="<?php echo BASE_PATH.'/products/page' ?>">Products</a></li>
                     <li><a href="<?php echo BASE_PATH.'/users/update' ?>">Account</a></li>
+                    <li><a href="<?php echo BASE_PATH?>/users/logout">Log out</a></li>
                 </ul>
             </nav>
             <a href="<?php echo BASE_PATH ?>/carts/index">
