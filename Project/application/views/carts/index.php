@@ -42,12 +42,12 @@
                 info = JSON.parse(info);
                 info = JSON.parse(info);
                 //console.log(typeof(info.Product));
-                let segment = '<tr><th>';
-                segment += JSON.stringify(info.Product) + "</th>";
-                segment += "<th><button type=\"button\" onclick=\"decreaseQty(" + info.Product.id + ")\">-</button></th>";
-                segment += "<th>" + info.buy_qty +"</th>";
-                segment += "<th><button type=\"button\" onclick=\"increaseQty(" + info.Product.id+ ")\">+</button></th>";
-                segment += "<th><button type=\"button\" onclick=\"removeItem(" + info.Product.id + ")\">Remove</button></th></tr>";
+                let segment = '<tr><td>';
+                segment += JSON.stringify(info.Product) + "</td>";
+                segment += "<td><button type=\"button\" onclick=\"decreaseQty(" + info.Product.id + ")\">-</button></td>";
+                segment += "<td>" + info.buy_qty +"</td>";
+                segment += "<td><button type=\"button\" onclick=\"increaseQty(" + info.Product.id+ ")\">+</button></td>";
+                segment += "<td><button type=\"button\" onclick=\"removeItem(" + info.Product.id + ")\">Remove</button></td></tr>";
                 html += segment;
             });
             html += "</table>";
@@ -61,15 +61,15 @@ Your Cart:
 <?php
     session_start();
     if ($cart != 'None') {
-        echo "<table border=\"1\" style=\"width:100%\">";
+        echo "<table border=\"1\" style=\"widtd:100%\">";
         foreach ($cart as $item) {
             $item = json_decode((json_encode(json_decode($item))), true);
             ?>
-            <tr><th><?php echo json_encode($item['Product'])?></th>
-            <th><button type= "button" onclick="decreaseQty(<?php echo $item['Product']['id']?>)">-</button></th>
-            <th><?php echo $item['buy_qty']?></th>
-            <th><button type= "button" onclick="increaseQty(<?php echo $item['Product']['id']?>)">+</button></th>
-            <th><button type= "button" onclick="removeItem(<?php echo $item['Product']['id']?>)">Remove</button></th></tr>
+            <tr><td><?php echo json_encode($item['Product'])?></td>
+            <td><button type= "button" onclick="decreaseQty(<?php echo $item['Product']['id']?>)">-</button></td>
+            <td><?php echo $item['buy_qty']?></td>
+            <td><button type= "button" onclick="increaseQty(<?php echo $item['Product']['id']?>)">+</button></td>
+            <td><button type= "button" onclick="removeItem(<?php echo $item['Product']['id']?>)">Remove</button></td></tr>
             <?php
         }
         echo '</table>';

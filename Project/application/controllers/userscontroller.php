@@ -43,7 +43,7 @@
                         // save username to session
                         $_SESSION['user']['username'] = $username;
                         $_SESSION['user']['role'] = $user['role'];
-                        $_SESSION['user']['role'] = $user['id'];
+                        $_SESSION['user']['id'] = $user['id'];
 
                         if($user['role'] == 'user')
                             header('Location: '.BASE_PATH.'/orders/index');
