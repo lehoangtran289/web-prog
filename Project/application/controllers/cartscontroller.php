@@ -11,7 +11,6 @@
         }
 
         function index() {
-            var_dump($_SESSION['cart']);
             if (isset($_SESSION['cart']) && count($_SESSION['cart']) != 0) {
                 $cart = array();
                 foreach ($_SESSION['cart'] as $id => $quantity) {

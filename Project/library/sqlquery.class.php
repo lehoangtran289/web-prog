@@ -372,7 +372,6 @@
                 $query = 'INSERT INTO ' . $this->_table . ' (' . $fields . ') VALUES (' . $values . ');';
             }
             $this->_result = mysqli_query($this->_dbHandle, $query);
-        //    echo '<h1>' . $query . '</h1>';
             $this->clear();
             if ($this->_result == 0) {
                 /** Error Generation **/
@@ -417,5 +416,39 @@
         
         function getError() {
             return mysqli_error($this->_dbHandle);
+        }
+
+        function saveAndGetId() {
+            $query = '';
+            if (isset($this->id)) {
+                $updates = '';
+                foreach ($this->_describe as $field) {
+                    if ($this->$field) {
+                        $updates .= '`' . $field . '` = \'' . $this->_dbHandle->real_escape_string($this->$field) . '\',';
+                    }
+                }
+                
+                $updates = substr($updates, 0, -1);
+                
+                $query = 'UPDATE ' . $this->_table . ' SET ' . $updates . ' WHERE `id`=\'' . $this->_dbHandle->real_escape_string($this->id) . '\'';
+            } else {
+                $fields = '';
+                $values = '';
+                foreach ($this->_describe as $field) {
+                    if ($this->$field) {
+                        $fields .= '`' . $field . '`,';
+                        $values .= '\'' . $this->_dbHandle->real_escape_string($this->$field) . '\',';
+                    }
+                }
+                $values = substr($values, 0, -1);
+                $fields = substr($fields, 0, -1);
+                
+                $query = 'INSERT INTO ' . $this->_table . ' (' . $fields . ') VALUES (' . $values . ');';
+            }
+            $this->_result = mysqli_query($this->_dbHandle, $query);
+            $this->clear();
+            if ($this->_result == 0) {
+                return -1;
+            } else return $this->_dbHandle->insert_id;
         }
     }

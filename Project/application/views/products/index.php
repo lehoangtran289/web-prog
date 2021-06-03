@@ -1,9 +1,9 @@
 <style>
     .hero-image {
-        height: 50%;
+        height: 70%;
         background-image: linear-gradient(rgba(0, 0, 0, 0.5),
                 rgba(0, 0, 0, 0.5)),
-            url("<?php BASE_PATH . '/public/images/Banner.jpg'; ?>");
+            url(<?php echo BASE_PATH . '/public/images/Banner.jpg' ?>);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -11,16 +11,25 @@
     }
 
     .hero-text {
-        text-align: start;
         position: absolute;
         top: 50%;
-        left: 40%;
-        transform: translate(-50%, -50%);
-        color: white;
+        transform: translateY(-50%);
+        text-align: center;
+        width: 100%;
     }
 
-    .hero-text p {
-        margin: 20px 0;
+    .hero-text h4 {
+        color: #ff523b;
+        font-size: 22px;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .hero-text h2 {
+        color: #fff;
+        font-size: 62px;
+        text-transform: uppercase;
+        letter-spacing: 5px;
     }
 
     .button {
@@ -54,15 +63,20 @@
         padding-right: 25px;
     }
 
+    .logo-container {
+        margin: auto;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
     .col-3 {
-        flex-basis: 30%;
-        min-width: 250px;
-        margin-bottom: 30px;
+        flex-basis: 10%;
+        margin-bottom: 40px;
     }
 
     .col-3 img {
-        width: 80%;
-        height: 80%;
+        width: 100%;
+        height: 100%;
     }
 
     .title {
@@ -111,28 +125,52 @@
     }
 </style>
 
-<!-- Hero image -->
+<!-- Banner -->
 <div class="hero-image">
     <div class="hero-text">
-        <h1>Welcome to<br>J Henlo Cheems Mobile Shop!</h1>
-        <p>"The mobile phone is used from when you get up in the morning and is often the last thing you interact with at night.”</p>
+        <h4>Welcome to</h4>
+        <h2>J Henlo Cheems Mobile Shop</h2>
         <a href="" class="button">Explore now</a>
     </div>
 </div>
 
 <!-- Featured categories -->
 <div class="categories">
-    <div class="small-container">
+    <div class="logo-container">
+        <h2 class="title">Brands</h2>
         <div class="row">
-            <?php
-            foreach ($categories as $category) {
-            ?>
-                <div class="col-3" id="categories">
-                    <img src="<?php echo BASE_PATH . '/public/images/' . $category['Category']['brand'] . '-logo.png'; ?>">
-                </div>
-            <?php
-            }
-            ?>
+            <div class="col-3" id="categories">
+                <img src="<?php echo BASE_PATH . '/public/images/logo_samsung.png' ?>">
+            </div>
+            <div class="col-3" id="categories">
+                <img src="<?php echo BASE_PATH . '/public/images/logo_apple.png' ?>">
+            </div>
+            <div class="col-3" id="categories">
+                <img src="<?php echo BASE_PATH . '/public/images/logo_asus.png' ?>">
+            </div>
+            <div class="col-3" id="categories">
+                <img src="<?php echo BASE_PATH . '/public/images/logo_blackberry.png' ?>">
+            </div>
+            <div class="col-3" id="categories">
+                <img src="<?php echo BASE_PATH . '/public/images/logo_htc.png' ?>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" id="categories">
+                <img src="<?php echo BASE_PATH . '/public/images/logo_huawei.png' ?>">
+            </div>
+            <div class="col-3" id="categories">
+                <img src="<?php echo BASE_PATH . '/public/images/logo_nokia.png' ?>">
+            </div>
+            <div class="col-3" id="categories">
+                <img src="<?php echo BASE_PATH . '/public/images/logo_sony.png' ?>">
+            </div>
+            <div class="col-3" id="categories">
+                <img src="<?php echo BASE_PATH . '/public/images/logo_xiaomi.png' ?>">
+            </div>
+            <div class="col-3" id="categories">
+                <img src="<?php echo BASE_PATH . '/public/images/logo_lg.png' ?>">
+            </div>
         </div>
     </div>
 </div>

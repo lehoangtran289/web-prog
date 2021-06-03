@@ -6,19 +6,42 @@
     </div>
 <?php endforeach ?>
 <div class="pagination">
-<a href="#">&laquo;</a>
-<?php for ($i = 1; $i <= $totalPages; $i++)
-{
-    echo '<a href="'. BASE_PATH.'/products/page/'.$i .'">'.$i.'</a>';
-} ?>
-<a href="#">&raquo;</a>
+    <?php
+    echo '<script>localStorage.setItem("currentPage", "'.$currentPageNumber.'")</script>';
+    echo '<script>localStorage.setItem("totalPages", "'.$totalPages.'")</script>';
+    if($name)
+        {
+            echo '<a id="left" href="'.BASE_PATH.'/products/page/'. ($currentPageNumber - 1).'/'.$name.' ">&laquo;</a>';
+            for ($i = 1; $i <= $totalPages; $i++)
+                echo '<a href="'. BASE_PATH.'/products/page/'.$i. '/'. $name .'">'.$i.'</a>';
+            echo '<a id="right" href="'.BASE_PATH.'/products/page/'. ($currentPageNumber + 1).'/'.$name.' ">&raquo;</a>';
+        }
+    else
+        {
+            echo '<a id="left" href="'.BASE_PATH.'/products/page/'. ($currentPageNumber - 1).' ">&laquo;</a>';
+            for ($i = 1; $i <= $totalPages; $i++)
+                echo '<a href="'. BASE_PATH.'/products/page/'.$i. '/'. $name .'">'.$i.'</a>';
+            echo '<a id="right" href="'.BASE_PATH.'/products/page/'. ($currentPageNumber + 1).' ">&raquo;</a>';
+        }
+?>
+
 </div>
-<!--<div align="center" class="pagination">-->
-<!--    <a href="#">&laquo;</a>-->
-<!--    --><?php
-//    for ($i = 1; $i < $totalPages ; $i++) {
-//        echo '<a href="'. BASE_PATH. '/products/page/'. $i .'">'.$i .'</a>';
-//    }
-//    ?>
-<!--    <a href="#">&raquo;</a>-->
-<!--</div>-->
+<script>
+    function showArrow()
+    {
+        var rightArrow = document.getElementById('right');
+        var leftArrow = document.getElementById('left');
+        var currentPage = localStorage.getItem("currentPage");
+        var totalPages = localStorage.getItem("totalPages");
+        if( currentPage === totalPages )
+            rightArrow.style.display = 'none';
+        if( currentPage === '1' )
+            leftArrow.style.display = 'none';
+        if(currentPage !== totalPages && currentPage !== '1')
+        {
+            rightArrow.style.display = 'inline';
+            leftArrow.style.display = 'inline';
+        }
+    }
+    showArrow();
+</script>

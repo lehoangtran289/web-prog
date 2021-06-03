@@ -60,27 +60,22 @@
                 $new_order -> payment_id = $_POST['payment-method'];
                 $new_order -> date = date("Y-m-d h:i:s");
                 $new_order -> total_bill =  $_POST['total_bill'];
-                if ($new_order->save() == -1) {
+                $order_id = $new_order->saveAndGetId();
+                if ($order_id == -1) {
                     echo "<script type='text/javascript'>alert('Purchase fail at create order, try again!');</script>";
                     return;
                 }
-                /*
                 foreach ($_SESSION['cart'] as $id => $qty){
                     $new_order_product = new Orders_product();
-                    $new_order_product -> id = null;
-                    $new_order_product -> order_id = $new_order -> id;
-                    $new_order_product -> product_id = $id;
-                    $new_order_product -> product_qty = $qty;
-                    if ($new_order_product->save() == -1) {
+                    $res = $new_order_product->custom("INSERT INTO orders_products (order_id,product_id,product_qty) VALUES (".$order_id.",".$id.",".$qty.");");
+                    if ($res == -1) {
                         echo "<script type='text/javascript'>alert('Purchase fail at create order product, try again!');</script>";
                         return;
                     }
                 }
-                */
                 header("Location: ". BASE_PATH ."/orders/thankyou");
             }
         }
-
         function payout() {
             // check if user not login -> redirect to login page
 
