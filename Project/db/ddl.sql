@@ -88,6 +88,7 @@ create table if not exists orders_products
     id          int primary key auto_increment,
     order_id    int not null,
     product_id  int not null,
+    unique (order_id, product_id),
     product_qty int not null
 );
 insert into orders_products(id, order_id, product_id, product_qty)

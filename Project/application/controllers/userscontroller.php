@@ -13,14 +13,7 @@
 //    }
 
         function beforeAction() {
-//            if(isset($_SESSION['user']))
-//            {
-//                if($_SESSION['user']['role'] == 'admin')
-//                    header('Location: ../'.BASE_PATH.'/admin/index');
-//                else if($_SESSION['user']['role'] == 'user')
-//                    header('Location: ../'.BASE_PATH.'/orders/index');
-//            }else
-//                header('Location: '.BASE_PATH.'/users/login');
+//
         }
 
         function afterAction() {
@@ -44,24 +37,24 @@
                         $_SESSION['user']['username'] = $username;
                         $_SESSION['user']['role'] = $user['role'];
                         $_SESSION['user']['id'] = $user['id'];
-
+                        echo '<script>localStorage.setItem("isLoggedIn", "true")</script>';
                         if($user['role'] == 'user')
-                            header('Location: '.BASE_PATH.'/orders/index');
+                            echo '<script>location.href = "' . BASE_PATH. '/orders/index' .'"</script>';
                         else if($user['role'] == 'admin')
-                            header('Location: '.BASE_PATH.'/admin/index');
+                            echo '<script>location.href = "' . BASE_PATH. '/admin/index' .'"</script>';
+
                     } else echo "Username or password incorrect !";
                     $this->set('user', $user); // maybe dont need this
                 }
-
             }
-
         }
 
         function logout() {
             if (isset($_SESSION['user']))
                 unset($_SESSION['user']);
 //                redirectAction('products','index',array());
-            header('Location: '.BASE_PATH.'/products/index');
+            echo '<script>localStorage.setItem("isLoggedIn", "false")</script>';
+            echo '<script>location.href = "' . BASE_PATH .'"</script>';
         }
 
 
