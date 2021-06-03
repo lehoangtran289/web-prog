@@ -22,7 +22,7 @@
                 margin: 0;
                 font-family: 'Poppins', sans-serif;
             }
-    
+            
             .header {
                 max-width: 1500px;
                 margin: auto;
