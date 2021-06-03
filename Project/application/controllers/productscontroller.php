@@ -82,4 +82,13 @@
                 return $this->Product->search();
             }
         }
+        
+        function search($name = '') {
+            $this->render = 0;
+            error_reporting(0);
+            if ($name != '') {
+                $this->Product->like('name', $name);
+                echo json_encode($this->Product->search());
+            }
+        }
     }
