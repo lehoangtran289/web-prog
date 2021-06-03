@@ -155,5 +155,17 @@
                                 width="30px" height="30px">
                     </a>
             </div>
+            <nav>
+                <ul>
+                    <!-- Put something here -->
+                    <li><a href="<?php echo BASE_PATH ?>">Home</a></li>
+                    <li><a href="<?php echo BASE_PATH.'/products/page' ?>">Products</a></li>
+                    <li><a href="<?php echo BASE_PATH.'/users/update' ?>">Account</a></li>
+                    <li><a href="<?php echo BASE_PATH?>/users/logout">Log out</a></li>
+                </ul>
+            </nav>
+            <a href="<?php echo BASE_PATH ?>/carts/index">
+                <a href="<?php echo BASE_PATH.'/carts/index' ?>"><img src="<?php echo BASE_PATH ?>/icons/cart.png" width="30px" height="30px">
+            </a>
         </div>
         <script>showButton();</script>
