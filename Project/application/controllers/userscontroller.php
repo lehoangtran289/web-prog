@@ -98,7 +98,7 @@
             }
         }
 
-        function update()   // just a copy of register function, haven't dev yet
+        function update()
         {
             if(!isset($_SESSION['user']))
                 header('Location: '.BASE_PATH.'/users/login');
