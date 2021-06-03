@@ -372,7 +372,6 @@
                 $query = 'INSERT INTO ' . $this->_table . ' (' . $fields . ') VALUES (' . $values . ');';
             }
             $this->_result = mysqli_query($this->_dbHandle, $query);
-        //    echo '<h1>' . $query . '</h1>';
             $this->clear();
             if ($this->_result == 0) {
                 /** Error Generation **/

@@ -64,7 +64,7 @@
                     echo "<script type='text/javascript'>alert('Purchase fail at create order, try again!');</script>";
                     return;
                 }
-                /*
+
                 foreach ($_SESSION['cart'] as $id => $qty){
                     $new_order_product = new Orders_product();
                     $new_order_product -> id = null;
@@ -76,11 +76,9 @@
                         return;
                     }
                 }
-                */
                 header("Location: ". BASE_PATH ."/orders/thankyou");
             }
         }
-
         function payout() {
             // check if user not login -> redirect to login page
 
