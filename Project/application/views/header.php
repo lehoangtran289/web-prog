@@ -103,6 +103,71 @@
             #searchQuerySubmit:hover {
                 cursor: pointer;
             }
+
+            .wrapper{
+                width: 40%;
+                margin-left: 10%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+            .wrapper .search-input{
+                position: relative;
+                width: 100%;
+            }
+            .search-input input{
+                height: 2.8rem;
+                width: 100%;
+                background: #f5f5f5;
+                outline: none;
+                border: none;
+                border-radius: 1.625rem;
+                padding: 0 3.5rem 0 1.5rem;
+                font-size: 1rem;
+            }
+            .search-input.active input{
+                border-radius: 1.625rem;
+            }
+            .search-input .autocom-box{
+                position: absolute;
+                width: 100%;
+                background-color: white;
+                z-index: 1;
+                padding: 0;
+                opacity: 0;
+                pointer-events: none;
+                max-height: 280px;
+                overflow-y: auto;
+            }
+            .search-input.active .autocom-box{
+                padding: 10px 8px;
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .autocom-box li{
+                list-style: none;
+                padding: 8px 12px;
+                display: none;
+                width: 100%;
+                cursor: default;
+                border-radius: 3px;
+            }
+            .search-input.active .autocom-box li{
+                display: block;
+            }
+            .autocom-box li:hover{
+                background: #efefef;
+            }
+            .search-input .icon{
+                position: absolute;
+                width: 3.5rem;
+                height: 2.8rem;
+                margin-left: -3.5rem;
+                background: none;
+                border: none;
+                outline: none;
+                cursor: pointer;
+            }
         </style>
         
         <script type="text/javascript">
@@ -124,7 +189,6 @@
                     window.location.href = "<?php echo BASE_PATH . "/products/page/1/"?>" + input;
                 }
             }
-        
         </script>
     </head>
     
@@ -134,11 +198,17 @@
                 <div class="name">
                     <h1><a href="<?php echo BASE_PATH ?>">J Henlo Cheems</a></h1>
                 </div>
-                <div class="searchBar">
-                    <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value=""/>
-                    <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit" onclick="processSearch()">
-                        <span class="material-icons md-24">search</span>
-                    </button>
+                <div class="wrapper">
+                    <div class="search-input">
+                        <a href="" target="_blank" hidden></a>
+                        <input id="searchQueryInput" type="text" placeholder="Type to search.." value="">
+                        <div class="autocom-box">
+                            <!-- here list are inserted from javascript -->
+                        </div>
+                        <button class="icon" id="searchQuerySubmit" type="submit" name="searchQuerySubmit" onclick="processSearch()">
+                            <span class="material-icons md-24">search</span>
+                        </button>
+                    </div>
                 </div>
                 <nav class="nav-header">
                     <ul>
@@ -156,4 +226,47 @@
                     </a>
             </div>
         </div>
-        <script>showButton();</script>
+        <script>showButton()</script>
+        <script type="text/javascript">
+            // getting all required elements
+            const searchWrapper = document.querySelector(".search-input");
+            const inputBox = searchWrapper.querySelector("input");
+            const suggBox = searchWrapper.querySelector(".autocom-box");
+            const icon = searchWrapper.querySelector(".icon");
+            let linkTag = searchWrapper.querySelector("a");
+            let webLink;
+
+            inputBox.onkeyup = (e) => {
+                let searchKey = e.target.value;
+                if (searchKey) {
+                    const url = "<?php echo BASE_PATH . "/products/search/" ?>" + searchKey;
+                    fetch(url)
+                            .then(response => response.text())
+                            .then(data => {
+                                console.log(data);
+                                let obj = JSON.parse(data);
+                                if (data.length > 2) {
+                                    let arr = [];
+                                    obj.forEach(o => {
+                                        arr.push("<li>" + o['Product']['name'] + '</li>');
+                                    })
+                                    searchWrapper.classList.add("active");
+                                    suggBox.innerHTML = arr.join('');
+                                    console.log("here");
+                                    let allList = suggBox.querySelectorAll("li");
+                                    for (let i = 0; i < allList.length; i++) {
+                                        //adding onclick attribute in all li tag
+                                        allList[i].setAttribute("onclick", "select(this)");
+                                    }
+                                }
+                            });
+                } else {
+                    searchWrapper.classList.remove("active"); // hide autocomplete box
+                }
+            }
+            
+            function select(element) {
+                inputBox.value = element.textContent;
+                searchWrapper.classList.remove("active");
+            }
+        </script>
