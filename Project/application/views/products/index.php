@@ -3,7 +3,7 @@
         height: 70%;
         background-image: linear-gradient(rgba(0, 0, 0, 0.5),
                 rgba(0, 0, 0, 0.5)),
-            url(<?php echo BASE_PATH . '/public/images/banner.jpg' ?>);
+            url(<?php echo BASE_PATH . '/public/images/Banner.jpg' ?>);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;

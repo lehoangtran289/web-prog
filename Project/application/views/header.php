@@ -180,7 +180,7 @@
                 </ul>
             </nav>
             <a href="<?php echo BASE_PATH . '/carts/index' ?>">
-                <img src="<?php echo BASE_PATH ?>/icons/Cart.png" width="30px" height="30px">
+                <img src="<?php echo BASE_PATH ?>/icons/cart.png" width="30px" height="30px">
             </a>
         </div>
         <script>
