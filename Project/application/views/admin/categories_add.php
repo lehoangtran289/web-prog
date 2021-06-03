@@ -11,8 +11,7 @@
 </script>
 
 <br>
-<button><a href="<?php echo BASE_PATH?>/admin">Back to admin page</a></button>
-<h2>Add new user</h2>
+<h2>Add new user</h2><br>
 <form name="addCategoryForm" action="<?php echo BASE_PATH . '/admin/categories/add' ?>" method="post" onsubmit="return validateForm()">
     <table>
         <tr>

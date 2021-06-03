@@ -24,8 +24,7 @@
 </script>
 
 <br>
-<button><a href="<?php echo BASE_PATH ?>/admin">Back to admin page</a></button>
-<h2>Add new user</h2>
+<h2>Add new product</h2><br>
 <form name="addProductForm" action="<?php echo BASE_PATH . '/admin/products/add' ?>" method="post"
       onsubmit="return validateForm()" enctype="multipart/form-data">
     <table>
