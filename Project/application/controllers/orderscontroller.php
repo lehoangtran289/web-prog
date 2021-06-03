@@ -93,13 +93,11 @@
 
         }
 
-
-//    function findProducts($categoryId = null, $categoryName = null) {
-//        $this->Product->where('category_id', $categoryId);
-//        $this->Product->orderBy('name');
-//        return $this->Product->search();
-//    }
-        
+        function viewall() {
+            $this->Order->where('user_id', $_SESSION['user']['id']);
+            $orders = $this->Order->search();
+            $this->set('orders', $orders);
+        }
         
         function afterAction() {
         
