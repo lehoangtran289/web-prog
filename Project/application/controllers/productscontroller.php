@@ -22,6 +22,7 @@
         function page($pageNumber = 1, $name = '') {
             if ($name != '') {
                 $this->Product->like('name', $name);
+                $this->set('name', $name);
             }
             $this->Product->setPage($pageNumber);
             $this->Product->setLimit('10');

@@ -9,7 +9,10 @@
 <a href="#">&laquo;</a>
 <?php for ($i = 1; $i <= $totalPages; $i++)
 {
-    echo '<a href="'. BASE_PATH.'/products/page/'.$i .'">'.$i.'</a>';
+    if($name)
+        echo '<a href="'. BASE_PATH.'/products/page/'.$i. '/'. $name .'">'.$i.'</a>';
+    else
+        echo '<a href="'. BASE_PATH.'/products/page/'.$i .'">'.$i.'</a>';
 } ?>
 <a href="#">&raquo;</a>
 </div>
