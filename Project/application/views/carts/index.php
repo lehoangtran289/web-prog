@@ -51,6 +51,7 @@
                 html += segment;
             });
             html += "</table>";
+            html += "<button><a href=" + "<?php echo BASE_PATH . "/orders/index"?>" + ">Buy</a></button>"
         }
         document.getElementById("table").innerHTML = html;
     }
