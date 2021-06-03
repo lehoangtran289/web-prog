@@ -60,15 +60,16 @@
                 $new_order -> payment_id = $_POST['payment-method'];
                 $new_order -> date = date("Y-m-d h:i:s");
                 $new_order -> total_bill =  $_POST['total_bill'];
-                if ($new_order->save() == -1) {
+                $order_id = $new_order->saveAndGetId();
+                if ($order_id == -1) {
                     echo "<script type='text/javascript'>alert('Purchase fail at create order, try again!');</script>";
                     return;
                 }
-                /*
+                
                 foreach ($_SESSION['cart'] as $id => $qty){
                     $new_order_product = new Orders_product();
                     $new_order_product -> id = null;
-                    $new_order_product -> order_id = $new_order -> id;
+                    $new_order_product -> order_id = $order_id;
                     $new_order_product -> product_id = $id;
                     $new_order_product -> product_qty = $qty;
                     if ($new_order_product->save() == -1) {
@@ -76,7 +77,7 @@
                         return;
                     }
                 }
-                */
+                
                 header("Location: ". BASE_PATH ."/orders/thankyou");
             }
         }
