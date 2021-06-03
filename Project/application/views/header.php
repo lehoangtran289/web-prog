@@ -1,13 +1,32 @@
+<script type="text/javascript">
+    function showButton()
+    {
+        loginButton = document.getElementById('login');
+        logoutButton = document.getElementById('logout');
+        if(localStorage.getItem("isLoggedIn") === 'true')
+        {
+            loginButton.style.display = 'none';
+            logoutButton.style.display = 'inline-block';
+        } else
+        {
+            logoutButton.style.display = 'none';
+            loginButton.style.display = 'inline-block';
+        }
+    }
+
+</script>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
     <title>My E-Commerce Website</title>
 
     <style>
@@ -58,6 +77,7 @@
             text-decoration: none;
             color: #555;
         }
+
         .pagination {
             display: inline-block;
         }
@@ -71,23 +91,26 @@
     </style>
 </head>
 
-<body>
-    <div class="header">
-        <div class="navbar">
-            <div class="name">
-                <h1><a href="">J Henlo Cheems</a></h1>
-            </div>
-            <nav>
-                <ul>
-                    <!-- Put something here -->
-                    <li><a href="<?php echo BASE_PATH ?>">Home</a></li>
-                    <li><a href="<?php echo BASE_PATH.'/products/page' ?>">Products</a></li>
-                    <li><a href="<?php echo BASE_PATH.'/users/update' ?>">Account</a></li>
-                    <li><a href="<?php echo BASE_PATH?>/users/logout">Log out</a></li>
-                </ul>
-            </nav>
-            <a href="<?php echo BASE_PATH ?>/carts/index">
-                <a href="<?php echo BASE_PATH.'/carts/index' ?>"><img src="<?php echo BASE_PATH ?>/images/cart.png" width="30px" height="30px">
-            </a>
+<body
+">
+<div class="header">
+    <div class="navbar">
+        <div class="name">
+            <h1><a href="<?php echo BASE_PATH ?>">J Henlo Cheems</a></h1>
         </div>
+        <nav class="nav-header">
+            <ul>
+                <!-- Put something here -->
+                <li><a href="<?php echo BASE_PATH . '/products/page' ?>">Products</a></li>
+                <li><a href="<?php echo BASE_PATH . '/users/update' ?>">Account</a></li>
+                <li id="login"><a href="<?php echo BASE_PATH ?>/users/login">Log in</a> <br></li>
+                <li id="logout"><a href="<?php echo BASE_PATH ?>/users/logout">Log out</a></li>
+            </ul>
+        </nav>
+        <a href="<?php echo BASE_PATH ?>/carts/index">
+            <a href="<?php echo BASE_PATH . '/carts/index' ?>"><img src="<?php echo BASE_PATH ?>/images/cart.png"
+                                                                    width="30px" height="30px">
+            </a>
     </div>
+</div>
+<script>showButton();</script>

@@ -31,6 +31,3 @@
     <input required type="text" id="content" name="content" placeholder="Post your review here man">
     <input type="submit" value="Post review">
 </form>
-                <button><a href="<?php echo BASE_PATH?>/users/login">Sign in</a> <br></button>
-                <button><a href="<?php echo BASE_PATH?>/users/register">Register</a></button>
-                <button><a href="<?php echo BASE_PATH?>/carts/index">Cart</a></button>

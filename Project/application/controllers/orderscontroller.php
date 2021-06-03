@@ -17,7 +17,6 @@
 //        $this->set('product', $product);
 //
 //    }
-        
         function index() {
             // check if user not login -> redirect to login page
             

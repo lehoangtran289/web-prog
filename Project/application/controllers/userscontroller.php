@@ -27,6 +27,19 @@
 
         }
 
+        function processHeader() {
+            $this->render = 0;
+            error_reporting(0);
+            // process check o day -> return true false hay nhu nao day
+//            echo '<ul>
+//                <!-- Put something here -->
+/*                <li><a href="<?php echo BASE_PATH . '/products/page' ?>">Products</a></li>*/
+/*                <li><a href="<?php echo BASE_PATH . '/users/update' ?>">Account</a></li>*/
+/*                <li id="login"><a href="<?php echo BASE_PATH ?>/users/login">Log in</a> <br></li>*/
+/*                <li id="logout"><a href="<?php echo BASE_PATH ?>/users/logout">Log out</a></li>*/
+//            </ul>';
+        }
+
         function login() {
             if (isset($_POST['username']) && isset($_POST['password'])) {
                 $username = $_POST['username'];
@@ -44,24 +57,24 @@
                         $_SESSION['user']['username'] = $username;
                         $_SESSION['user']['role'] = $user['role'];
                         $_SESSION['user']['id'] = $user['id'];
-
+                        echo '<script>localStorage.setItem("isLoggedIn", "true")</script>';
                         if($user['role'] == 'user')
-                            header('Location: '.BASE_PATH.'/orders/index');
+                            echo '<script>location.href = "' . BASE_PATH. '/orders/index' .'"</script>';
                         else if($user['role'] == 'admin')
-                            header('Location: '.BASE_PATH.'/admin/index');
+                            echo '<script>location.href = "' . BASE_PATH. '/admin/index' .'"</script>';
+
                     } else echo "Username or password incorrect !";
                     $this->set('user', $user); // maybe dont need this
                 }
-
             }
-
         }
 
         function logout() {
             if (isset($_SESSION['user']))
                 unset($_SESSION['user']);
 //                redirectAction('products','index',array());
-            header('Location: '.BASE_PATH.'/products/index');
+            echo '<script>localStorage.setItem("isLoggedIn", "false")</script>';
+            echo '<script>location.href = "' . BASE_PATH .'"</script>';
         }
 
 
