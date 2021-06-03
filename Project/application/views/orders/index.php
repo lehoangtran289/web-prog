@@ -42,8 +42,9 @@
 <?php
     //var_dump($user['0']['User']['id']);
     $total_bill = 0;
-    foreach ($cart as $item) {
-        echo "<tr><td>".json_encode($item['Product'])."</td>";
+    foreach ($cart as $item) { // thong tin san pham lay tu trong bien $item nay nhe son
+        //echo "<tr><td>".json_encode($item['Product'])."</td>";
+        echo "<tr><td>".$item['Product']['name']."</td>";
         echo "<td>".$item['buy_qty']."</td></tr>";
         $total_bill += (int)$item['Product']['price'] * (int)$item['buy_qty'];
         ?>
