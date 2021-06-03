@@ -15,7 +15,7 @@
             if (isset($_SESSION['cart']) && count($_SESSION['cart']) != 0) {
                 $cart = array();
                 foreach ($_SESSION['cart'] as $id => $quantity) {
-                    $item = $this->Cart->custom('SELECT * FROM products WHERE id='.$id);
+                    $item = performAction('products', 'findById', array($id));
                     $item['0']['buy_qty'] = $quantity; 
                     $item = json_encode($item['0']);
                     #echo $item;
@@ -34,7 +34,7 @@
             unset($_SESSION['cart'][$id]);
             $cart = array();
             foreach ($_SESSION['cart'] as $id => $quantity) {
-                $item = $this->Cart->custom('SELECT * FROM products WHERE id='.$id);
+                $item = performAction('products', 'findById', array($id));
                 $item['0']['buy_qty'] = $quantity; 
                 $item = json_encode($item['0']);
                 array_push($cart, $item);
@@ -54,7 +54,7 @@
             $_SESSION['cart'][$id] += 1;
             $cart = array();
             foreach ($_SESSION['cart'] as $id => $quantity) {
-                $item = $this->Cart->custom('SELECT * FROM products WHERE id='.$id);
+                $item = performAction('products', 'findById', array($id));
                 $item['0']['buy_qty'] = $quantity; 
                 $item = json_encode($item['0']);
                 array_push($cart, $item);
@@ -72,7 +72,7 @@
             }
             $cart = array();
             foreach ($_SESSION['cart'] as $id => $quantity) {
-                $item = $this->Cart->custom('SELECT * FROM products WHERE id='.$id);
+                $item = performAction('products', 'findById', array($id));
                 $item['0']['buy_qty'] = $quantity; 
                 $item = json_encode($item['0']);
                 array_push($cart, $item);

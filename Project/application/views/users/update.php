@@ -36,3 +36,5 @@
     </table>
 
 </form>
+<br>
+<button><a href="<?php echo BASE_PATH."/orders/viewall"?>">Order History</a></button>
