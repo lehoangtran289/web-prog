@@ -16,6 +16,8 @@
                 <input type="submit" value="Buy">
             </form>
                 <?php
+                pprint($product);
+                pprint($reviews);
                 foreach ($reviews as $review)
                 {
                     echo $review['User']['name'].': rating '.$review['Review']['rating'].' stars';
