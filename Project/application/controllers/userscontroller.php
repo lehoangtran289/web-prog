@@ -43,7 +43,7 @@
                         else if($user['role'] == 'admin')
                             echo '<script>location.href = "' . BASE_PATH. '/admin/index' .'"</script>';
 
-                    } else echo "Username or password incorrect !";
+                    } else echo "<script>alert('Username or password incorrect !')</script>";
                     $this->set('user', $user); // maybe dont need this
                 }
             }
@@ -73,9 +73,8 @@
                     // Check if there exists an account
                     $this->User->where('username', $username);
                     if ($this->User->search($username)) {
-                        echo '<h1>Already exist this username</h1>';
+                        echo '<script>alert("Username already exist")</script>';
                     } else {
-                        echo '<h1>Register successfully!!!</h1>';
                         $this->User->id = NULL;
                         $this->User->username = $username;
                         $this->User->password = password_hash($password, PASSWORD_BCRYPT);
@@ -85,7 +84,6 @@
                         $this->User->address = $address;
                         $this->User->save();
                         header('Location: '.BASE_PATH.'/users/login');
-//                    redirectAction('users','login',array());
                     }
                 }
             }
@@ -114,9 +112,8 @@
                     $user = $this->User->search($username)[0]['User'];
 
                     if ($user && $user['username'] != $_SESSION['user']['username']) {
-                        echo '<h1>You can\'t change to that username, there already has one</h1>';
+                        echo '<script>alert("You can\'t change to that username, that username already exists");</script>';
                     } else {
-                        echo '<h1>Update successfully!!!</h1>';
                         $this->User->id = $currentUser['id'];
                         $this->User->username = $username;
                         $this->User->password = password_hash($password, PASSWORD_BCRYPT);

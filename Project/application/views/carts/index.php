@@ -66,7 +66,9 @@ Your Cart:
         foreach ($cart as $item) {
             $item = json_decode((json_encode(json_decode($item))), true);
             ?>
-            <tr><td><?php echo json_encode($item['Product'])?></td>
+<!--                tat ca thong tin duoc luu trong bien $item nhe son-->
+<!--            <tr><td>--><?php //echo json_encode($item['Product'])?><!--</td>-->
+            <tr><td><?php echo $item['Product']['name'].', price is '.$item['Product']['price']?></td>
             <td><button type= "button" onclick="decreaseQty(<?php echo $item['Product']['id']?>)">-</button></td>
             <td><?php echo $item['buy_qty']?></td>
             <td><button type= "button" onclick="increaseQty(<?php echo $item['Product']['id']?>)">+</button></td>
