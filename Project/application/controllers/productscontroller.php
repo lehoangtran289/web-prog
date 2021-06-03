@@ -19,7 +19,10 @@
             
         }
         
-        function page($pageNumber = 1) {
+        function page($pageNumber = 1, $name = '') {
+            if ($name != '') {
+                $this->Product->like('name', $name);
+            }
             $this->Product->setPage($pageNumber);
             $this->Product->setLimit('10');
             $products = $this->Product->search();
