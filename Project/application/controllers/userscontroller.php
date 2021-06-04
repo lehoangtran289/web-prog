@@ -21,6 +21,10 @@
         }
 
         function login() {
+            if($_SESSION['user']['role'] == 'user')
+                header('Location: '. BASE_PATH);
+            else if($_SESSION['user']['role'] == 'admin')
+                header('Location: '.BASE_PATH.'/admin/index');
             if (isset($_POST['username']) && isset($_POST['password'])) {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
@@ -33,15 +37,21 @@
 
                     if(!password_verify($password, $user['password'] )) unset($user);
                     if ($user) {
+                        unset($_SESSION['user']);
                         // save username to session
                         $_SESSION['user']['username'] = $username;
                         $_SESSION['user']['role'] = $user['role'];
                         $_SESSION['user']['id'] = $user['id'];
-                        echo '<script>localStorage.setItem("isLoggedIn", "true")</script>';
                         if($user['role'] == 'user')
+                        {
+                            echo '<script>localStorage.setItem("isLoggedIn", "user")</script>';
                             echo '<script>location.href = "' . BASE_PATH. '/orders/index' .'"</script>';
+                        }
                         else if($user['role'] == 'admin')
+                        {
+                            echo '<script>localStorage.setItem("isLoggedIn", "admin")</script>';
                             echo '<script>location.href = "' . BASE_PATH. '/admin/index' .'"</script>';
+                        }
 
                     } else echo "<script>alert('Username or password incorrect !')</script>";
                     $this->set('user', $user); // maybe dont need this
@@ -53,7 +63,7 @@
             if (isset($_SESSION['user']))
                 unset($_SESSION['user']);
 //                redirectAction('products','index',array());
-            echo '<script>localStorage.setItem("isLoggedIn", "false")</script>';
+            echo '<script>localStorage.setItem("isLoggedIn", "none")</script>';
             echo '<script>location.href = "' . BASE_PATH .'"</script>';
         }
 

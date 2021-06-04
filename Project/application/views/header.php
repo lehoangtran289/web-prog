@@ -214,12 +214,20 @@
             function showButton() {
                 loginButton = document.getElementById('login');
                 logoutButton = document.getElementById('logout');
-                if (localStorage.getItem("isLoggedIn") === 'true') {
+                adminButton = document.getElementById('admin');
+                if (localStorage.getItem("isLoggedIn") === 'user') {
                     loginButton.style.display = 'none';
-                    logoutButton.style.display = 'inline-block';
-                } else {
+                    adminButton.style.display = 'none';
+                    logoutButton.style.display = 'inline';
+                } else if(localStorage.getItem("isLoggedIn") === 'admin'){
+                    logoutButton.style.display = 'inline';
+                    loginButton.style.display = 'none';
+                    adminButton.style.display = 'inline';
+                } else
+                {
                     logoutButton.style.display = 'none';
-                    loginButton.style.display = 'inline-block';
+                    loginButton.style.display = 'inline';
+                    adminButton.style.display = 'none';
                 }
             }
             
@@ -256,6 +264,7 @@
                 <nav class="nav-header">
                     <ul>
                         <!-- Put something here -->
+                        <li id="admin"><a href="<?php echo BASE_PATH ?>/admin/index">Admin</a></li>
                         <li><a href="<?php echo BASE_PATH . '/products/page' ?>">Products</a></li>
                         <li><a href="<?php echo BASE_PATH . '/users/update' ?>">Account</a></li>
                         <li id="login"><a href="<?php echo BASE_PATH ?>/users/login">Log in</a></li>
