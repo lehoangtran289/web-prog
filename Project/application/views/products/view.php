@@ -1,16 +1,6 @@
 <style>
-    .small-container {
-        max-width: 1080px;
-        margin: auto;
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-
-    .row {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: space-around;
+    .button {
+        margin-bottom: 30px;
     }
 
     .path {
@@ -24,6 +14,7 @@
 
     .single-product {
         margin-top: 50px;
+        margin-bottom: 50px;
     }
 
     .single-product .col-2 {
@@ -45,36 +36,6 @@
         margin-left: 10px;
     }
 
-    .col-2 {
-        flex-basis: 50%;
-        min-width: 300px;
-    }
-
-    .col-2 img {
-        max-width: 100%;
-    }
-
-    .col-2 h1 {
-        font-size: 45px;
-        line-height: 55px;
-    }
-
-    .col-2 input[type="submit"] {
-        cursor: pointer;
-        margin-bottom: 30px;
-        display: inline-block;
-        background: #ff523b;
-        border: 0px;
-        color: #fff;
-        padding: 8px 30px;
-        border-radius: 30px;
-        transition: background 0.5;
-    }
-
-    .col-2 input[type="submit"]:hover {
-        background: #563434;
-    }
-
     .small-img-row {
         margin-top: 20px;
         display: flex;
@@ -85,15 +46,39 @@
         flex-basis: 22%;
         cursor: pointer;
     }
+
+    .table-details {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-details th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #1e1e1eec;
+        color: white;
+    }
+
+    .table-details th,
+    .table-details td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .table-details td:hover {
+        background-color: #ddd;
+    }
 </style>
 
 <!-- Product details -->
 <form action="<?php echo BASE_PATH ?>/carts/addToCart" method='POST'>
+
+    <!-- Product details -->
     <div class="small-container single-product">
         <div class="row">
+
             <div class="col-2">
                 <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] ?>" width="100%" id="productImage">
-
                 <div class="small-img-row">
                     <div class="small-img-col">
                         <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] ?>" width="100%" class="small-img">
@@ -108,8 +93,8 @@
                         <img src="<?php echo BASE_PATH . '/public/images/product-4.jpg' ?>" width="100%" class="small-img">
                     </div>
                 </div>
-
             </div>
+
             <div class="col-2">
                 <div class="path">
                     <a href="<?php echo BASE_PATH . '/products/page' ?>">Products</a>
@@ -118,42 +103,63 @@
                 <h1><?php echo $product['Product']['name'] ?></h1>
                 <h4>$<?php echo $product['Product']['price'] ?></h4>
                 <input type="hidden" id="id" name="id" value=<?php echo $product['Product']['id'] ?>>
-                <input type="submit" value="Add To Cart">
+                <input type="submit" value="Add To Cart" class="button">
                 <h3>Product Details <i class="fa fa-ident"></i></h3>
                 <p><?php echo $product['Product']['description'] ?></p>
             </div>
         </div>
     </div>
-</form>
 
-</div>
-<div>
-    <h2></h2>
-</div>
-<div>
-    <h2>Quantity: <?php echo $product['Product']['quantity'] ?></h2>
-</div>
-<div>
-    <h2>Operating System: <?php echo $product['Product']['OS'] ?></h2>
-</div>
-<div>
-    <h2>Chipset: <?php echo $product['Product']['chipset'] ?></h2>
-</div>
-<div>
-    <h2>Ram: <?php echo $product['Product']['ram'] ?></h2>
-</div>
-<div>
-    <h2>Display: <?php echo $product['Product']['display'] ?></h2>
-</div>
-<div>
-    <h2>Camera: <?php echo $product['Product']['camera'] ?></h2>
-</div>
-<div>
-    <h2>Memory: <?php echo $product['Product']['memory'] ?></h2>
-</div>
-<div>
-    <h2>Battery: <?php echo $product['Product']['pin'] ?></h2>
-</div>
+    <!-- Table of information -->
+    <div class="small-container">
+        <div class="row">
+            <table class="table-details">
+                <tr>
+                    <th>Quantity</th>
+                    <th>OS</th>
+                    <th>Chipset</th>
+                    <th>RAM</th>
+                    <th>Display</th>
+                    <th>Camera</th>
+                    <th>Memory</th>
+                    <th>Battery</th>
+                </tr>
+                <tr>
+                    <td><?php echo $product['Product']['quantity'] ?></td>
+                    <td><?php echo $product['Product']['OS'] ?></td>
+                    <td><?php echo $product['Product']['chipset'] ?></td>
+                    <td><?php echo $product['Product']['ram'] ?></td>
+                    <td><?php echo $product['Product']['display'] ?></td>
+                    <td><?php echo $product['Product']['camera'] ?></td>
+                    <td><?php echo $product['Product']['memory'] ?></td>
+                    <td><?php echo $product['Product']['pin'] ?></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Related products -->
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>Related Products</h2>
+        </div>
+        <div class="row">
+            <?php
+            for ($i = 0; $i < count($relatedProducts); $i++) {
+            ?>
+                <div class="col-4" id="relatedProducts">
+                    <a href="<?php echo BASE_PATH . '/products/view/' . $relatedProducts[$i]['Product']['id'] ?>">
+                        <img src="<?php echo BASE_PATH . '/public/images/' . $relatedProducts[$i]['Product']['image']; ?>">
+                    </a>
+                    <h4><?php echo $relatedProducts[$i]['Product']['name']; ?></h4>
+                    <p>$<?php echo $relatedProducts[$i]['Product']['price']; ?></p>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+    </div>
+</form>
 
 <?php
 foreach ($reviews as $review) {
@@ -232,7 +238,7 @@ foreach ($reviews as $review) {
     var productImage = document.getElementById("productImage");
     var smallImage = document.getElementsByClassName("small-img");
 
-    // Show the small image when clicked
+    // Change image when clicking on small images
     smallImage[0].onclick = function() {
         productImage.src = smallImage[0].src;
     }
