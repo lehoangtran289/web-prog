@@ -129,6 +129,92 @@
                 vertical-align: middle;
             }
         </style>
+        <style>
+            section {
+                position: relative;
+                width: 100%;
+                display: flex;
+            }
+        
+            .content-box {
+                display: flex;
+                width: 50%;
+                height: 100%;
+                justify-content: flex-end;
+                align-items: center;
+            }
+        
+            .form-box {
+                width: 80%;
+                margin-right: 50px;
+            }
+
+            .image-box {
+                position: relative;
+                display: flex;
+                width: 50%;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .image-box img {
+                width: 60%;
+                height: auto;
+                position: absolute;
+                object-fit: cover;
+            }
+        
+            .form-box h2 {
+                color: #555;
+                font-weight: 600;
+                font-size: 1.5em;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+                border-bottom: 4px solid #ff523b;
+                display: inline-block;
+                letter-spacing: 1px;
+            }
+        
+            .input-box {
+                margin-bottom: 20px;
+            }
+        
+            .input-box input, .input-box select {
+                width: 100%;
+                padding: 10px 20px;
+                outline: none;
+                font-weight: 400;
+                border: 1px solid #607d8b;
+                font-size: 16px;
+                letter-spacing: 1px;
+                color: #607d8b;
+                background: transparent;
+                border-radius: 30px;
+            }
+        
+            .input-box input[type="submit"] {
+                background: #ff523b;
+                color: #fff;
+                outline: none;
+                border: none;
+                font-weight: 500;
+                cursor: pointer;
+                margin-top: 20px;
+            }
+        
+            .input-box input[type="submit"]:hover {
+                background: #563434;
+            }
+        
+            .input-box p {
+                color: #607d8b;
+            }
+        
+            .input-box a {
+                color: #ff523b;
+            }
+    
+        </style>
     </head>
     <body>
         <div class="header">
