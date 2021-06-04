@@ -63,7 +63,7 @@
                 // image
                 let image_path = "<?php echo BASE_PATH . '/public/images/'?>" + o['image'];
                 result += o['image'] ? "<td><img src='" + image_path + "'></td>" : "<td></td>";
-
+                
                 // action
                 result += "<td>";
                 let updateUrl = "<?php echo BASE_PATH . "/admin/products/update/"?>" + o.id;
@@ -187,4 +187,5 @@
 <br>
 <div id="table">
     <!-- TO APPEND ELEMENTS FROM AJAX -->
+</div>
 </div>
