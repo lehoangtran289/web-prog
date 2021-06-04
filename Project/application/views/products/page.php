@@ -109,58 +109,60 @@
         color: #fff;
     }
 
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    #myBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        z-index: 99;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: #ff523b;
+        color: white;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 4px;
+    }
+
+    #myBtn:hover {
+        background-color: #555;
+    }
+
 </style>
 
 <!-- JS code -->
-<script type="text/javascript">
-    //let getHtmlProductList = (data) => {
-    //    console.log(data);
-    //    let result = '';
-    //    data.forEach((item) => {
-    //        result += "<form method='post' action='index'> <div style='border:1px solid #333; background-color:#f1f1f1; border-radius:5px; padding:16px;'align='center'>";
-    //        result += "<div><img src='<?php //echo BASE_PATH . '/public/images/' ?>//" + item['image'] + "'/>";
-    //        result += "<a href='<?php //echo BASE_PATH . '/products/view/' ?>//" + item['id'] + "'>" + item['name'] + "</a>";
-    //        result += "<h4>$ " + item['price'] + "</h4>"
-    //        result += "</div></div></form>";
-    //    });
-    //    console.log(result);
-    //    return result;
-    //}
-    //
-    //window.addEventListener('DOMContentLoaded', (event) => {
-    //    const form = document.getElementById("searchForm");
-    //    form.addEventListener('submit', function (e) {
-    //        e.preventDefault();
-    //        const formData = new FormData(form);
-    //        let data = {};
-    //        for (let [key, value] of formData.entries()) {
-    //            if (key === 'brands') {
-    //                data.hasOwnProperty('brands') ? data['brands'].push(value) : data['brands'] = [value];
-    //            } else {
-    //                if (value) data[key] = value;
-    //            }
-    //        }
-    //        console.log(JSON.stringify(data));
-    //        fetch("<?php //echo BASE_PATH . '/products/processSearchReq' ?>//", {
-    //            method: 'POST',
-    //            body: JSON.stringify(data),
-    //            mode: "same-origin",
-    //            credentials: "same-origin",
-    //            headers: {
-    //                "Content-Type": "application/json"
-    //            }
-    //        })
-    //                .then(response => response.text())
-    //                .then(data => {
-    //                    console.log(data);
-    //                    let obj = JSON.parse(data);
-    //                    // create product list html
-    //                    let res = getHtmlProductList(obj);
-    //                    document.getElementById("productList").innerHTML = res;
-    //                });
-    //    })
-    //});
+<script>
+    // SAVE FORM STATE WHEN RELOAD
+    window.onload = function () {
+        const orderBy = sessionStorage.getItem('orderBy');
+        if (orderBy !== null) document.getElementById("orderBy").value = orderBy;
+    }
+    
+    window.onbeforeunload = function () {
+        sessionStorage.setItem("orderBy", document.getElementById("orderBy").value);
+    }
+    
+    // Paging event
+    let processPaging = (url) => {
+        console.log(document.getElementById("orderBy").value);
+        let form = document.createElement("form");
+        form.action = url;
+        form.method = 'post';
+        let orderByInput = document.createElement('input');
+        orderByInput.type = 'hidden';
+        orderByInput.name = 'orderBy';
+        orderByInput.value = document.getElementById("orderBy").value;
+        form.appendChild(orderByInput);
+        document.getElementById('hidden_form_container').appendChild(form);
+        form.submit();
+    }
 </script>
+<div id="hidden_form_container" style="display:none;"></div>
 
 <!-- Banner -->
 <div class="hero-image">
@@ -177,7 +179,9 @@
         
         <!--Product search-->
         <form id="searchForm" method="POST" action="<?php
-            if (!empty($name)) echo BASE_PATH . "/products/page/" . $name;
+            if (!empty($name)) {
+                echo BASE_PATH . "/products/page/1/" . $name;
+            }
             else echo BASE_PATH . "/products/page"
         ?>">
             <!-- Search by brand name(s) -->
@@ -235,10 +239,10 @@
                 $rightUrl .= '/' . $name;
             }
             
-            echo '<a id="left" href="' . $leftUrl . ' "><span>&laquo;</span></a>';
+            echo "<a onclick=\"processPaging('" . $leftUrl . "')\" id=\"left\"><span>&laquo;</span></a>";
             for ($i = 1; $i <= $totalPages; $i++)
-                echo '<a href="' . $midUrls[$i] . '"><span>' . $i . '</span></a>';
-            echo '<a id="right" href="' . $rightUrl . ' "><span>&raquo;</span></a>';
+                echo "<a onclick=\"processPaging('" . $midUrls[$i] . "')\"><span>" . $i . "</span></a>";
+            echo "<a onclick=\"processPaging('" . $rightUrl . "')\" id=\"right\"><span>&raquo;</span></a>";
         ?>
     </div>
 </div>
@@ -260,4 +264,28 @@
     }
     
     showArrow();
+</script>
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">
+    <img src="<?php echo BASE_PATH . "/public/icons/expand_less.png" ?>">
+</button>
+<script type="text/javascript">
+    //Get the button
+    var mybutton = document.getElementById("myBtn");
+    
+    window.onscroll = function() {scrollFunction()};
+    
+    function scrollFunction() {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+    
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
 </script>
