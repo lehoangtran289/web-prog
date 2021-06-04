@@ -373,6 +373,7 @@
             }
             $this->_result = mysqli_query($this->_dbHandle, $query);
             $this->clear();
+            echo $query;
             if ($this->_result == 0) {
                 /** Error Generation **/
                 return -1;
