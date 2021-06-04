@@ -286,7 +286,9 @@
                 let webLink;
                 
                 inputBox.onkeyup = (e) => {
-                    let searchKey = e.target.value;
+                    let reg = new RegExp(/[^a-zA-Z0-9 ]/gi);
+                    let searchKey = e.target.value.replace(reg, "");
+                    if (searchKey.length < e.target.value.length) return;
                     if (searchKey) {
                         const url = "<?php echo BASE_PATH . "/products/search/" ?>" + searchKey;
                         fetch(url)
@@ -301,10 +303,8 @@
                                         })
                                         searchWrapper.classList.add("active");
                                         suggBox.innerHTML = arr.join('');
-                                        console.log("here");
                                         let allList = suggBox.querySelectorAll("li");
                                         for (let i = 0; i < allList.length; i++) {
-                                            //adding onclick attribute in all li tag
                                             allList[i].setAttribute("onclick", "select(this)");
                                         }
                                     }

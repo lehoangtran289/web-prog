@@ -58,6 +58,10 @@
             $this->_extraConditions .= '`' . $this->_model . '`.`' . $field . '` LIKE \'%' . $this->_dbHandle->real_escape_string($value) . '%\' AND ';
         }
         
+        function in($field, $values) {
+            $this->_extraConditions .= '`' . $this->_model . '`.`' . $field . '` IN (' . join(",", $values) . ') AND ';
+        }
+        
         function showHasOne() {
             $this->_hO = 1;
         }
