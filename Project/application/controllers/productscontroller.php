@@ -20,14 +20,25 @@
         }
         
         function page($pageNumber = 1, $name = '') {
-            if ($name != '') {
+            if (isset($_POST['orderBy'])) {
+                if ($_POST['orderBy'] == 'low') $this->Product->orderBy('price', 'ASC');
+                else $this->Product->orderBy('price', 'DESC');
+            }
+            if (isset($_POST['brands'])) {
+                $this->Product->in('category_id', $_POST['brands']);
+            }
+            if ($name != '' || !ctype_space($name)) {
                 $this->Product->like('name', $name);
                 $this->set('name', $name);
             }
             $this->Product->setPage($pageNumber);
             $this->Product->setLimit('10');
+            
             $products = $this->Product->search();
             $totalPages = $this->Product->totalPages();
+            $categories = performAction('categories', 'findAll', array());
+            $this->set('brands', $categories);
+            
             $this->set('totalPages', $totalPages);
             $this->set('products', $products);
             $this->set('currentPageNumber', $pageNumber);
@@ -38,18 +49,18 @@
             $this->Product->showHasOne();
             $this->Product->showHasMany();
             $products = $this->Product->search();
-
+            
             
             $this->set('products', $products);
-
+            
             // Get the list of category
             $categories = $this->Product->custom('SELECT * FROM categories LIMIT 3');
             $this->set('categories', $categories);
-
+            
             // Get list of featured products
             $featuredProducts = $this->Product->custom('SELECT * FROM products ORDER BY price DESC LIMIT 4');
             $this->set('featuredProducts', $featuredProducts);
-
+            
             // Get list of latest products
             $latestProducts = $this->Product->custom('SELECT * FROM products ORDER BY created_at DESC LIMIT 8');
             $this->set('latestProducts', $latestProducts);
@@ -75,7 +86,7 @@
             $this->Product->showHasOne();
             return $this->Product->search();
         }
-    
+        
         function findById($id = '') {
             if ($id != '') {
                 $this->Product->where('id', $id);
@@ -89,6 +100,48 @@
             if ($name != '') {
                 $this->Product->like('name', $name);
                 echo json_encode($this->Product->search());
+            }
+        }
+        
+        function processSearchReq() {
+            $this->render = 0;
+            error_reporting(0);
+            
+            $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+            
+            if ($contentType === "application/json") {
+                //Receive the RAW post data.
+                $content = trim(file_get_contents("php://input"));
+                $decoded = json_decode($content, true);
+                
+                $db = @mysqli_connect('127.0.0.1', 'root', '1');
+                $sql = "select * from products inner join categories on products.category_id = categories.id where '1'='1'";
+                foreach ($decoded as $key => $value) {
+                    if ($key == 'name') {
+                        $sql .= " and name like " . "'%" . mysqli_real_escape_string($db, $value) . "%'";
+                    }
+                    if ($key == 'brands') {
+                        $sql .= " and brand in (";
+                        foreach ($value as $k => $v) {
+                            if ($k != count($value) - 1) {
+                                $sql .= "'" . mysqli_real_escape_string($db, $v) . "'" . ", ";
+                            } else {
+                                $sql .= "'" . mysqli_real_escape_string($db, $v) . "'";
+                            }
+                        }
+                        $sql .= ") ";
+                    }
+                    if ($key == 'orderBy') {
+                        $sql .= $value == 'lowToHigh' ? "order by price asc" : "order by price desc";
+                    }
+                }
+                
+                global $inflect;
+                $data = $this->Product->custom($sql);
+                $data = array_map(function ($x) use ($inflect) {
+                    return $x[ucfirst($inflect->singularize('products'))];
+                }, $data);
+                echo json_encode($data);
             }
         }
     }
