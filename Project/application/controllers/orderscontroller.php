@@ -9,27 +9,6 @@
                 header('Location: '.BASE_PATH.'/users/login');
         }
 
-//    function view($id = null) {
-//        $this->Product->id = $id;
-//        $this->Product->showHasOne();
-//        $this->Product->showHMABTM();
-//        $this->Product->showHasMany();
-//        $product = $this->Product->search();
-//
-//        $this->set('product', $product);
-//
-//    }
-        /*
-        function index() {
-            $this->Order->showHasOne();
-            $this->Order->showHasMany();
-            $this->User->where('username', $username);
-            $userId =$this->Order->custom('SELECT * FROM users WHERE username='.$_SESSION['user']['username']);
-
-            $orders = $this->Order->search();
-            $this->set('orders', $orders);
-        }*/
-
         function index() {
             $cart = array();
             foreach ($_SESSION['cart'] as $id => $quantity) {
@@ -76,14 +55,6 @@
                 header("Location: ". BASE_PATH ."/orders/thankyou");
             }
         }
-        function payout() {
-            // check if user not login -> redirect to login page
-
-            if (!isset($_SESSION['user']))
-                header('Location: '.BASE_PATH.'/users/login');
-
-        }
-
         function thankyou(){
 
         }
@@ -94,6 +65,18 @@
             $this->set('orders', $orders);
         }
         
+        function is_bought($user_id, $product_id) {
+            $this->Order->where('user_id', $user_id);
+            $this->Order->showHasMany();
+            $products = $this->Order->search();
+            foreach($products as $product) {
+                if ($product["Orders_product"][0]['Orders_product']['product_id'] == $product_id) {
+                    return true;
+                }
+            }
+            return False;
+        }
+
         function afterAction() {
         
         }
