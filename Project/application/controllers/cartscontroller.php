@@ -41,7 +41,8 @@
             
             $this->set('cart', $cart);
             if (count($_SESSION['cart']) == 0) {
-                echo '{}';
+                $json = "cart_empty";
+                echo json_encode($json);
             } else {
                 echo json_encode($cart);
             }
@@ -50,6 +51,18 @@
         function increaseItemQty($id) {
             $this->render = 0;
             error_reporting(0);
+            $product = performAction('products', 'findById', array($id));
+            $stock_qty = $product['0']['Product']['quantity'];
+            if ($_SESSION['cart'][$id] + 1 > $stock_qty) {
+                $json = "exceeding_stock";
+                echo json_encode($json);
+                return;
+            }
+            if ($_SESSION['cart'][$id] + 1 > 5) {
+                $json = "exceeding_max_item";
+                echo json_encode($json);
+                return;
+            }
             $_SESSION['cart'][$id] += 1;
             $cart = array();
             foreach ($_SESSION['cart'] as $id => $quantity) {
@@ -65,7 +78,9 @@
         function decreaseItemQty($id) {
             $this->render = 0;
             error_reporting(0);
-            $_SESSION['cart'][$id] -= 1;
+            if (isset($_SESSION['cart'][$id]) != 0) {
+                $_SESSION['cart'][$id] -= 1;
+            }
             if ($_SESSION['cart'][$id] == 0) {
                 unset($_SESSION['cart'][$id]);
             }
@@ -74,11 +89,12 @@
                 $item = performAction('products', 'findById', array($id));
                 $item['0']['buy_qty'] = $quantity; 
                 $item = json_encode($item['0']);
-                array_push($cart, $item);
+                array_push($cart, $item);  
             }
             $this->set('cart', $cart);
             if (count($_SESSION['cart']) == 0) {
-                echo '{}';
+                $json = "cart_empty";
+                echo json_encode($json);
             } else {
                 echo json_encode($cart);
             }

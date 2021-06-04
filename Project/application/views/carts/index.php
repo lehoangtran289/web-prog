@@ -15,7 +15,7 @@
         res = fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            //console.log(data);
             displayCart(data);
         });
     }
@@ -30,8 +30,17 @@
     }
 
     function displayCart(data) {
+        console.log(JSON.stringify(data));
         let html = '';
-        if (JSON.stringify(data) === '{}') {
+        if (JSON.stringify(data) == '\"exceeding_stock\"') {
+            alert("Not enough products in stock");
+            return;
+        }
+        if (JSON.stringify(data) == '"exceeding_max_item"') {
+            alert("You can only purchase up to 5 items of the same product");
+            return;
+        }
+        if (JSON.stringify(data) === '"cart_empty"') {
             html += 'Cart Empty';
         } else {
             str = JSON.stringify(data);
