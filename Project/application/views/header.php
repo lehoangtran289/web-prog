@@ -153,13 +153,13 @@
                 background: #f5f5f5;
                 outline: none;
                 border: none;
-                /*border-radius: 1.625rem;*/
+                border-radius: 5px;
                 padding: 0 3.5rem 0 1.5rem;
                 font-size: 1rem;
             }
             
             .search-input.active input {
-                /*border-radius: 1.625rem;*/
+                border-radius: 5px;
             }
             
             .search-input .autocom-box {
@@ -172,6 +172,7 @@
                 pointer-events: none;
                 max-height: 280px;
                 overflow-y: auto;
+                border-radius: 5px;
             }
             
             .search-input.active .autocom-box {
