@@ -65,7 +65,6 @@
                     echo "<script type='text/javascript'>alert('Purchase fail at create order, try again!');</script>";
                     return;
                 }
-                
                 foreach ($_SESSION['cart'] as $id => $qty){
                     $new_order_product = new Orders_product();
                     $res = $new_order_product->custom("INSERT INTO orders_products (order_id,product_id,product_qty) VALUES (".$order_id.",".$id.",".$qty.");");
@@ -77,7 +76,6 @@
                 header("Location: ". BASE_PATH ."/orders/thankyou");
             }
         }
-
         function payout() {
             // check if user not login -> redirect to login page
 
