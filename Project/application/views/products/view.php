@@ -170,35 +170,6 @@ foreach ($reviews as $review) {
 }
 ?>
 
-<form action="<?php echo BASE_PATH ?>/reviews/addReview" method='POST' onsubmit="return validateReview()">
-    <input type="hidden" id="idForReview" name="idForReview" value=<?php echo $product['Product']['id'] ?>>
-    <input required type="text" id="content" name="content" placeholder="Post your review here">
-    <br>
-    <input type="submit" value="Post review" name="postReview">
-    <br>
-    <input type="radio" name="rating" value='1'>
-    <input type="radio" name="rating" value='2'>
-    <input type="radio" name="rating" value='3'>
-    <input type="radio" name="rating" value='4'>
-    <input type="radio" name="rating" value='5'>
-</form>
-
-
-<form action="<?php echo BASE_PATH ?>/carts/addToCart" method='POST'>
-    <input type="hidden" id="id" name="id" value=<?php echo $product['Product']['id'] ?>>
-    <input type="submit" value="Buy">
-</form>
-
-<?php
-foreach ($reviews as $review) {
-    echo $review['User']['name'] . ': rating ' . $review['Review']['rating'] . ' stars';
-    echo '<br>';
-    echo $review['Review']['content'];
-    echo '<br>';
-}
-
-?>
-
 <form action="<?php echo BASE_PATH ?>/reviews/addReview" method='POST' onsubmit="return validateReview();">
     <input type="hidden" id="idForReview" name="idForReview" value=<?php echo $product['Product']['id'] ?>>
     <input required type="text" id="content" name="content" placeholder="Post your review here man">
