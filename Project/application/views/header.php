@@ -286,7 +286,7 @@
                 let webLink;
                 
                 inputBox.onkeyup = (e) => {
-                    let reg = new RegExp(/[^a-zA-Z0-9]/gi);
+                    let reg = new RegExp(/[^a-zA-Z0-9 ]/gi);
                     let searchKey = e.target.value.replace(reg, "");
                     if (searchKey.length < e.target.value.length) return;
                     if (searchKey) {
