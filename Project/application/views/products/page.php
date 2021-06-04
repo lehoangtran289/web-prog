@@ -108,56 +108,64 @@
         background: #ff523b;
         color: #fff;
     }
-
+    
     html {
         scroll-behavior: smooth;
     }
-    
-    #myBtn {
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 30px;
-        z-index: 99;
-        font-size: 18px;
-        border: none;
-        outline: none;
-        background-color: #ff523b;
-        color: white;
-        cursor: pointer;
-        padding: 15px;
-        border-radius: 4px;
-    }
-
-    #myBtn:hover {
-        background-color: #555;
-    }
-
 </style>
 
 <!-- JS code -->
 <script>
     // SAVE FORM STATE WHEN RELOAD
     window.onload = function () {
+        // orderBy input
         const orderBy = sessionStorage.getItem('orderBy');
         if (orderBy !== null) document.getElementById("orderBy").value = orderBy;
+        
+        // brands
+        const brands = JSON.parse(sessionStorage.getItem('brands'));
+        brands.forEach((item) => {
+            document.getElementById(item.id).checked = item.checked;
+        })
     }
     
     window.onbeforeunload = function () {
         sessionStorage.setItem("orderBy", document.getElementById("orderBy").value);
+        
+        // brands input
+        const brands = document.getElementsByName("brands[]");
+        let brandsData = [];
+        brands.forEach((item) => {
+            brandsData.push({id: item.id, checked: item.checked});
+        });
+        sessionStorage.setItem("brands", JSON.stringify(brandsData));
+        console.log(JSON.stringify(brandsData));
     }
     
-    // Paging event
+    // add filter when navigating between pages
     let processPaging = (url) => {
         console.log(document.getElementById("orderBy").value);
         let form = document.createElement("form");
         form.action = url;
         form.method = 'post';
+        
+        // orderBy Filter
         let orderByInput = document.createElement('input');
         orderByInput.type = 'hidden';
         orderByInput.name = 'orderBy';
         orderByInput.value = document.getElementById("orderBy").value;
         form.appendChild(orderByInput);
+        
+        // brands Filter
+        const brands = JSON.parse(sessionStorage.getItem('brands'));
+        brands.forEach((item) => {
+            let brand = document.createElement('input');
+            brand.type = 'hidden';
+            brand.name = 'brands[]';
+            brand.value = item.id;
+            form.appendChild(brand);
+        })
+        
         document.getElementById('hidden_form_container').appendChild(form);
         form.submit();
     }
@@ -181,14 +189,13 @@
         <form id="searchForm" method="POST" action="<?php
             if (!empty($name)) {
                 echo BASE_PATH . "/products/page/1/" . $name;
-            }
-            else echo BASE_PATH . "/products/page"
+            } else echo BASE_PATH . "/products/page"
         ?>">
             <!-- Search by brand name(s) -->
             <span>Brand: </span>
             <?php
                 foreach ($brands as $brand) {
-                    echo "<input type='checkbox' name='brands[]' value=" . $brand['Category']['id'] . ">";
+                    echo "<input id='" . $brand['Category']['id'] . "' type='checkbox' name='brands[]' value=" . $brand['Category']['id'] . ">";
                     echo "<label for=" . $brand['Category']['brand'] . ">" . $brand['Category']['brand'] . "</label>";
                 }
                 echo "<br><br>";
@@ -266,6 +273,28 @@
     showArrow();
 </script>
 
+<!-- SCROLL TO TOP BUTTON -->
+<style>
+    #myBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        z-index: 99;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: #ff523b;
+        color: white;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 4px;
+    }
+    
+    #myBtn:hover {
+        background-color: #555;
+    }
+</style>
 <button onclick="topFunction()" id="myBtn" title="Go to top">
     <img src="<?php echo BASE_PATH . "/public/icons/expand_less.png" ?>">
 </button>
@@ -273,7 +302,9 @@
     //Get the button
     var mybutton = document.getElementById("myBtn");
     
-    window.onscroll = function() {scrollFunction()};
+    window.onscroll = function () {
+        scrollFunction()
+    };
     
     function scrollFunction() {
         if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
