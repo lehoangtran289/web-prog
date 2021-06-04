@@ -133,7 +133,8 @@
         sessionStorage.setItem("orderBy", document.getElementById("orderBy").value);
         
         // brands input
-        const brands = document.getElementsByName("brands[]");
+        const brands = document.querySelectorAll(".brcb");
+        console.log(brands);
         let brandsData = [];
         brands.forEach((item) => {
             brandsData.push({id: item.id, checked: item.checked});
@@ -158,15 +159,19 @@
         
         // brands Filter
         const brands = JSON.parse(sessionStorage.getItem('brands'));
+        let i = 0;
         brands.forEach((item) => {
             let brand = document.createElement('input');
-            brand.type = 'hidden';
+            brand.type = 'checkbox';
             brand.name = 'brands[]';
+            brand.style.visibility = 'hidden';
+            brand.checked = item.checked;
             brand.value = item.id;
             form.appendChild(brand);
         })
         
         document.getElementById('hidden_form_container').appendChild(form);
+        console.log(form);
         form.submit();
     }
 </script>
@@ -195,7 +200,7 @@
             <span>Brand: </span>
             <?php
                 foreach ($brands as $brand) {
-                    echo "<input id='" . $brand['Category']['id'] . "' type='checkbox' name='brands[]' value=" . $brand['Category']['id'] . ">";
+                    echo "<input class=\"brcb\" id='" . $brand['Category']['id'] . "' type='checkbox' name='brands[]' value=" . $brand['Category']['id'] . ">";
                     echo "<label for=" . $brand['Category']['brand'] . ">" . $brand['Category']['brand'] . "</label>";
                 }
                 echo "<br><br>";
