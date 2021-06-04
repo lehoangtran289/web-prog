@@ -1,3 +1,23 @@
+<script>
+    function validateReview() {
+        let product_id= document.getElementById("idForReview").value;
+        let content = document.getElementById("content").value;
+        let ratings = document.getElementsById("rating");
+
+        if (!product_id || !content) {
+            allert('Review must not be empty!');
+            return false;
+        }
+
+        for (var i = 0, length = ratings.length; i < length; i++) {
+            if (ratings[i].checked) {
+                return true;
+            }
+        }
+        return false;
+    }
+</script>
+
 <div><h2><strong><?php echo $product['Product']['name'] ?></strong>
 </div>
 <div><h2>Price: $<?php echo $product['Product']['price'] ?></h2></div>
@@ -26,11 +46,11 @@
 
                 ?>
 
-<form action="<?php echo BASE_PATH?>/reviews/addReview" method= 'POST'>
+<form action="<?php echo BASE_PATH?>/reviews/addReview" method= 'POST' onsubmit="return validateReview()">
     <input type="hidden" id="idForReview" name="idForReview" value=<?php echo $product['Product']['id'] ?>>
     <input required type="text" id="content" name="content" placeholder="Post your review here man">
     <br>
-    <input type="submit" value="Post review">
+    <input type="submit" value="Post review" name="postReview">
     <br>
     <input type="radio" name="rating" value='1'>
     <input type="radio" name="rating" value='2'>
