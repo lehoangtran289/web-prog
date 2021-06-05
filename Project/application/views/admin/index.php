@@ -28,7 +28,7 @@
         let result = '';
         if (value === 'users') {
             result += "<form style=\"margin-left:30px\" action=\"<?php echo BASE_PATH . '/admin/users/add' ?>\"><input type=\"submit\" value=\"Add new User\"></input> </form>";
-            result += "<br><table class='index-table' border='1' style='width:100%'>";
+            result += "<br><table class='index-table table-details' border='1' style='width:100%'>";
             result += "<tr><th>Username</th> <th>Name</th> <th>Role</th> <th>Email</th> <th>Address</th> <th>Phone</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
@@ -47,7 +47,7 @@
             })
         } else if (value === 'products') {
             result += "<form style=\"margin-left:30px\" action=\"<?php echo BASE_PATH . '/admin/products/add' ?>\"><input type=\"submit\" value=\"Add new Product\"/> </form>";
-            result += "<br><table class='index-table' border='1' style='width:100%'>";
+            result += "<br><table class='index-table table-details' border='1' style='width:100%'>";
             result += "<tr><th>Name</th><th>Quantity</th><th>Category</th><th>OS</th><th>Chipset</th><th>Ram</th><th>Display</th><th>Resolution</th><th>Camera</th><th>Memory</th><th>Pin</th><th>Description</th><th>Price</th><th>CreateAt</th> <th>UpdateAt</th><th>Image</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
@@ -75,7 +75,7 @@
             })
         } else if (value === 'categories') {
             result += "<form style=\"margin-left:30px\" action=\"<?php echo BASE_PATH . '/admin/categories/add' ?>\"><input type=\"submit\" value=\"Add new Category\"/> </form>";
-            result += "<br><table class='index-table' border='1' style='width:100%'>";
+            result += "<br><table class='index-table table-details' border='1' style='width:100%'>";
             result += "<tr><th>Brand name</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
@@ -94,7 +94,7 @@
             })
         } else if (value === 'shipments') {
             result += "<form style=\"margin-left:30px\" action=\"<?php echo BASE_PATH . '/admin/shipments/add' ?>\"><input type=\"submit\" value=\"Add new Shipment method\"/> </form>";
-            result += "<br><table class='index-table' border='1' style='width:100%'>";
+            result += "<br><table class='index-table table-details' border='1' style='width:100%'>";
             result += "<tr><th>Method name</th> <th>Fee</th> <th>Description</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
@@ -117,7 +117,7 @@
             })
         } else if (value === 'payments') {
             result += "<form style=\"margin-left:30px\" action=\"<?php echo BASE_PATH . '/admin/payments/add' ?>\"><input type=\"submit\" value=\"Add new Payment method\"/> </form>";
-            result += "<br><table class='index-table' border='1' style='width:100%'>";
+            result += "<br><table class='index-table table-details' border='1' style='width:100%'>";
             result += "<tr><th>Method name</th> <th>Description</th> <th>CreateAt</th> <th>UpdateAt</th> <th>Action</th></tr>";
             // table content
             obj.forEach(o => {
@@ -170,6 +170,26 @@
         }
     }
 </script>
+
+<style>
+    .table-details {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .table-details th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #1e1e1eec;
+        color: white;
+    }
+    
+    .table-details th,
+    .table-details td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+</style>
 
 <form>
     <label style="margin-left: 30px">Choose an action</label>
