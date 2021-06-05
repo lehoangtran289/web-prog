@@ -305,7 +305,6 @@
         for (const rb of rbs) {
             if (rb.checked) {
                 selectedValue = rb.value;
-                alert(selectedValue);
                 return true;
             }
         }
