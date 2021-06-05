@@ -27,6 +27,7 @@
         }
 
         function removeFromCart($id) {
+            $id = (int)$id;
             $this->render = 0;
             error_reporting(0);
 
@@ -49,6 +50,7 @@
         }
 
         function increaseItemQty($id) {
+            $id = (int)$id;
             $this->render = 0;
             error_reporting(0);
             $product = performAction('products', 'findById', array($id));
@@ -76,6 +78,7 @@
         }
 
         function decreaseItemQty($id) {
+            $id = (int)$id;
             $this->render = 0;
             error_reporting(0);
             if (isset($_SESSION['cart'][$id]) != 0) {

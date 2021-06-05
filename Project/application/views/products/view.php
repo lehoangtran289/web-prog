@@ -8,12 +8,11 @@
             return false;
         }
 
-        const rbs = document.querySelectorAll('input[id="rating"]');
+        const rbs = document.querySelectorAll('input[name="rating"]');
             let selectedValue;
             for (const rb of rbs) {
                 if (rb.checked) {
                     selectedValue = rb.value;
-                    alert(selectedValue);
                     return true;
                 }
             }
@@ -56,9 +55,9 @@
     <br>
     <input type="submit" value="Post review" name="postReview">
     <br>
-    <input type="radio" id="rating" value='1'>
-    <input type="radio" id="rating" value='2'>
-    <input type="radio" id="rating" value='3'>
-    <input type="radio" id="rating" value='4'>
-    <input type="radio" id="rating" value='5'>
+    <input type="radio" name="rating" value='1'>
+    <input type="radio" name="rating" value='2'>
+    <input type="radio" name="rating" value='3'>
+    <input type="radio" name="rating" value='4'>
+    <input type="radio" name="rating" value='5'>
 </form>
