@@ -8,6 +8,8 @@
         }
         
         function view($id = null) {
+            if(!$id)
+                header('Location: '.BASE_PATH.'/public/404.php');
             $this->Product->id = $id;
             $this->Product->showHasOne();
             $this->Product->showHMABTM();
@@ -34,6 +36,7 @@
             }
             $this->Product->setPage($pageNumber);
             $this->Product->setLimit('10');
+            $this->Product->greater('quantity',0);
             
             $products = $this->Product->search();
             $totalPages = $this->Product->totalPages();
@@ -49,6 +52,7 @@
         {
             $this->Product->showHasOne();
             $this->Product->showHasMany();
+            $this->Product->greater('quantity', 0);
             $products = $this->Product->search();
             
             
@@ -59,11 +63,11 @@
             $this->set('categories', $categories);
             
             // Get list of featured products
-            $featuredProducts = $this->Product->custom('SELECT * FROM products ORDER BY price DESC LIMIT 3');
+            $featuredProducts = $this->Product->custom('SELECT * FROM products WHERE quantity>0 ORDER BY price DESC LIMIT 3');
             $this->set('featuredProducts', $featuredProducts);
             
             // Get list of latest products
-            $latestProducts = $this->Product->custom('SELECT * FROM products ORDER BY created_at DESC LIMIT 8');
+            $latestProducts = $this->Product->custom('SELECT * FROM products WHERE quantity>0 ORDER BY created_at DESC LIMIT 8');
             $this->set('latestProducts', $latestProducts);
         }
         

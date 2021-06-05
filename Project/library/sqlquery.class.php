@@ -53,7 +53,11 @@
         function where($field, $value) {
             $this->_extraConditions .= '`' . $this->_model . '`.`' . $field . '` = \'' . $this->_dbHandle->real_escape_string($value) . '\' AND ';
         }
-        
+
+        function greater($field, $value) {
+            $this->_extraConditions .= '`' . $this->_model . '`.`' . $field . '` > ' . $this->_dbHandle->real_escape_string($value) . ' AND ';
+        }
+
         function like($field, $value) {
             $this->_extraConditions .= '`' . $this->_model . '`.`' . $field . '` LIKE \'%' . $this->_dbHandle->real_escape_string($value) . '%\' AND ';
         }
@@ -219,7 +223,7 @@
                             
                             if (mysqli_num_rows($resultChild) > 0) {
                                 $numOfFieldsChild = mysqli_num_fields($resultChild);
-                                var_dump($queryChild);
+                                //var_dump($queryChild);
                                 for ($j = 0; $j < $numOfFieldsChild; ++$j) {
                                     array_push($tableChild, mysqli_field_table($resultChild, $j));
                                     array_push($fieldChild, mysqli_field_name($resultChild, $j));
@@ -377,7 +381,7 @@
             }
             $this->_result = mysqli_query($this->_dbHandle, $query);
             $this->clear();
-            echo $query;
+            //echo $query;
             if ($this->_result == 0) {
                 /** Error Generation **/
                 return -1;
