@@ -57,18 +57,19 @@
                     }
                     $product = performAction('products', 'findById', array($id));
                     $updated_product = new Product;
-                    $updated_product -> quantity = $product['0']['Product']['quantity'] - $qty;
-                    $updated_product -> id = $product['0']['Product']['id'];
-                    if ($updated_product -> save() == -1) {
-                        echo "<script type='text/javascript'>alert('Purchase fail at update product, try again!');</script>";
-                    }
+//                    $updated_product -> quantity = $product['0']['Product']['quantity'] - $qty;
+//                    $updated_product -> id = $product['0']['Product']['id'];
+//                    if ($updated_product -> save() == -1) {
+//                        echo "<script type='text/javascript'>alert('Purchase fail at update product, try again!');</script>";
+//                    }
+                    $updated_product->custom("UPDATE products SET `quantity` = '".($product['0']['Product']['quantity'] - $qty)."' WHERE `id`='".$id."'");
                 }
                 header("Location: ". BASE_PATH ."/orders/thankyou");
             }
         }
 
         function thankyou(){
-
+            unset($_SESSION['cart']);
         }
 
         function viewall() {

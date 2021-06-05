@@ -107,6 +107,12 @@
             $this->render = 0;
             error_reporting(0);
             $id = $_POST['id'];
+            $product = performAction('products','findById', array($id));
+            if((int)$product['0']['Product']['quantity'] <= $_SESSION['cart'][$id])
+            {
+                header("Location: " . BASE_PATH . "/carts/index");
+                return;
+            }
             if (isset($_SESSION['cart'])) {
                 if (isset($_SESSION['cart'][$id])) {
                     if ($_SESSION['cart'][$id] < 5) {
