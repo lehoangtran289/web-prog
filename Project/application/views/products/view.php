@@ -36,17 +36,6 @@
         margin-left: 10px;
     }
 
-    .small-img-row {
-        margin-top: 20px;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .small-img-col {
-        flex-basis: 22%;
-        cursor: pointer;
-    }
-
     .table-details {
         width: 100%;
         border-collapse: collapse;
@@ -68,33 +57,101 @@
     .table-details td:hover {
         background-color: #ddd;
     }
+
+    .review-box {
+        border-radius: 5px;
+        background-color: #f3f3f3;
+        padding: 20px;
+    }
+
+    .review-box input[type="text"] {
+        width: 100%;
+        padding: 15px 20px;
+        display: inline-block;
+        margin: 10px 0;
+        border: 0px;
+        box-sizing: border-box;
+        background-color: white;
+        color: black;
+        border-radius: 5px;
+    }
+
+    .review-box input[type="submit"] {
+        width: 100%;
+        background-color: #ff523b;
+        color: #fff;
+        padding: 14px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+    .review-box input[type="submit"]:hover {
+        background-color: #563434;
+    }
+
+    .user-review {
+        padding: 5px 0;
+    }
+
+    .row {
+        justify-content: left;
+    }
+
+    .rate {
+        display: flex;
+        justify-content: center;
+        flex-direction: row-reverse;
+        height: 46px;
+        padding: 0 10px;
+    }
+
+    .rate:not(:checked)>input {
+        position: absolute;
+        top: -9999px;
+    }
+
+    .rate:not(:checked)>label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 30px;
+        color: #ccc;
+    }
+
+    .rate:not(:checked)>label:before {
+        content: '★ ';
+    }
+
+    .rate>input:checked~label {
+        color: #ffc700;
+    }
+
+    .rate:not(:checked)>label:hover,
+    .rate:not(:checked)>label:hover~label {
+        color: #deb217;
+    }
+
+    .rate>input:checked+label:hover,
+    .rate>input:checked+label:hover~label,
+    .rate>input:checked~label:hover,
+    .rate>input:checked~label:hover~label,
+    .rate>label:hover~input:checked~label {
+        color: #c59b08;
+    }
 </style>
 
-<!-- Product details -->
 <form action="<?php echo BASE_PATH ?>/carts/addToCart" method='POST'>
 
-    <!-- Product details -->
+    <!-- Product description -->
     <div class="small-container single-product">
         <div class="row">
-
             <div class="col-2">
                 <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] ?>" width="100%" id="productImage">
-                <div class="small-img-row">
-                    <div class="small-img-col">
-                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] ?>" width="100%" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="<?php echo BASE_PATH . '/public/images/product-2.jpg' ?>" width="100%" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="<?php echo BASE_PATH . '/public/images/product-3.jpg' ?>" width="100%" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="<?php echo BASE_PATH . '/public/images/product-4.jpg' ?>" width="100%" class="small-img">
-                    </div>
-                </div>
             </div>
-
             <div class="col-2">
                 <div class="path">
                     <a href="<?php echo BASE_PATH . '/products/page' ?>">Products</a>
@@ -109,14 +166,18 @@
                     echo '<input type="submit" value="Add To Cart" class="button">';
                 ?>
                 <input type="hidden" id="id" name="id" value=<?php echo $product['Product']['id'] ?>>
-                <h3>Product Details <i class="fa fa-ident"></i></h3>
+                <input type="submit" value="Add To Cart" class="button">
+                <h3>Description <i class="fa fa-ident"></i></h3>
                 <p><?php echo $product['Product']['description'] ?></p>
             </div>
         </div>
     </div>
 
-    <!-- Table of information -->
+    <!-- Product information -->
     <div class="small-container">
+        <div class="row row-2">
+            <h2>Product Details</h2>
+        </div>
         <div class="row">
             <table class="table-details">
                 <tr>
@@ -143,50 +204,92 @@
         </div>
     </div>
 
-    <!-- Related products -->
+</form>
+
+<!-- Reviews -->
+<form action="<?php echo BASE_PATH ?>/reviews/addReview" method='POST' onsubmit="return validateReview();">
     <div class="small-container">
         <div class="row row-2">
-            <h2>Related Products</h2>
+            <h2>Reviews</h2>
         </div>
-        <div class="row">
-            <?php
-            for ($i = 0; $i < count($relatedProducts); $i++) {
-            ?>
-                <div class="col-4" id="relatedProducts">
-                    <a href="<?php echo BASE_PATH . '/products/view/' . $relatedProducts[$i]['Product']['id'] ?>">
-                        <img src="<?php echo BASE_PATH . '/public/images/' . $relatedProducts[$i]['Product']['image']; ?>">
-                    </a>
-                    <h4><?php echo $relatedProducts[$i]['Product']['name']; ?></h4>
-                    <p>$<?php echo $relatedProducts[$i]['Product']['price']; ?></p>
-                </div>
-            <?php
-            }
-            ?>
+        <div class="review-box" style="margin-bottom: 30px;">
+            <input type="hidden" id="idForReview" name="idForReview" value=<?php echo $product['Product']['id'] ?>>
+            <label>Your review</label>
+            <input required type="text" id="content" name="content" placeholder="Leave your review here">
+            <label>Rate this product</label>
+            <div class="rate" style="margin-bottom: 10px;">
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label for="star1" title="text">1 star</label>
+            </div>
+            <input type="submit" value="Post review" name="postReview">
+        </div>
+        <div class="review-box">
+            <div style="width: 100%;">
+                <label style="text-transform: uppercase;">Others's reviews</label>
+                <?php
+                foreach ($reviews as $review) {
+                    $star = $review['Review']['rating'];
+                ?>
+                    <div class="user-review">
+                        <div class="row">
+                            <h4><?php echo $review['User']['name'] ?></h4>
+                            <div class="user-rate-star" style="margin-left: 10px;">
+                                <?php
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= $star) {
+                                ?>
+                                        <span class="fa fa-star checked" style="color: #ff523b;"></span>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <span class="fa fa-star"></span>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p><?php echo $review['Review']['content'] ?></p>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
         </div>
     </div>
 </form>
 
-<?php
-foreach ($reviews as $review) {
-    echo $review['User']['name'] . ': rating ' . $review['Review']['rating'] . ' stars';
-    echo '<br>';
-    echo $review['Review']['content'];
-    echo '<br>';
-}
-?>
-
-<form action="<?php echo BASE_PATH ?>/reviews/addReview" method='POST' onsubmit="return validateReview();">
-    <input type="hidden" id="idForReview" name="idForReview" value=<?php echo $product['Product']['id'] ?>>
-    <input required type="text" id="content" name="content" placeholder="Post your review here man">
-    <br>
-    <input type="submit" value="Post review" name="postReview">
-    <br>
-    <input type="radio" id="rating" value='1'>
-    <input type="radio" id="rating" value='2'>
-    <input type="radio" id="rating" value='3'>
-    <input type="radio" id="rating" value='4'>
-    <input type="radio" id="rating" value='5'>
-</form>
+<!-- Related products -->
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Related Products</h2>
+    </div>
+    <div class="row">
+        <?php
+        for ($i = 0; $i < count($relatedProducts); $i++) {
+        ?>
+            <div class="col-4" id="relatedProducts">
+                <a href="<?php echo BASE_PATH . '/products/view/' . $relatedProducts[$i]['Product']['id'] ?>">
+                    <img src="<?php echo BASE_PATH . '/public/images/' . $relatedProducts[$i]['Product']['image']; ?>">
+                </a>
+                <h4><?php echo $relatedProducts[$i]['Product']['name']; ?></h4>
+                <p>$<?php echo $relatedProducts[$i]['Product']['price']; ?></p>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
+</div>
 
 <script>
     function validateReview() {
@@ -198,7 +301,7 @@ foreach ($reviews as $review) {
             return false;
         }
 
-        const rbs = document.querySelectorAll('input[id="rating"]');
+        const rbs = document.getElementsByName("rating");
         let selectedValue;
         for (const rb of rbs) {
             if (rb.checked) {
