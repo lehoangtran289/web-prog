@@ -29,6 +29,11 @@
             alert('Please choose payment method!');
             return false;
         }
+        let in_cart = <?php echo count($cart)?>;
+        if (in_cart == 0) {
+            alert("Cart Empty, can not create Order!");
+            return false;
+        }
         return true;
     }
 
