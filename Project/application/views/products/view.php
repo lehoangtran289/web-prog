@@ -236,7 +236,7 @@
                 <?php
                 foreach ($reviews as $review) {
                     $star = $review['Review']['rating'];
-                ?>
+                    ?>
                     <div class="user-review">
                         <div class="row">
                             <h4><?php echo $review['User']['name'] ?></h4>
@@ -244,13 +244,13 @@
                                 <?php
                                 for ($i = 1; $i <= 5; $i++) {
                                     if ($i <= $star) {
-                                ?>
+                                        ?>
                                         <span class="fa fa-star checked" style="color: #ff523b;"></span>
-                                    <?php
+                                        <?php
                                     } else {
-                                    ?>
+                                        ?>
                                         <span class="fa fa-star"></span>
-                                <?php
+                                        <?php
                                     }
                                 }
                                 ?>
@@ -260,7 +260,7 @@
                             <p><?php echo $review['Review']['content'] ?></p>
                         </div>
                     </div>
-                <?php
+                    <?php
                 }
                 ?>
             </div>
@@ -276,7 +276,7 @@
     <div class="row">
         <?php
         for ($i = 0; $i < count($relatedProducts); $i++) {
-        ?>
+            ?>
             <div class="col-4" id="relatedProducts">
                 <a href="<?php echo BASE_PATH . '/products/view/' . $relatedProducts[$i]['Product']['id'] ?>">
                     <img src="<?php echo BASE_PATH . '/public/images/' . $relatedProducts[$i]['Product']['image']; ?>">
@@ -284,7 +284,7 @@
                 <h4><?php echo $relatedProducts[$i]['Product']['name']; ?></h4>
                 <p>$<?php echo $relatedProducts[$i]['Product']['price']; ?></p>
             </div>
-        <?php
+            <?php
         }
         ?>
     </div>

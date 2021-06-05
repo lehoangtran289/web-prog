@@ -77,7 +77,7 @@ values ('Oppo 5x', '4', 'abcoppo', 1000, 'abc.png', 10),
 create table if not exists reviews
 (
     id         int primary key auto_increment,
-    user_id    int not null,
+    user_id    int not null unique ,
     product_id int not null,
     content    text,
     rating     int,

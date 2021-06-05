@@ -11,14 +11,18 @@
 
         function index() {
             $cart = array();
+            $total_bill = 0;
             foreach ($_SESSION['cart'] as $id => $quantity) {
                 $item = performAction('products', 'findById', array($id));
                 $item['0']['buy_qty'] = $quantity; 
+                $total_bill += (int)$item['0']['Product']['price'] * $quantity;
                 array_push($cart, $item['0']);
             }
             $shipment_methods = performAction('shipments', 'findAll', array());
             $payment_methods = performAction('payments', 'findAll', array());
             $user = performAction('users', 'findById', array($_SESSION['user']['id']));
+            //$this->set('total_bill', $total_bill);
+            $_SESSION['order']['total_bill'] = $total_bill;
             $this->set('cart', $cart);
             $this->set('shipment_methods', $shipment_methods);
             $this->set('payment_methods', $payment_methods);
@@ -38,7 +42,7 @@
                 $new_order -> shipment_id = $_POST['shipment-method'];
                 $new_order -> payment_id = $_POST['payment-method'];
                 $new_order -> date = date("Y-m-d h:i:s");
-                $new_order -> total_bill =  $_POST['total_bill'];
+                $new_order -> total_bill =  $_SESSION['order']['total_bill'];
                 $order_id = $new_order->saveAndGetId();
                 if ($order_id == -1) {
                     echo "<script type='text/javascript'>alert('Purchase fail at create order, try again!');</script>";
@@ -53,18 +57,19 @@
                     }
                     $product = performAction('products', 'findById', array($id));
                     $updated_product = new Product;
-                    $updated_product -> quantity = $product['0']['Product']['quantity'] - $qty;
-                    $updated_product -> id = $product['0']['Product']['id'];
-                    if ($updated_product -> save() == -1) {
-                        echo "<script type='text/javascript'>alert('Purchase fail at update product, try again!');</script>";
-                    }
+//                    $updated_product -> quantity = $product['0']['Product']['quantity'] - $qty;
+//                    $updated_product -> id = $product['0']['Product']['id'];
+//                    if ($updated_product -> save() == -1) {
+//                        echo "<script type='text/javascript'>alert('Purchase fail at update product, try again!');</script>";
+//                    }
+                    $updated_product->custom("UPDATE products SET `quantity` = '".($product['0']['Product']['quantity'] - $qty)."' WHERE `id`='".$id."'");
                 }
                 header("Location: ". BASE_PATH ."/orders/thankyou");
             }
         }
 
         function thankyou(){
-
+            unset($_SESSION['cart']);
         }
 
         function viewall() {

@@ -27,6 +27,7 @@
         }
 
         function removeFromCart($id) {
+            $id = (int)$id;
             $this->render = 0;
             error_reporting(0);
 
@@ -49,6 +50,7 @@
         }
 
         function increaseItemQty($id) {
+            $id = (int)$id;
             $this->render = 0;
             error_reporting(0);
             $product = performAction('products', 'findById', array($id));
@@ -76,6 +78,7 @@
         }
 
         function decreaseItemQty($id) {
+            $id = (int)$id;
             $this->render = 0;
             error_reporting(0);
             if (isset($_SESSION['cart'][$id]) != 0) {
@@ -104,9 +107,17 @@
             $this->render = 0;
             error_reporting(0);
             $id = $_POST['id'];
+            $product = performAction('products','findById', array($id));
+            if((int)$product['0']['Product']['quantity'] <= $_SESSION['cart'][$id])
+            {
+                header("Location: " . BASE_PATH . "/carts/index");
+                return;
+            }
             if (isset($_SESSION['cart'])) {
                 if (isset($_SESSION['cart'][$id])) {
-                    $_SESSION['cart'][$id] += 1;
+                    if ($_SESSION['cart'][$id] < 5) {
+                        $_SESSION['cart'][$id] += 1;
+                    }
                 } else {
                     $_SESSION['cart'][$id] = 1;
                 }

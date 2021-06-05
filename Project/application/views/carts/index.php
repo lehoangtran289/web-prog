@@ -87,7 +87,7 @@ Your Cart:
         echo '</table>';
         echo "<button><a href='" . BASE_PATH . "/orders/index'" . ">Buy</a></button>";
     } else {
-        echo 'Cart empty';
+        echo 'Cart Empty';
     }
 ?>
 </div>
