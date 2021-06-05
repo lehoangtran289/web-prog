@@ -166,7 +166,6 @@
                     echo '<input type="submit" value="Add To Cart" class="button">';
                 ?>
                 <input type="hidden" id="id" name="id" value=<?php echo $product['Product']['id'] ?>>
-                <input type="submit" value="Add To Cart" class="button">
                 <h3>Description <i class="fa fa-ident"></i></h3>
                 <p><?php echo $product['Product']['description'] ?></p>
             </div>
