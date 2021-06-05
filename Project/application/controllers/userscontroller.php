@@ -21,6 +21,10 @@
         }
 
         function login() {
+//            if(isset($_COOKIE['username']) && isset($_COOKIE['token']))
+//            {
+//
+//            }
             if($_SESSION['user']['role'] == 'user')
                 header('Location: '. BASE_PATH);
             else if($_SESSION['user']['role'] == 'admin')
@@ -28,7 +32,7 @@
             if (isset($_POST['username']) && isset($_POST['password'])) {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
-
+                $rememberMe = $_POST['rememberMe'];
                 if ($username == '' || $password == '') {
                     echo 'Please fill in all blank!';
                 } else {
@@ -42,6 +46,15 @@
                         $_SESSION['user']['username'] = $username;
                         $_SESSION['user']['role'] = $user['role'];
                         $_SESSION['user']['id'] = $user['id'];
+
+//                        //generate token for cookie
+//                        $randomVal = mt_rand();
+//                        $insertString = "INSERT INTO tokens(username, tokens) values ('".$username."','".$randomVal.")";
+//                        $this->User->custom($insertString);
+//                        setcookie("username", $username);
+//                        setcookie("token",$randomVal);
+
+                        // authorization
                         if($user['role'] == 'user')
                         {
                             echo '<script>localStorage.setItem("isLoggedIn", "user")</script>';

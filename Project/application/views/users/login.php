@@ -125,7 +125,7 @@ session_start();
                     <input required type="password" name="password">
                 </div>
                 <div class="remember">
-                    <label><input type="checkbox" name="remember"> Remember me</label>
+                    <label><input type="checkbox" name="rememberMe"> Remember me</label>
                 </div>
                 <div class="input-box">
                     <input type="submit" name="submit" value="Login">
