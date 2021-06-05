@@ -90,7 +90,7 @@ create table if not exists orders_products
     order_id    int not null,
     product_id  int not null,
     unique (order_id, product_id),
-    product_qty int not null
+    product_qty int not null check ( product_qty>=0 )
 );
 insert into orders_products(id, order_id, product_id, product_qty)
 values (1, 1, 1, 1);
