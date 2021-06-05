@@ -150,7 +150,7 @@
     <div class="small-container single-product">
         <div class="row">
             <div class="col-2">
-                <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] ?>" width="100%" id="productImage">
+                <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg' ?>" width="100%" id="productImage">
             </div>
             <div class="col-2">
                 <div class="path">
@@ -279,7 +279,7 @@
             ?>
             <div class="col-4" id="relatedProducts">
                 <a href="<?php echo BASE_PATH . '/products/view/' . $relatedProducts[$i]['Product']['id'] ?>">
-                    <img src="<?php echo BASE_PATH . '/public/images/' . $relatedProducts[$i]['Product']['image']; ?>">
+                    <img src="<?php echo BASE_PATH . '/public/images/' . $relatedProducts[$i]['Product']['image'] . '_0.jpg'; ?>">
                 </a>
                 <h4><?php echo $relatedProducts[$i]['Product']['name']; ?></h4>
                 <p>$<?php echo $relatedProducts[$i]['Product']['price']; ?></p>

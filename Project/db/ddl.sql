@@ -68,11 +68,11 @@ create table if not exists products
 );
 
 insert into products(name, category_id, description, price, image, quantity)
-values ('Oppo 5x', '4', 'abcoppo', 1000, 'abc.png', 10),
-       ('Samsung Galaxy X', '2', 'abcoppo', 1500, 'def.png', 3),
-       ('IPhone XS', '1', 'abcoppo', 2100, 'ghk.png', 5),
-       ('IPhone XS Max', '1', 'abcoppo', 2500, 'abc.png', 12),
-       ('Xiaomi ABC', '3', 'abcoppo', 1000, 'abc.png', 15);
+values ('Oppo 5x', '4', 'abcoppo', 1000, 'abc', 10),
+       ('Samsung Galaxy X', '2', 'abcoppo', 1500, 'def', 3),
+       ('IPhone XS', '1', 'abcoppo', 2100, 'ghk', 5),
+       ('IPhone XS Max', '1', 'abcoppo', 2500, 'abc', 12),
+       ('Xiaomi ABC', '3', 'abcoppo', 1000, 'abc', 15);
 
 create table if not exists reviews
 (

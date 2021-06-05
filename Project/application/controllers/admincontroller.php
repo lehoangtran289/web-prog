@@ -112,18 +112,22 @@
                 $add_product->pin = $_POST['pin'];
                 $add_product->description = $_POST['description'];
                 $add_product->price = $_POST['price'];
-                if ($_FILES['image']['error'] > 0 || $_FILES['image']['size'] > 5000000) {
-                    echo "<script type='text/javascript'>alert('Error uploading file!');</script>";
-                    return;
+                $add_product->image = $_POST['name'];
+                
+                // save multiple images
+                $total_count = count($_FILES['image']['name']);
+                for ($i = 0; $i < $total_count; $i++) {
+                    if ($_FILES['image']['size'][$i] > 1024 * 1024) {
+                        echo "<script type='text/javascript'>alert('File too large! Upload failed');</script>";
+                        return;
+                    }
+                    $tmpFile = $_FILES['image']['tmp_name'][$i];
+                    if ($tmpFile != "") {
+                        $newFilePath = PUBLIC_PATH . "/images/" . $add_product->image . "_" . $i . ".jpg";
+                        move_uploaded_file($tmpFile, $newFilePath);
+                    }
                 }
-                if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-                    $add_product->image = $_POST['name'] . ".jpg";
-                    $target_path = PUBLIC_PATH . "/images/" . $add_product->image;
-                    move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
-                } else {
-                    echo "<script type='text/javascript'>alert('Uploading file failed!');</script>";
-                    return;
-                }
+                
                 if ($add_product->save() == -1) {
                     echo "<script type='text/javascript'>alert('Add fail, try again!');</script>";
                     return;
@@ -154,14 +158,20 @@
                 $updated_product->description = $_POST['description'];
                 $updated_product->pin = $_POST['pin'];
                 $updated_product->price = $_POST['price'];
-                if ($_FILES['image']['size'] > 5000000) {
-                    echo "<script type='text/javascript'>alert('Error uploading filee!');</script>";
-                    return;
-                }
-                if ($_FILES['image']['error'] <= 0 && is_uploaded_file($_FILES['image']['tmp_name'])) {
-                    $updated_product->image = $_POST['name'] . ".jpg";
-                    $target_path = PUBLIC_PATH . "/images/" . $updated_product->image;
-                    move_uploaded_file($_FILES['image']['tmp_name'], $target_path);
+                $updated_product->image = $_POST['name'];
+                
+                // save multiple images
+                $total_count = count($_FILES['image']['name']);
+                for ($i = 0; $i < $total_count; $i++) {
+                    if ($_FILES['image']['size'][$i] > 1024 * 1024) {
+                        echo "<script type='text/javascript'>alert('File too large!! Upload failed');</script>";
+                        return;
+                    }
+                    $tmpFile = $_FILES['image']['tmp_name'][$i];
+                    if ($tmpFile != "") {
+                        $newFilePath = PUBLIC_PATH . "/images/" . $updated_product->image . "_" . $i . ".jpg";
+                        move_uploaded_file($tmpFile, $newFilePath);
+                    }
                 }
                 if ($updated_product->save() == -1) {
                     echo "<script type='text/javascript'>alert('Update fail, try again!');</script>";
@@ -172,6 +182,16 @@
         }
         
         function products_delete($id) {
+            // delete image
+            $product = performAction('products', 'findById', array($id));
+            $image = $product[0]['Product']['image'];
+            pprint($product);
+            $fileList = glob(PUBLIC_PATH . '/images/*');
+            foreach ($fileList as $filename) {
+                if (is_file($filename) && strpos($filename, $image . '_') == true) {
+                    unlink($filename);
+                }
+            }
             $deleted_product = new Product();
             $deleted_product->id = $id;
             $deleted_product->delete();

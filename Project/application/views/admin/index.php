@@ -61,7 +61,7 @@
                     } else result += "<td></td>";
                 }
                 // image
-                let image_path = "<?php echo BASE_PATH . '/public/images/'?>" + o['image'];
+                let image_path = "<?php echo BASE_PATH . '/public/images/'?>" + o['image'] + '_0.jpg';
                 result += o['image'] ? "<td><img src='" + image_path + "'></td>" : "<td></td>";
                 
                 // action

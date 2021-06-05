@@ -102,7 +102,7 @@
         ?>
             <div class="col-3" id="featuredProducts">
                 <a href="<?php echo BASE_PATH . '/products/view/' . $featuredProduct['Product']['id'] ?>">
-                    <img src="<?php echo BASE_PATH . '/public/images/' . $featuredProduct['Product']['image']; ?>">
+                    <img src="<?php echo BASE_PATH . '/public/images/' . $featuredProduct['Product']['image'] . '_0.jpg'; ?>">
                 </a>
                 <h4><?php echo $featuredProduct['Product']['name']; ?></h4>
                 <p>$<?php echo $featuredProduct['Product']['price']; ?></p>
@@ -120,7 +120,7 @@
         ?>
             <div class="col-4" id="latestProducts">
                 <a href="<?php echo BASE_PATH . '/products/view/' . $latestProducts[$i]['Product']['id'] ?>">
-                    <img src="<?php echo BASE_PATH . '/public/images/' . $latestProducts[$i]['Product']['image']; ?>">
+                    <img src="<?php echo BASE_PATH . '/public/images/' . $latestProducts[$i]['Product']['image'] . '_0.jpg'; ?>">
                 </a>
                 <h4><?php echo $latestProducts[$i]['Product']['name']; ?></h4>
                 <p>$<?php echo $latestProducts[$i]['Product']['price']; ?></p>

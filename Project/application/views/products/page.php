@@ -130,7 +130,7 @@
         <?php foreach ($products as $product) : ?>
             <div class="col-4" id="pagingProducts">
                 <a href="<?php echo BASE_PATH . '/products/view/' . $product['Product']['id'] ?>">
-                    <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image']; ?>">
+                    <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg'; ?>">
                 </a>
                 <h4><?php echo $product['Product']['name']; ?></h4>
                 <p>$<?php echo $product['Product']['price']; ?></p>

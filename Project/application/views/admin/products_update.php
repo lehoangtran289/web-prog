@@ -92,7 +92,7 @@
                     </tr>
                     <tr class="input-box">
                         <td>Image</td>
-                        <td><input type="file" name="image" accept=".png, .jpg, .jpeg"></td>
+                        <td><input type="file" name="image[]" multiple="multiple" accept=".png, .jpg, .jpeg"></td>
                     </tr>
                     <tr class="input-box">
                         <td>Description</td>
@@ -111,6 +111,6 @@
         </div>
     </div>
     <div class="image-box">
-        <?php echo "<img src=" . BASE_PATH . '/public/images/' . $product['Product']['image'] . ">"; ?>
+        <?php echo "<img src=" . BASE_PATH . '/public/images/' . $product['Product']['image'] . "_0.jpg" . ">"; ?>
     </div>
 </section>
