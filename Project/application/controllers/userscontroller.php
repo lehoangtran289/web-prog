@@ -58,7 +58,7 @@
                         if($user['role'] == 'user')
                         {
                             echo '<script>localStorage.setItem("isLoggedIn", "user")</script>';
-                            echo '<script>location.href = "' . BASE_PATH. '/orders/index' .'"</script>';
+                            echo '<script>location.href = "' . BASE_PATH. '/carts/index' .'"</script>';
                         }
                         else if($user['role'] == 'admin')
                         {

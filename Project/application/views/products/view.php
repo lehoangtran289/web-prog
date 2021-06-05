@@ -102,8 +102,13 @@
                 </div>
                 <h1><?php echo $product['Product']['name'] ?></h1>
                 <h4>$<?php echo $product['Product']['price'] ?></h4>
+                <?php
+                if($product['Product']['quantity'] == 0)
+                    echo '<h4 style="color: red">This product is out of stock!</h4>';
+                else
+                    echo '<input type="submit" value="Add To Cart" class="button">';
+                ?>
                 <input type="hidden" id="id" name="id" value=<?php echo $product['Product']['id'] ?>>
-                <input type="submit" value="Add To Cart" class="button">
                 <h3>Product Details <i class="fa fa-ident"></i></h3>
                 <p><?php echo $product['Product']['description'] ?></p>
             </div>
@@ -221,5 +226,9 @@ foreach ($reviews as $review) {
     }
     smallImage[3].onclick = function() {
         productImage.src = smallImage[3].src;
+    }
+    function hideOutOfStock()
+    {
+        document.getElementById('oufOfStock').style.display = 'none';
     }
 </script>
