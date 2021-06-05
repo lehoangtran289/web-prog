@@ -47,7 +47,7 @@
                 $this->Review->id = null;
                 $this->Review->user_id = $user_id;
                 $this->Review->product_id = $product_id;
-                $this->Review->content = $content;
+                $this->Review->content = htmlspecialchars($content, ENT_COMPAT);
                 $this->Review->rating = $rating;
                 if ($this->Review->save() == -1) {
                     echo "<script type='text/javascript'>alert('Post review failed!, try again!');";

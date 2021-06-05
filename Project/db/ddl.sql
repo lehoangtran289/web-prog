@@ -6,6 +6,7 @@ drop table if exists orders;
 drop table if exists shipments;
 drop table if exists payments;
 drop table if exists reviews;
+drop table if exists tokens;
 
 create table if not exists users
 (
@@ -89,7 +90,7 @@ create table if not exists orders_products
     order_id    int not null,
     product_id  int not null,
     unique (order_id, product_id),
-    product_qty int not null
+    product_qty int not null check ( product_qty>=0 )
 );
 insert into orders_products(id, order_id, product_id, product_qty)
 values (1, 1, 1, 1);
@@ -130,3 +131,12 @@ create table if not exists payments
 );
 insert into payments(method, description)
 values ('COD', 'Cash on delivery');
+
+create table tokens
+(
+ id int not null primary key auto_increment,
+ username varchar(20) not null ,
+ token text not null ,
+ is_expired int not null default 0,
+ expire_date datetime not null default current_timestamp on update current_timestamp
+)

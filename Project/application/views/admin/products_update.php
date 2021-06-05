@@ -23,84 +23,94 @@
     }
 </script>
 
-<br>
-<h2>Edit user <?php echo $product['Product']['name'] ?></h2>
-<?php echo "<img src=" . BASE_PATH . '/public/images/' . $product['Product']['image'] . ">"; ?>
-<form action="<?php echo BASE_PATH . '/admin/products/update/' . $product['Product']['id'] ?>" method="post"
-    onsubmit="return validateForm()" enctype="multipart/form-data">
-    <table>
-        <tr>
-            <td>Product name</td>
-            <td><input type="text" name="name" value="<?php echo $product['Product']['name']?>"></td>
-        </tr>
-        <tr>
-            <td>Quantity</td>
-            <td><input type="number" name="quantity" value="<?php echo $product['Product']['name']?>"></td>
-        </tr>
-        <tr>
-            <td>Category</td>
-            <td>
-                <select name="category">
-                    <?php
-                        foreach ($categories as $c) {
-                            if ($c['Category']['id'] == $product['Product']['category_id']) {
-                                echo "<option selected='selected' value=" . $c['Category']['id'] . ">";
-                            } else {
-                                echo "<option value=" . $c['Category']['id'] . ">";
-                            }
-                            echo $c['Category']['brand'];
-                            echo "</option>";
-                        }
-                    ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>OS</td>
-            <td><input type="text" name="OS" value="<?php echo $product['Product']['OS']?>"></td>
-        </tr>
-        <tr>
-            <td>Chipset</td>
-            <td><input type="text" name="chipset" value="<?php echo $product['Product']['chipset']?>"></td>
-        </tr>
-        <tr>
-            <td>Ram</td>
-            <td><input type="text" name="ram" value="<?php echo $product['Product']['ram']?>"></td>
-        </tr>
-        <tr>
-            <td>Display</td>
-            <td><input type="text" name="display" value="<?php echo $product['Product']['display']?>"></td>
-        </tr>
-        <tr>
-            <td>Resolution</td>
-            <td><input type="text" name="resolution" value="<?php echo $product['Product']['resolution']?>"></td>
-        </tr>
-        <tr>
-            <td>Camera</td>
-            <td><input type="text" name="camera" value="<?php echo $product['Product']['camera']?>"></td>
-        </tr>
-        <tr>
-            <td>Memory</td>
-            <td><input type="text" name="memory" value="<?php echo $product['Product']['memory']?>"></td>
-        </tr>
-        <tr>
-            <td>Pin</td>
-            <td><input type="text" name="pin" value="<?php echo $product['Product']['pin']?>"></td>
-        </tr>
-        <tr>
-            <td>Image</td>
-            <td><input type="file" name="image" accept=".png, .jpg, .jpeg"></td>
-        </tr>
-        <tr>
-            <td>Description</td>
-            <td><input type="text" name="description" value="<?php echo $product['Product']['description']?>"></td>
-        </tr>
-        <tr>
-            <td>Price</td>
-            <td><input type="number" name="price" value="<?php echo $product['Product']['price']?>"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="submit" value="Submit"></td>
-        </tr>
-    </table>
-</form>
+<section>
+    <div class="content-box">
+        <div class="form-box">
+            <br>
+            <h2>Edit product <?php echo $product['Product']['name'] ?></h2>
+            <form action="<?php echo BASE_PATH . '/admin/products/update/' . $product['Product']['id'] ?>" method="post"
+                  onsubmit="return validateForm()" enctype="multipart/form-data">
+                <table>
+                    <tr class="input-box">
+                        <td>Product name</td>
+                        <td><input type="text" name="name" value="<?php echo $product['Product']['name'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Quantity</td>
+                        <td><input type="number" name="quantity" value="<?php echo $product['Product']['name'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Category</td>
+                        <td>
+                            <select name="category">
+                                <?php
+                                    foreach ($categories as $c) {
+                                        if ($c['Category']['id'] == $product['Product']['category_id']) {
+                                            echo "<option selected='selected' value=" . $c['Category']['id'] . ">";
+                                        } else {
+                                            echo "<option value=" . $c['Category']['id'] . ">";
+                                        }
+                                        echo $c['Category']['brand'];
+                                        echo "</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>OS</td>
+                        <td><input type="text" name="OS" value="<?php echo $product['Product']['OS'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Chipset</td>
+                        <td><input type="text" name="chipset" value="<?php echo $product['Product']['chipset'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Ram</td>
+                        <td><input type="text" name="ram" value="<?php echo $product['Product']['ram'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Display</td>
+                        <td><input type="text" name="display" value="<?php echo $product['Product']['display'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Resolution</td>
+                        <td><input type="text" name="resolution"
+                                   value="<?php echo $product['Product']['resolution'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Camera</td>
+                        <td><input type="text" name="camera" value="<?php echo $product['Product']['camera'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Memory</td>
+                        <td><input type="text" name="memory" value="<?php echo $product['Product']['memory'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Pin</td>
+                        <td><input type="text" name="pin" value="<?php echo $product['Product']['pin'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Image</td>
+                        <td><input type="file" name="image" accept=".png, .jpg, .jpeg"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Description</td>
+                        <td><input type="text" name="description"
+                                   value="<?php echo $product['Product']['description'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td>Price</td>
+                        <td><input type="number" name="price" value="<?php echo $product['Product']['price'] ?>"></td>
+                    </tr>
+                    <tr class="input-box">
+                        <td><input type="submit" name="submit" value="Submit"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="image-box">
+        <?php echo "<img src=" . BASE_PATH . '/public/images/' . $product['Product']['image'] . ">"; ?>
+    </div>
+</section>

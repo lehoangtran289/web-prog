@@ -13,10 +13,11 @@
             $this->Product->showHMABTM();
             $this->Product->showHasMany();
             $product = $this->Product->search();
+            $relatedProducts = $this->Product->custom('SELECT * FROM products WHERE category_id = ' . $product['Product']['category_id'] . ' AND id != ' . $id);
             $reviews = performAction('reviews', 'findAll', array($id));
             $this->set('reviews', $reviews);
             $this->set('product', $product);
-            
+            $this->set('relatedProducts', $relatedProducts);
         }
         
         function page($pageNumber = 1, $name = '') {
@@ -58,7 +59,7 @@
             $this->set('categories', $categories);
             
             // Get list of featured products
-            $featuredProducts = $this->Product->custom('SELECT * FROM products ORDER BY price DESC LIMIT 4');
+            $featuredProducts = $this->Product->custom('SELECT * FROM products ORDER BY price DESC LIMIT 3');
             $this->set('featuredProducts', $featuredProducts);
             
             // Get list of latest products
