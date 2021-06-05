@@ -313,22 +313,6 @@
         return false;
     }
 
-    var productImage = document.getElementById("productImage");
-    var smallImage = document.getElementsByClassName("small-img");
-
-    // Change image when clicking on small images
-    smallImage[0].onclick = function() {
-        productImage.src = smallImage[0].src;
-    }
-    smallImage[1].onclick = function() {
-        productImage.src = smallImage[1].src;
-    }
-    smallImage[2].onclick = function() {
-        productImage.src = smallImage[2].src;
-    }
-    smallImage[3].onclick = function() {
-        productImage.src = smallImage[3].src;
-    }
     function hideOutOfStock()
     {
         document.getElementById('oufOfStock').style.display = 'none';
