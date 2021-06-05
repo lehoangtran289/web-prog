@@ -174,7 +174,7 @@
                 <tr>
                     <td>
                         <div class="cart-info">
-                            <img src="<?php echo BASE_PATH . '/public/images/' . $item['Product']['image'] ?>">
+                            <img src="<?php echo BASE_PATH . '/public/images/' . $item['Product']['image'] . '_0.jpg'?>">
                             <div>
                                 <p><?php echo $item['Product']['name'] ?></p>
                             </div>
