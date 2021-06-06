@@ -109,7 +109,8 @@
 
     .rate:not(:checked)>input {
         position: absolute;
-        top: -9999px;
+        /*top: -9999px;*/
+        display: none;
     }
 
     .rate:not(:checked)>label {
