@@ -8,7 +8,7 @@
         }
         
         function view($id = null) {
-            if(!$id || $id > (int)$this->Product->custom('SELECT COUNT(id) FROM products') || $id<=0)
+            if(!$id|| $id<=0)
                 header('Location: '.BASE_PATH.'/public/404.php');
             $this->Product->id = $id;
             $this->Product->showHasOne();

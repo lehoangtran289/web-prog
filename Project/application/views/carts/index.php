@@ -31,7 +31,7 @@
 
     function displayCart(data) {
         console.log(JSON.stringify(data));
-        let html = '';
+        let html = '<div class="row row-2"><h2>Your cart</h2></div>';
         if (JSON.stringify(data) == '\"exceeding_stock\"') {
             alert("Not enough products in stock");
             return;
@@ -41,28 +41,35 @@
             return;
         }
         if (JSON.stringify(data) === '"cart_empty"') {
-            html += 'Cart Empty';
+            html += '<h4 style="color: red;">Cart Empty</h4>';
         } else {
             str = JSON.stringify(data);
             products = JSON.parse(str);
-            html += "<table border='1'>";
+            total_bill = 0;
+            html += "<table><tr><th>Product</th><th>Price</th><th>Quantity</th><th>Subtotal</th><th></th></tr>";
             Array.prototype.forEach.call(products, product => {
                 info = JSON.stringify(product);
                 info = JSON.parse(info);
                 info = JSON.parse(info);
+                sub_total = info.Product.price * info.buy_qty;
+                total_bill += sub_total;
                 //console.log(typeof(info.Product));
-                let segment = '<tr><td>';
-                segment += info.Product.name + ", price is " + info.Product.price + "</td>";
-                segment += "<td><button type=\"button\" onclick=\"decreaseQty(" + info.Product.id + ")\">-</button></td>";
-                segment += "<td>" + info.buy_qty + "</td>";
-                segment += "<td><button type=\"button\" onclick=\"increaseQty(" + info.Product.id + ")\">+</button></td>";
-                segment += "<td><button type=\"button\" onclick=\"removeItem(" + info.Product.id + ")\">Remove</button></td></tr>";
+                let segment = '';
+                segment += "<tr><td><div class=\"cart-info\"><img src=\"<?php echo BASE_PATH . '/public/images/'?>"+  info.Product.image + "_0.jpg\">";
+                segment += "<div><p>" + info.Product.name + "</p></div></div></td>";
+                segment += "<td>$"+ info.Product.price+ "</td>";
+                segment += "<td><button type=\"button\" onclick=\"decreaseQty(" + info.Product.id + ")\">-</button> ";
+                segment += info.buy_qty;
+                segment += " <button type=\"button\" onclick=\"increaseQty(" + info.Product.id + ")\">+</button></td>";
+                segment += "<td>$"+ sub_total + "</td>";
+                segment += "<td><a href=\"\" onclick=\"removeItem(" + info.Product.id + ")\">Remove</a></td></tr>";
+
                 html += segment;
             });
-            html += "</table>";
-            html += "<button><a href=" + "<?php echo BASE_PATH . "/orders/index" ?>" + ">Buy</a></button>"
+            html += "</table><div class=\"row\" style=\"margin-top: 40px;\"><h2>Total</h2><p>$" + total_bill +"</p>";
+            html += "<a href=\"<?php echo BASE_PATH . '/orders/index'; ?> \" class=\"button\" style=\"margin-left: auto;\">Buy</a></div>";
         }
-        document.getElementById("table").innerHTML = html;
+        document.getElementsByClassName("small-container cart-page")[0].innerHTML = html;
     }
 </script>
 
