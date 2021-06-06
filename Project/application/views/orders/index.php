@@ -65,7 +65,7 @@ Choose Shipment Method
         $method_id = $method['Shipment']['id'];
         ?>
             <input type="radio" name="shipment-method" id="<?php echo $method['Shipment']['method']?>" value=<?php echo $method_id?>>
-            <label for="<?php echo $method['Shipment']['method']?>" ><?php echo $method['Shipment']['method']?></label>
+            <label for="<?php echo $method['Shipment']['method']?>" ><?php echo $method['Shipment']['method']."\nFee: ".$method['Shipment']['fee']?></label>
         <?php
     }
 ?>
