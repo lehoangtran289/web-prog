@@ -218,6 +218,4 @@
         echo '<h4 style="color: red;">Cart Empty</h4>';
     }
     ?>
-
-
 </div>
