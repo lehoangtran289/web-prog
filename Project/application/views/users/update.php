@@ -24,9 +24,10 @@
     }
 
     .content-box {
-        display: flex;
+        /*display: flex;*/
         width: 50%;
         height: 100%;
+        margin-top: 5%;
         justify-content: flex-start;
         align-items: center;
     }
