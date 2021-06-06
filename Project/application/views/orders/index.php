@@ -64,8 +64,8 @@ Choose Shipment Method
     foreach ($shipment_methods as $method) {
         $method_id = $method['Shipment']['id'];
         ?>
-            <input type="radio" name="shipment-method" id="shipment-.<?php echo $method_id?>" value=<?php echo $methdod_id?>>
-            <label for="shipment-.<?php echo $method_id?>"><?php echo $method['Shipment']['method']?></label>
+            <input type="radio" name="shipment-method" id="<?php echo $method['Shipment']['method']?>" value=<?php echo $method_id?>>
+            <label for="<?php echo $method['Shipment']['method']?>" ><?php echo $method['Shipment']['method']?></label>
         <?php
     }
 ?>
@@ -76,8 +76,8 @@ Choose Payment Method
     foreach ($payment_methods as $method) {
         $method_id = $method['Payment']['id'];
         ?>
-            <input type="radio" name="payment-method" id="payment-.<?php echo $method_id?>" value=<?php echo $methdod_id?>>
-            <label for="payment-.<?php echo $method_id?>"><?php echo $method['Payment']['method']?></label>
+            <input type="radio" name="payment-method" id="<?php echo $method['Payment']['method']?>" value=<?php echo $method_id?>>
+            <label for="<?php echo $method['Payment']['method']?>" ><?php echo $method['Payment']['method']?></label>
         <?php
         //<a href="<?php echo BASE_PATH /orders/confirmOrder">
     }

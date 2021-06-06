@@ -45,6 +45,7 @@
                 $new_order -> total_bill =  $_SESSION['order']['total_bill'];
                 $order_id = $new_order->saveAndGetId();
                 if ($order_id == -1) {
+                    echo $_POST['shipment-method'];
                     echo "<script type='text/javascript'>alert('Purchase fail at create order, try again!');</script>";
                     return;
                 }
