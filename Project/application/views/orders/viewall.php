@@ -105,7 +105,7 @@
     }
 </style>
 
-<div class="small-container order-page">
+<div style="margin-bottom: 10rem;" class="small-container order-page">
     <div class="row row-2">
         <h2>Order History</h2>
     </div>
@@ -151,6 +151,7 @@
                         <div id="myModal-<?php echo $order['Order']['id'] ?>" class="modal" name="modal">
                             <div class="modal-content">
                                 <span class="close" id="close-<?php echo $order['Order']['id'] ?>">&times;</span>
+                                <h3>Order detail</h3>
                                 <table>
                                     <tr>
                                         <th>#</th>
