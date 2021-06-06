@@ -62,10 +62,10 @@ Choose Shipment Method
 <br>
 <?php 
     foreach ($shipment_methods as $method) {
-        $methdod_id = $method['Shipment']['id'];
+        $method_id = $method['Shipment']['id'];
         ?>
-            <input type="radio" name="shipment-method" value=<?php echo $methdod_id?>>
-            <label for="pickup"><?php echo $method['Shipment']['method']?></label>
+            <input type="radio" name="shipment-method" id="shipment-.<?php echo $method_id?>" value=<?php echo $methdod_id?>>
+            <label for="shipment-.<?php echo $method_id?>"><?php echo $method['Shipment']['method']?></label>
         <?php
     }
 ?>
@@ -74,10 +74,10 @@ Choose Payment Method
 <br>
 <?php 
     foreach ($payment_methods as $method) {
-        $methdod_id = $method['Payment']['id'];
+        $method_id = $method['Payment']['id'];
         ?>
-            <input type="radio" name="payment-method" value=<?php echo $methdod_id?>>
-            <label for="pickup"><?php echo $method['Payment']['method']?></label>
+            <input type="radio" name="payment-method" id="payment-.<?php echo $method_id?>" value=<?php echo $methdod_id?>>
+            <label for="payment-.<?php echo $method_id?>"><?php echo $method['Payment']['method']?></label>
         <?php
         //<a href="<?php echo BASE_PATH /orders/confirmOrder">
     }
