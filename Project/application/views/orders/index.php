@@ -1,5 +1,14 @@
 <script type='text/javascript'>
 
+    var shipment_fee = 0;
+
+    function chargeFee(fee){
+        var total_bill = <?php echo $_SESSION['order']['total_bill']?>;
+        total_bill += fee;
+        html = "Total Bill:<br>$" + total_bill;
+        document.getElementsByClassName("total_bill_container")[0].innerHTML = html;
+    }
+
     function validatePurchase() {
         var shipment = 'None';
         var payment = 'None';
@@ -36,6 +45,8 @@
         }
         return true;
     }
+    
+
 
 </script>
 <form action="<?php echo BASE_PATH ?>/orders/confirmPurchase" method="POST" onsubmit="return validatePurchase()">
@@ -64,7 +75,7 @@ Choose Shipment Method
     foreach ($shipment_methods as $method) {
         $method_id = $method['Shipment']['id'];
         ?>
-            <input type="radio" name="shipment-method" id="<?php echo $method['Shipment']['method']?>" value=<?php echo $method_id?>>
+            <input type="radio" name="shipment-method" onchange="chargeFee(<?php echo $method['Shipment']['fee']?>)" id="<?php echo $method['Shipment']['method']?>" value=<?php echo $method_id?>>
             <label for="<?php echo $method['Shipment']['method']?>" ><?php echo $method['Shipment']['method']."\nFee: ".$method['Shipment']['fee']?></label>
         <?php
     }
@@ -93,6 +104,11 @@ Choose Payment Method
         <td><input required type="text" name="phone" value="<?php echo $user['phone']?>"></td>
     </tr>
 </table>
+<div class= "total_bill_container">
+    Total Bill:
+    <br>
+    <?php echo '$'.$_SESSION['order']['total_bill']?>
+</div>
 <input type="submit" name="confirmPurchase" value="Confirm Purchase">
 </form>
 <!--<button><a href="<!?php echo BASE_PATH?>/users/update">Your profile</a></button><br>
