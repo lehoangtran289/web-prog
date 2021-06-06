@@ -8,13 +8,13 @@
         }
         
         function view($id = null) {
-            if (!$id || $id <= 0)
-                header('Location: ' . BASE_PATH . '/public/404.php');
             $this->Product->id = $id;
             $this->Product->showHasOne();
             $this->Product->showHMABTM();
             $this->Product->showHasMany();
             $product = $this->Product->search();
+            if(!$product)
+                header('Location: ' . BASE_PATH . '/public/404.php');
             $relatedProducts = $this->Product->custom('SELECT * FROM products WHERE category_id = ' . $product['Product']['category_id'] . ' AND id != ' . $id);
             $reviews = performAction('reviews', 'findAll', array($id));
             $this->set('reviews', $reviews);
@@ -58,7 +58,7 @@
                 $this->set('name', $name);
             }
             $this->Product->setPage($pageNumber);
-            $this->Product->setLimit('10');
+            $this->Product->setLimit('12');
             $this->Product->greater('quantity', 0);
             
             $products = $this->Product->search();
