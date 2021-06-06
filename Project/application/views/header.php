@@ -225,12 +225,12 @@
                 <div class="search-input">
                     <a href="" target="_blank" hidden></a>
                     <input id="searchQueryInput" type="text" placeholder="Type to search.." value="">
-                    <div class="autocom-box">
-                        <!-- here list are inserted from javascript -->
-                    </div>
                     <button class="icon" id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
                         <span class="material-icons md-24">search</span>
                     </button>
+                    <div class="autocom-box">
+                        <!-- here list are inserted from javascript -->
+                    </div>
                 </div>
             </form>
             <nav class="nav-header">
