@@ -8,7 +8,7 @@
         }
         
         function view($id = null) {
-            if(!$id || $id > (int)$this->Product->custom('SELECT COUNT(id) FROM products'))
+            if(!$id || $id > (int)$this->Product->custom('SELECT COUNT(id) FROM products') || $id<=0)
                 header('Location: '.BASE_PATH.'/public/404.php');
             $this->Product->id = $id;
             $this->Product->showHasOne();
@@ -40,7 +40,7 @@
             
             $products = $this->Product->search();
             $totalPages = $this->Product->totalPages();
-            if($pageNumber > $totalPages)
+            if($pageNumber > $totalPages || $pageNumber <= 0)
                 header('Location: '.BASE_PATH.'/public/404.php');
             $categories = performAction('categories', 'findAll', array());
             $this->set('brands', $categories);
