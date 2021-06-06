@@ -208,6 +208,7 @@
             if (input) {
                 window.location.href = "<?php echo BASE_PATH . "/products/page/1/" ?>" + input;
             }
+            return false;
         }
     </script>
 </head>
@@ -220,18 +221,18 @@
                     <h2><em>J</em> Henlo Cheems</h2>
                 </a>
             </div>
-            <div class="wrapper">
+            <form class="wrapper" onsubmit="return processSearch();">
                 <div class="search-input">
                     <a href="" target="_blank" hidden></a>
                     <input id="searchQueryInput" type="text" placeholder="Type to search.." value="">
                     <div class="autocom-box">
                         <!-- here list are inserted from javascript -->
                     </div>
-                    <button class="icon" id="searchQuerySubmit" type="submit" name="searchQuerySubmit" onclick="processSearch()">
+                    <button class="icon" id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
                         <span class="material-icons md-24">search</span>
                     </button>
                 </div>
-            </div>
+            </form>
             <nav class="nav-header">
                 <ul>
                     <!-- Put something here -->
