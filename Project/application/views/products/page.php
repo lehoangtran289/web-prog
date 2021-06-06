@@ -27,9 +27,11 @@
 
         // brands
         const brands = JSON.parse(sessionStorage.getItem('brands'));
-        brands.forEach((item) => {
-            document.getElementById(item.id).checked = item.checked;
-        })
+        if (brands) {
+            brands.forEach((item) => {
+                document.getElementById(item.id).checked = item.checked;
+            })
+        }
     }
 
     window.onbeforeunload = function() {
@@ -64,17 +66,19 @@
         form.appendChild(orderByInput);
 
         // brands Filter
-        const brands = JSON.parse(sessionStorage.getItem('brands'));
-        let i = 0;
-        brands.forEach((item) => {
-            let brand = document.createElement('input');
-            brand.type = 'checkbox';
-            brand.name = 'brands[]';
-            brand.style.visibility = 'hidden';
-            brand.checked = item.checked;
-            brand.value = item.id;
-            form.appendChild(brand);
-        })
+        if (sessionStorage.getItem('brands')) {
+            const brands = JSON.parse(sessionStorage.getItem('brands'));
+            let i = 0;
+            brands.forEach((item) => {
+                let brand = document.createElement('input');
+                brand.type = 'checkbox';
+                brand.name = 'brands[]';
+                brand.style.visibility = 'hidden';
+                brand.checked = item.checked;
+                brand.value = item.id;
+                form.appendChild(brand);
+            });
+        }
 
         document.getElementById('hidden_form_container').appendChild(form);
         console.log(form);
