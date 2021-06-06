@@ -75,6 +75,8 @@
 
         function viewall() {
             $this->Order->where('user_id', $_SESSION['user']['id']);
+            $this->Order->showHMABTM();
+            $this->Order->showHasOne();
             $orders = $this->Order->search();
             $this->set('orders', $orders);
         }
