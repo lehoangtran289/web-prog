@@ -96,17 +96,6 @@
         align-items: center;
     }
 
-    .total-price {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .total-price table {
-        border-top: 3px solid #1e1e1eec;
-        width: 100%;
-        max-width: 300px;
-    }
-
     table {
         width: 100%;
         border-collapse: collapse;
