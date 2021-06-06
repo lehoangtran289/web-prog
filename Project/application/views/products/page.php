@@ -5,15 +5,76 @@
         margin-bottom: 80px;
     }
 
-    .row-2 select {
-        background: #f3f3f3;
-        border: 0px;
+    .select {
+        width: 100%;
+        border: 1px solid #1e1e1eec;
         padding: 10px;
-        border-radius: 20px;
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
-    .row-2 select:focus {
+    .select:focus {
         outline: none;
+    }
+
+    .button {
+        border-radius: 5px;
+        width: 100%;
+        padding: 10px 0;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .row {
+        align-items: stretch;
+    }
+
+    .filter {
+        flex-basis: 30%;
+        padding: 10px;
+        min-width: 200px;
+    }
+
+    .product-list {
+        padding: 10px;
+        flex-basis: 70%;
+        min-width: 200px;
+    }
+
+    .filter-box {
+        margin: 10px auto 0;
+        width: 100%;
+    }
+
+    .brand-checkbox-row {
+        margin: 8px auto 0;
+        display: flex;
+        align-items: center;
+    }
+
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        border: solid 1px #cccccc;
+        margin-right: 8px;
+        position: relative;
+    }
+
+    input[type="checkbox"]:checked:before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        background-color: #ff523b;
+        position: absolute;
+        top: 2px;
+        left: 2px;
     }
 </style>
 
@@ -85,6 +146,7 @@
         form.submit();
     }
 </script>
+
 <div id="hidden_form_container" style="display:none;"></div>
 
 <!-- Banner -->
@@ -97,79 +159,98 @@
 
 <!-- Products -->
 <div class="small-container">
-    <div class="row row-2">
-        <h2>All Products</h2>
-
-        <!--Product search-->
-        <form id="searchForm" method="POST" action="<?php
-                                                    if (!empty($name)) {
-                                                        echo BASE_PATH . "/products/page/1/" . $name;
-                                                    } else echo BASE_PATH . "/products/page"
-                                                    ?>">
-            <!-- Search by brand name(s) -->
-            <span>Brand: </span>
-            <?php
-            foreach ($brands as $brand) {
-                echo "<input class=\"brcb\" id='" . $brand['Category']['id'] . "' type='checkbox' name='brands[]' value=" . $brand['Category']['id'] . ">";
-                echo "<label for=" . $brand['Category']['brand'] . ">" . $brand['Category']['brand'] . "</label>";
-            }
-            echo "<br><br>";
-            ?>
-
-            <!-- Order by price -->
-            <select name="orderBy" id="orderBy">
-                <option value="low">Sort by price (low -> high)</option>
-                <option value="high">Sort by price (high -> low)</option>
-            </select>
-
-            <br><br>
-            <input type="submit" id="submit" value="Search" />
-        </form>
-    </div>
-
-    <!-- hoac them vao day -->
-
-    <!-- List of products -->
     <div class="row">
-        <?php foreach ($products as $product) : ?>
-            <div class="col-4" id="pagingProducts">
-                <a href="<?php echo BASE_PATH . '/products/view/' . $product['Product']['id'] ?>">
-                    <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg'; ?>">
-                </a>
-                <h4><?php echo $product['Product']['name']; ?></h4>
-                <p>$<?php echo $product['Product']['price']; ?></p>
+
+        <!-- Filters section -->
+        <div class="filter">
+            <h2 style="text-transform: uppercase; font-size: 22px;">Filters</h2>
+
+            <!-- Brand filter -->
+            <div class="filter-box">
+                <h4>Brands</h4>
+                <!--Product search-->
+                <form id="searchForm" method="POST" action="<?php
+                                                            if (!empty($name)) {
+                                                                echo BASE_PATH . "/products/page/1/" . $name;
+                                                            } else echo BASE_PATH . "/products/page"
+                                                            ?>">
+
+                    <?php
+                    foreach ($brands as $brand) {
+                    ?>
+                        <div class="brand-checkbox-row">
+                            <input class="brcb" id="<?php echo $brand['Category']['id'] ?>" type="checkbox" name="brands[]" value="<?php echo $brand['Category']['id'] ?>">
+                            <label for="<?php echo $brand['Category']['brand'] ?>" class="checkmark"> <?php echo $brand['Category']['brand'] ?> </label>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </form>
             </div>
-        <?php endforeach ?>
-    </div>
 
-    <!-- Page number -->
-    <div class="pagination">
-        <?php
-        echo '<script>localStorage.setItem("currentPage", "' . $currentPageNumber . '")</script>';
-        echo '<script>localStorage.setItem("totalPages", "' . $totalPages . '")</script>';
+            <!-- Sort filter -->
+            <div class="filter-box">
+                <h4>Sort</h4>
+                <!-- Order by price -->
+                <select name="orderBy" id="orderBy" class="select">
+                    <option value="low">Sort by price (low -> high)</option>
+                    <option value="high">Sort by price (high -> low)</option>
+                </select>
+            </div>
+            
+            <input type="submit" id="submit" value="Apply filter" class="button" />
+        </div>
 
-        $leftUrl = BASE_PATH . '/products/page/' . ($currentPageNumber - 1);
-        $midUrls = array();
-        for ($i = 1; $i <= $totalPages; $i++)
-            $midUrls[$i] = BASE_PATH . '/products/page/' . $i;
-        $rightUrl = BASE_PATH . '/products/page/' . ($currentPageNumber + 1);
+        <!-- Product section -->
+        <div class="product-list">
+            <div class="row">
+                <?php foreach ($products as $product) : ?>
+                    <div class="col-3" id="pagingProducts">
+                        <a href="<?php echo BASE_PATH . '/products/view/' . $product['Product']['id'] ?>">
+                            <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg'; ?>">
+                        </a>
+                        <h4><?php echo $product['Product']['name']; ?></h4>
+                        <p>$<?php echo $product['Product']['price']; ?></p>
+                    </div>
+                <?php endforeach ?>
+            </div>
+            <div class="row">
+                <!-- Page number -->
+                <div class="pagination">
+                    <?php
+                    echo '<script>localStorage.setItem("currentPage", "' . $currentPageNumber . '")</script>';
+                    echo '<script>localStorage.setItem("totalPages", "' . $totalPages . '")</script>';
 
-        if (!empty($name)) {
-            $leftUrl .= '/' . $name;
-            for ($i = 1; $i <= $totalPages; $i++)
-                $midUrls[$i] .= '/' . $name;
-            $rightUrl .= '/' . $name;
-        }
+                    $leftUrl = BASE_PATH . '/products/page/' . ($currentPageNumber - 1);
+                    $midUrls = array();
+                    for ($i = 1; $i <= $totalPages; $i++)
+                        $midUrls[$i] = BASE_PATH . '/products/page/' . $i;
+                    $rightUrl = BASE_PATH . '/products/page/' . ($currentPageNumber + 1);
 
-        echo "<a onclick=\"processPaging('" . $leftUrl . "')\" id=\"left\"><span>&laquo;</span></a>";
-        for ($i = 1; $i <= $totalPages; $i++)
-            echo "<a onclick=\"processPaging('" . $midUrls[$i] . "')\"><span>" . $i . "</span></a>";
-        echo "<a onclick=\"processPaging('" . $rightUrl . "')\" id=\"right\"><span>&raquo;</span></a>";
-        ?>
+                    if (!empty($name)) {
+                        $leftUrl .= '/' . $name;
+                        for ($i = 1; $i <= $totalPages; $i++)
+                            $midUrls[$i] .= '/' . $name;
+                        $rightUrl .= '/' . $name;
+                    }
+
+                    echo "<a onclick=\"processPaging('" . $leftUrl . "')\" id=\"left\"><span>&laquo;</span></a>";
+                    for ($i = 1; $i <= $totalPages; $i++)
+                        echo "<a onclick=\"processPaging('" . $midUrls[$i] . "')\"><span>" . $i . "</span></a>";
+                    echo "<a onclick=\"processPaging('" . $rightUrl . "')\" id=\"right\"><span>&raquo;</span></a>";
+                    ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<script>
+<!-- SCROLL TO TOP BUTTON -->
+<button onclick="topFunction()" id="myBtn" title="Go to top">
+    <img src="<?php echo BASE_PATH . "/public/icons/expand_less.png" ?>">
+</button>
+
+<script type="text/javascript">
     function showArrow() {
         var rightArrow = document.getElementById('right');
         var leftArrow = document.getElementById('left');
@@ -184,15 +265,8 @@
             leftArrow.style.display = 'inline';
         }
     }
-
     showArrow();
-</script>
 
-<!-- SCROLL TO TOP BUTTON -->
-<button onclick="topFunction()" id="myBtn" title="Go to top">
-    <img src="<?php echo BASE_PATH . "/public/icons/expand_less.png" ?>">
-</button>
-<script type="text/javascript">
     //Get the button
     var mybutton = document.getElementById("myBtn");
 

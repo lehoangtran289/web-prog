@@ -204,6 +204,7 @@ a {
 .col-3 h4,
 .col-4 h4 {
     text-align: center;
+    margin-top: 8px;
 }
 
 .col-3 p,
