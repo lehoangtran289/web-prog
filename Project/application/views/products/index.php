@@ -4,7 +4,7 @@
             url(<?php echo BASE_PATH . '/public/images/Banner.jpg' ?>);
     }
 
-    .categories {
+    .brands {
         margin: 70px 0;
     }
 
@@ -12,6 +12,15 @@
         margin: auto;
         padding-left: 50px;
         padding-right: 50px;
+    }
+
+    .offer {
+        background-image: url(<?php echo BASE_PATH . '/public/images/offer_iphone.jpg' ?>);
+        margin-bottom: 80px;
+        padding: 30px 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 </style>
 
@@ -42,7 +51,7 @@
 </script>
 
 <!-- Banner -->
-<div class="hero-image">
+<div class="hero-image" id="bannerHomePage">
     <div class="hero-text">
         <h4>Welcome to</h4>
         <h2>J Henlo Cheems Mobile Shop</h2>
@@ -51,7 +60,7 @@
 </div>
 
 <!-- Brands -->
-<div class="categories">
+<div class="brands">
     <div class="logo-container">
         <h2 class="title">Brands</h2>
         <div class="row">
@@ -88,6 +97,21 @@
                 <img src="<?php echo BASE_PATH . '/public/images/logo_lg.png' ?>">
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Offer -->
+<div class="hero-image" style="background-image: url(<?php echo BASE_PATH . '/public/images/Banner_offer.jpg' ?>); margin-bottom: 70px;">
+    <div class="hero-text">
+        <h4 style="color: #fff;">Exclusively Available on J Henlo Cheems Store</h4>
+        <h2 style="margin: 20px 0;">IPhone 12 Pro Max</h2>
+        <smal style="color: #fff;">
+            A14 Bionic - The only thing even close was our last chip.
+            <br>
+            LiDAR Scanner - AR at the speed of light.
+            <br>
+            Super fast wireless - Hello 5G!
+        </smal>
     </div>
 </div>
 

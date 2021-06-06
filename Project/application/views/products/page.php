@@ -15,7 +15,6 @@
     
     .row {
         align-items: stretch;
-        justify-content: left;
     }
     
     .filter-list {

@@ -13,40 +13,36 @@
     <title>J Henlo Cheems Shop</title>
 
     <style>
-        <?php include "style.css" ?>
-        
-        .navbar {
+        <?php include "style.css" ?>.navbar {
             display: flex;
             align-items: center;
             padding: 20px;
-            color: black;
         }
-        
+
         .header {
             width: 100%;
             margin: auto;
-            padding-left: 100px;
-            padding-right: 100px;
+            padding-left: 50px;
+            padding-right: 50px;
             background-color: #1e1e1eec;
         }
 
-        .nav-header {
-            margin-left: 100px;
+        .nav-header-menu {
             flex: 1;
             text-align: right;
         }
 
-        .nav-header ul {
+        .nav-header-menu ul {
             display: inline-block;
             list-style-type: none;
         }
 
-        .nav-header ul li {
+        .nav-header-menu ul li {
             display: inline-block;
             margin-right: 20px;
         }
 
-        .nav-header ul li a {
+        .nav-header-menu ul li a {
             text-transform: capitalize;
             font-size: 15px;
             font-weight: 500;
@@ -56,10 +52,8 @@
             margin-top: 5px;
         }
 
-        .nav-header ul li a:hover {
-            color: #fff;
-            padding-bottom: 25px;
-            border-bottom: 3px solid #f33f3f;
+        .nav-header-menu ul li a:hover {
+            color: #ff523b;
         }
 
         .name h2 {
@@ -181,6 +175,58 @@
             outline: none;
             cursor: pointer;
         }
+
+        .menu-icon {
+            width: 28px;
+            margin-left: 20px;
+            display: none;
+        }
+
+        @media only screen and (max-width: 800px) {
+            .hero-image {
+                z-index: 0;
+            }
+
+            .header {
+                position: relative;
+                z-index: 2;
+            }
+
+            .nav-header-menu ul {
+                position: absolute;
+                top: 90px;
+                left: 0;
+                background: #1e1e1eec;
+                width: 100%;
+                padding-bottom: 20px;
+                overflow: hidden;
+                transition: max-height 0.5s;
+            }
+
+            .nav-header-menu ul li {
+                display: block;
+                margin-right: 50px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .menu-icon {
+                display: block;
+                cursor: pointer;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .row {
+                text-align: center;
+            }
+
+            .col-2,
+            .col-3, 
+            .col-4 {
+                flex-basis: 100%;
+            }
+        }
     </style>
 
     <script type="text/javascript">
@@ -210,6 +256,18 @@
             }
             return false;
         }
+
+        var menuItems = document.getElementById("menuItems");
+        menuItems.style.maxHeight = "0px";
+
+        // Menu toggle when screen width is <= 800px
+        function menuToggle() {
+            if (menuItems.style.maxHeight == "0px") {
+                menuItems.style.maxHeight == "200px";
+            } else {
+                menuItems.style.maxHeight == "0px";
+            }
+        }
     </script>
 </head>
 
@@ -233,8 +291,8 @@
                     </div>
                 </div>
             </form>
-            <nav class="nav-header">
-                <ul>
+            <nav class="nav-header-menu">
+                <ul id="menuItems">
                     <!-- Put something here -->
                     <li id="admin"><a href="<?php echo BASE_PATH ?>/admin/index">Admin</a></li>
                     <li><a href="<?php echo BASE_PATH . '/products/page' ?>">Products</a></li>
@@ -246,7 +304,9 @@
             <a href="<?php echo BASE_PATH . '/carts/index' ?>">
                 <img src="<?php echo BASE_PATH ?>/icons/cart.png" width="30px" height="30px">
             </a>
+            <img src="<?php echo BASE_PATH ?>/icons/menu.png" class="menu-icon" onclick="menuToggle()">
         </div>
+
         <script>
             showButton()
         </script>
