@@ -51,6 +51,16 @@
                 document.getElementById(item.id).checked = item.checked;
             })
         }
+        
+        // price range
+        const priceRange = sessionStorage.getItem('priceRange');
+        if (priceRange !== null) {
+            document.getElementsByName("priceRange").forEach(i => {
+                if (i.value === priceRange) {
+                    i.checked = true;
+                }
+            })
+        }
     }
 
     window.onbeforeunload = function() {
@@ -60,7 +70,7 @@
         const brands = document.querySelectorAll(".brcb");
         console.log(brands);
         let brandsData = [];
-        brands.forEach((item) => {
+        brands.forEach(item => {
             brandsData.push({
                 id: item.id,
                 checked: item.checked
@@ -68,6 +78,14 @@
         });
         sessionStorage.setItem("brands", JSON.stringify(brandsData));
         console.log(JSON.stringify(brandsData));
+        
+        // priceRange input
+        const priceRange = document.getElementsByName('priceRange');
+        priceRange.forEach(item => {
+            if (item.checked) {
+                sessionStorage.setItem('priceRange', item.value);
+            }
+        })
     }
 
     // add filter when navigating between pages
@@ -97,6 +115,15 @@
                 brand.value = item.id;
                 form.appendChild(brand);
             });
+        }
+
+        // priceRange filter
+        if (sessionStorage.getItem('priceRange')) {
+            let priceRange = document.createElement('input');
+            priceRange.type = 'hidden';
+            priceRange.name = 'priceRange';
+            priceRange.value = sessionStorage.getItem('priceRange');
+            form.appendChild(priceRange);
         }
 
         document.getElementById('hidden_form_container').appendChild(form);
@@ -141,26 +168,25 @@
                     <?php
                     }
                     ?>
-
                 </div>
 
                 <!-- Price filter -->
                 <div class="filter-box">
                     <h4>Price</h4>
                     <div class="radio-row">
-                        <input type="radio" id="priceRange1" name="radio-group">
+                        <input type="radio" id="priceRange1" name="priceRange" value="priceRange1">
                         <label for="priceRange1">$0 - $500</label>
                     </div>
                     <div class="radio-row">
-                        <input type="radio" id="priceRange2" name="radio-group">
+                        <input type="radio" id="priceRange2" name="priceRange" value="priceRange2">
                         <label for="priceRange2">$500 - $1000</label>
                     </div>
                     <div class="radio-row">
-                        <input type="radio" id="priceRange3" name="radio-group">
+                        <input type="radio" id="priceRange3" name="priceRange" value="priceRange3">
                         <label for="priceRange3">$1000 - $2000</label>
                     </div>
                     <div class="radio-row">
-                        <input type="radio" id="priceRange4" name="radio-group">
+                        <input type="radio" id="priceRange4" name="priceRange" value="priceRange4">
                         <label for="priceRange4">> $2000</label>
                     </div>
                 </div>
@@ -181,44 +207,51 @@
 
         <!-- Product section -->
         <div class="product-list">
-            <div class="row">
-                <?php foreach ($products as $product) : ?>
-                    <div class="col-3" id="pagingProducts">
-                        <a href="<?php echo BASE_PATH . '/products/view/' . $product['Product']['id'] ?>">
-                            <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg'; ?>">
-                        </a>
-                        <h4><?php echo $product['Product']['name']; ?></h4>
-                        <p>$<?php echo $product['Product']['price']; ?></p>
+            <?php
+                if(isset($msg)) {
+                    echo "<h3 align='center'>" . $msg . "</h3>";
+                } else {?>
+                    <div class="row">
+                        <?php foreach ($products as $product) : ?>
+                            <div class="col-3" id="pagingProducts">
+                                <a href="<?php echo BASE_PATH . '/products/view/' . $product['Product']['id'] ?>">
+                                    <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg'; ?>">
+                                </a>
+                                <h4><?php echo $product['Product']['name']; ?></h4>
+                                <p>$<?php echo $product['Product']['price']; ?></p>
+                            </div>
+                        <?php endforeach ?>
                     </div>
-                <?php endforeach ?>
-            </div>
-            <div class="row">
-                <!-- Page number -->
-                <div class="pagination">
+                    <div class="row">
+                        <!-- Page number -->
+                        <div class="pagination">
+                            <?php
+                                echo '<script>localStorage.setItem("currentPage", "' . $currentPageNumber . '")</script>';
+                                echo '<script>localStorage.setItem("totalPages", "' . $totalPages . '")</script>';
+                
+                                $leftUrl = BASE_PATH . '/products/page/' . ($currentPageNumber - 1);
+                                $midUrls = array();
+                                for ($i = 1; $i <= $totalPages; $i++)
+                                    $midUrls[$i] = BASE_PATH . '/products/page/' . $i;
+                                $rightUrl = BASE_PATH . '/products/page/' . ($currentPageNumber + 1);
+                
+                                if (!empty($name)) {
+                                    $leftUrl .= '/' . $name;
+                                    for ($i = 1; $i <= $totalPages; $i++)
+                                        $midUrls[$i] .= '/' . $name;
+                                    $rightUrl .= '/' . $name;
+                                }
+                
+                                echo "<a onclick=\"processPaging('" . $leftUrl . "')\" id=\"left\"><span>&laquo;</span></a>";
+                                for ($i = 1; $i <= $totalPages; $i++)
+                                    echo "<a onclick=\"processPaging('" . $midUrls[$i] . "')\"><span>" . $i . "</span></a>";
+                                echo "<a onclick=\"processPaging('" . $rightUrl . "')\" id=\"right\"><span>&raquo;</span></a>";
+                            ?>
+                        </div>
+                    </div>
                     <?php
-                    echo '<script>localStorage.setItem("currentPage", "' . $currentPageNumber . '")</script>';
-                    echo '<script>localStorage.setItem("totalPages", "' . $totalPages . '")</script>';
-
-                    $leftUrl = BASE_PATH . '/products/page/' . ($currentPageNumber - 1);
-                    $midUrls = array();
-                    for ($i = 1; $i <= $totalPages; $i++)
-                        $midUrls[$i] = BASE_PATH . '/products/page/' . $i;
-                    $rightUrl = BASE_PATH . '/products/page/' . ($currentPageNumber + 1);
-
-                    if (!empty($name)) {
-                        $leftUrl .= '/' . $name;
-                        for ($i = 1; $i <= $totalPages; $i++)
-                            $midUrls[$i] .= '/' . $name;
-                        $rightUrl .= '/' . $name;
-                    }
-
-                    echo "<a onclick=\"processPaging('" . $leftUrl . "')\" id=\"left\"><span>&laquo;</span></a>";
-                    for ($i = 1; $i <= $totalPages; $i++)
-                        echo "<a onclick=\"processPaging('" . $midUrls[$i] . "')\"><span>" . $i . "</span></a>";
-                    echo "<a onclick=\"processPaging('" . $rightUrl . "')\" id=\"right\"><span>&raquo;</span></a>";
-                    ?>
-                </div>
-            </div>
+                }
+            ?>
         </div>
     </div>
 </div>

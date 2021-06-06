@@ -8,8 +8,8 @@
         }
         
         function view($id = null) {
-            if(!$id|| $id<=0)
-                header('Location: '.BASE_PATH.'/public/404.php');
+            if (!$id || $id <= 0)
+                header('Location: ' . BASE_PATH . '/public/404.php');
             $this->Product->id = $id;
             $this->Product->showHasOne();
             $this->Product->showHMABTM();
@@ -23,6 +23,7 @@
         }
         
         function page($pageNumber = 1, $name = '') {
+            // handle filters
             if (isset($_POST['orderBy'])) {
                 if ($_POST['orderBy'] == 'low') $this->Product->orderBy('price', 'ASC');
                 else $this->Product->orderBy('price', 'DESC');
@@ -30,18 +31,42 @@
             if (isset($_POST['brands'])) {
                 $this->Product->in('category_id', $_POST['brands']);
             }
+            if (isset($_POST['priceRange'])) {
+                $priceRange = $_POST['priceRange'];
+                switch ($priceRange) {
+                    case 'priceRange1':
+                        $this->Product->greaterOrEqual('price', 0);
+                        $this->Product->lowerOrEqual('price', 500);
+                        break;
+                    case 'priceRange2':
+                        $this->Product->greaterOrEqual('price', 500);
+                        $this->Product->lowerOrEqual('price', 1000);
+                        break;
+                    case 'priceRange3':
+                        $this->Product->greaterOrEqual('price', 1000);
+                        $this->Product->lowerOrEqual('price', 2000);
+                        break;
+                    case 'priceRange4':
+                        $this->Product->greaterOrEqual('price', 2000);
+                        break;
+                }
+            }
+            
+            // handle header search
             if ($name != '' || !ctype_space($name)) {
                 $this->Product->like('name', $name);
                 $this->set('name', $name);
             }
             $this->Product->setPage($pageNumber);
             $this->Product->setLimit('10');
-            $this->Product->greater('quantity',0);
+            $this->Product->greater('quantity', 0);
             
             $products = $this->Product->search();
             $totalPages = $this->Product->totalPages();
-            if($pageNumber > $totalPages || $pageNumber <= 0)
-                header('Location: '.BASE_PATH.'/public/404.php');
+            if ($pageNumber > $totalPages || $pageNumber <= 0) {
+//                header('Location: ' . BASE_PATH . '/public/404.php');
+                $this->set('msg', "No products found");
+            }
             $categories = performAction('categories', 'findAll', array());
             $this->set('brands', $categories);
             

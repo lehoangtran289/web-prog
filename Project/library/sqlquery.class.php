@@ -57,6 +57,18 @@
         function greater($field, $value) {
             $this->_extraConditions .= '`' . $this->_model . '`.`' . $field . '` > ' . $this->_dbHandle->real_escape_string($value) . ' AND ';
         }
+    
+        function lower($field, $value) {
+            $this->_extraConditions .= '`' . $this->_model . '`.`' . $field . '` < ' . $this->_dbHandle->real_escape_string($value) . ' AND ';
+        }
+    
+        function greaterOrEqual($field, $value) {
+            $this->_extraConditions .= '`' . $this->_model . '`.`' . $field . '` >= ' . $this->_dbHandle->real_escape_string($value) . ' AND ';
+        }
+    
+        function lowerOrEqual($field, $value) {
+            $this->_extraConditions .= '`' . $this->_model . '`.`' . $field . '` <= ' . $this->_dbHandle->real_escape_string($value) . ' AND ';
+        }
 
         function like($field, $value) {
             $this->_extraConditions .= '`' . $this->_model . '`.`' . $field . '` LIKE \'%' . $this->_dbHandle->real_escape_string($value) . '%\' AND ';
