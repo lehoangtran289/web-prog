@@ -20,6 +20,49 @@ a {
 }
 
 
+/* Remove default check box */
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+/* Custom checkbox */
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border: solid 1px #cccccc;
+    margin-right: 8px;
+    position: relative;
+}
+
+input[type="checkbox"]:checked:before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    background-color: #ff523b;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+
+select {
+    width: 100%;
+    border: 1px solid #1e1e1eec;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+select:focus {
+    outline: none;
+}
+
+
 /****************************************/
 
 
@@ -228,6 +271,12 @@ a {
 .col-4 img,
 .col-5 img {
     width: 100%;
+}
+
+.checkbox-row {
+    margin: 8px auto 0;
+    display: flex;
+    align-items: center;
 }
 
 
