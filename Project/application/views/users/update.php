@@ -1,8 +1,9 @@
 <style>
     section {
         position: relative;
+        margin-bottom: 2rem;
         width: 100%;
-        height: 80vh;
+        height: auto;
         display: flex;
     }
 
@@ -10,7 +11,7 @@
         position: relative;
         display: flex;
         width: 50%;
-        height: 100%;
+        /*height: 100%;*/
         align-items: center;
         justify-content: flex-end;
     }
