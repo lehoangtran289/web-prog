@@ -1,10 +1,10 @@
 <style>
     .hero-image {
         background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url(<?php echo BASE_PATH . '/public/images/Banner_products.jpg' ?>);
+        url(<?php echo BASE_PATH . '/public/images/Banner_products.jpg' ?>);
         margin-bottom: 80px;
     }
-
+    
     .select {
         width: 100%;
         border: 1px solid #1e1e1eec;
@@ -13,11 +13,11 @@
         margin-top: 10px;
         margin-bottom: 10px;
     }
-
+    
     .select:focus {
         outline: none;
     }
-
+    
     .button {
         border-radius: 5px;
         width: 100%;
@@ -25,40 +25,40 @@
         text-transform: uppercase;
         font-weight: 700;
     }
-
+    
     .row {
         align-items: stretch;
     }
-
+    
     .filter {
         flex-basis: 30%;
         padding: 10px;
         min-width: 200px;
     }
-
+    
     .product-list {
         padding: 10px;
         flex-basis: 70%;
         min-width: 200px;
     }
-
+    
     .filter-box {
         margin: 10px auto 0;
         width: 100%;
     }
-
+    
     .brand-checkbox-row {
         margin: 8px auto 0;
         display: flex;
         align-items: center;
     }
-
+    
     input[type="checkbox"] {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
     }
-
+    
     input[type="checkbox"] {
         width: 20px;
         height: 20px;
@@ -66,7 +66,7 @@
         margin-right: 8px;
         position: relative;
     }
-
+    
     input[type="checkbox"]:checked:before {
         content: "";
         width: 14px;
@@ -81,11 +81,11 @@
 <!-- JS code -->
 <script>
     // SAVE FORM STATE WHEN RELOAD
-    window.onload = function() {
+    window.onload = function () {
         // orderBy input
         const orderBy = sessionStorage.getItem('orderBy');
         if (orderBy !== null) document.getElementById("orderBy").value = orderBy;
-
+        
         // brands
         const brands = JSON.parse(sessionStorage.getItem('brands'));
         if (brands) {
@@ -94,10 +94,10 @@
             })
         }
     }
-
-    window.onbeforeunload = function() {
+    
+    window.onbeforeunload = function () {
         sessionStorage.setItem("orderBy", document.getElementById("orderBy").value);
-
+        
         // brands input
         const brands = document.querySelectorAll(".brcb");
         console.log(brands);
@@ -111,21 +111,21 @@
         sessionStorage.setItem("brands", JSON.stringify(brandsData));
         console.log(JSON.stringify(brandsData));
     }
-
+    
     // add filter when navigating between pages
     let processPaging = (url) => {
         console.log(document.getElementById("orderBy").value);
         let form = document.createElement("form");
         form.action = url;
         form.method = 'post';
-
+        
         // orderBy Filter
         let orderByInput = document.createElement('input');
         orderByInput.type = 'hidden';
         orderByInput.name = 'orderBy';
         orderByInput.value = document.getElementById("orderBy").value;
         form.appendChild(orderByInput);
-
+        
         // brands Filter
         if (sessionStorage.getItem('brands')) {
             const brands = JSON.parse(sessionStorage.getItem('brands'));
@@ -140,7 +140,7 @@
                 form.appendChild(brand);
             });
         }
-
+        
         document.getElementById('hidden_form_container').appendChild(form);
         console.log(form);
         form.submit();
@@ -160,47 +160,48 @@
 <!-- Products -->
 <div class="small-container">
     <div class="row">
-
+        
         <!-- Filters section -->
         <div class="filter">
             <h2 style="text-transform: uppercase; font-size: 22px;">Filters</h2>
-
-            <!-- Brand filter -->
-            <div class="filter-box">
-                <h4>Brands</h4>
-                <!--Product search-->
-                <form id="searchForm" method="POST" action="<?php
-                                                            if (!empty($name)) {
-                                                                echo BASE_PATH . "/products/page/1/" . $name;
-                                                            } else echo BASE_PATH . "/products/page"
-                                                            ?>">
-
+            <form id="searchForm" method="POST" action="<?php
+                if (!empty($name)) {
+                    echo BASE_PATH . "/products/page/1/" . $name;
+                } else echo BASE_PATH . "/products/page"
+            ?>">
+                <!-- Brand filter -->
+                <div class="filter-box">
+                    <h4>Brands</h4>
+                    <!--Product search-->
                     <?php
-                    foreach ($brands as $brand) {
+                        foreach ($brands as $brand) {
+                            ?>
+                            <div class="brand-checkbox-row">
+                                <input class="brcb" id="<?php echo $brand['Category']['id'] ?>" type="checkbox"
+                                       name="brands[]" value="<?php echo $brand['Category']['id'] ?>">
+                                <label for="<?php echo $brand['Category']['brand'] ?>"
+                                       class="checkmark"> <?php echo $brand['Category']['brand'] ?> </label>
+                            </div>
+                            <?php
+                        }
                     ?>
-                        <div class="brand-checkbox-row">
-                            <input class="brcb" id="<?php echo $brand['Category']['id'] ?>" type="checkbox" name="brands[]" value="<?php echo $brand['Category']['id'] ?>">
-                            <label for="<?php echo $brand['Category']['brand'] ?>" class="checkmark"> <?php echo $brand['Category']['brand'] ?> </label>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                </form>
-            </div>
-
-            <!-- Sort filter -->
-            <div class="filter-box">
-                <h4>Sort</h4>
-                <!-- Order by price -->
-                <select name="orderBy" id="orderBy" class="select">
-                    <option value="low">Sort by price (low -> high)</option>
-                    <option value="high">Sort by price (high -> low)</option>
-                </select>
-            </div>
-            
-            <input type="submit" id="submit" value="Apply filter" class="button" />
+                
+                </div>
+                
+                <!-- Sort filter -->
+                <div class="filter-box">
+                    <h4>Sort</h4>
+                    <!-- Order by price -->
+                    <select name="orderBy" id="orderBy" class="select">
+                        <option value="low">Sort by price (low -> high)</option>
+                        <option value="high">Sort by price (high -> low)</option>
+                    </select>
+                </div>
+                
+                <input type="submit" id="submit" value="Apply filter" class="button"/>
+            </form>
         </div>
-
+        
         <!-- Product section -->
         <div class="product-list">
             <div class="row">
@@ -218,26 +219,26 @@
                 <!-- Page number -->
                 <div class="pagination">
                     <?php
-                    echo '<script>localStorage.setItem("currentPage", "' . $currentPageNumber . '")</script>';
-                    echo '<script>localStorage.setItem("totalPages", "' . $totalPages . '")</script>';
-
-                    $leftUrl = BASE_PATH . '/products/page/' . ($currentPageNumber - 1);
-                    $midUrls = array();
-                    for ($i = 1; $i <= $totalPages; $i++)
-                        $midUrls[$i] = BASE_PATH . '/products/page/' . $i;
-                    $rightUrl = BASE_PATH . '/products/page/' . ($currentPageNumber + 1);
-
-                    if (!empty($name)) {
-                        $leftUrl .= '/' . $name;
+                        echo '<script>localStorage.setItem("currentPage", "' . $currentPageNumber . '")</script>';
+                        echo '<script>localStorage.setItem("totalPages", "' . $totalPages . '")</script>';
+                        
+                        $leftUrl = BASE_PATH . '/products/page/' . ($currentPageNumber - 1);
+                        $midUrls = array();
                         for ($i = 1; $i <= $totalPages; $i++)
-                            $midUrls[$i] .= '/' . $name;
-                        $rightUrl .= '/' . $name;
-                    }
-
-                    echo "<a onclick=\"processPaging('" . $leftUrl . "')\" id=\"left\"><span>&laquo;</span></a>";
-                    for ($i = 1; $i <= $totalPages; $i++)
-                        echo "<a onclick=\"processPaging('" . $midUrls[$i] . "')\"><span>" . $i . "</span></a>";
-                    echo "<a onclick=\"processPaging('" . $rightUrl . "')\" id=\"right\"><span>&raquo;</span></a>";
+                            $midUrls[$i] = BASE_PATH . '/products/page/' . $i;
+                        $rightUrl = BASE_PATH . '/products/page/' . ($currentPageNumber + 1);
+                        
+                        if (!empty($name)) {
+                            $leftUrl .= '/' . $name;
+                            for ($i = 1; $i <= $totalPages; $i++)
+                                $midUrls[$i] .= '/' . $name;
+                            $rightUrl .= '/' . $name;
+                        }
+                        
+                        echo "<a onclick=\"processPaging('" . $leftUrl . "')\" id=\"left\"><span>&laquo;</span></a>";
+                        for ($i = 1; $i <= $totalPages; $i++)
+                            echo "<a onclick=\"processPaging('" . $midUrls[$i] . "')\"><span>" . $i . "</span></a>";
+                        echo "<a onclick=\"processPaging('" . $rightUrl . "')\" id=\"right\"><span>&raquo;</span></a>";
                     ?>
                 </div>
             </div>
@@ -265,15 +266,16 @@
             leftArrow.style.display = 'inline';
         }
     }
+    
     showArrow();
-
+    
     //Get the button
     var mybutton = document.getElementById("myBtn");
-
-    window.onscroll = function() {
+    
+    window.onscroll = function () {
         scrollFunction()
     };
-
+    
     function scrollFunction() {
         if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
             mybutton.style.display = "block";
@@ -281,7 +283,7 @@
             mybutton.style.display = "none";
         }
     }
-
+    
     // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
         document.body.scrollTop = 0;
