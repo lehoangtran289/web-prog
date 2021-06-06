@@ -122,10 +122,10 @@
         </tr>
         <?php
             $j = 1;
-            foreach ($orders as $order) {?>
+            foreach ($orders as $order) { ?>
                 <tr>
                     <td>
-                        <?php echo $j; $j++;?>
+                        <?php echo $j; $j++; ?>
                     </td>
                     <td>
                         <?php echo $order['Order']['date'] ?>
@@ -161,20 +161,20 @@
                                     <?php
                                         $i = 1;
                                         foreach ($order['Product'] as $product) { ?>
-                                                <tr>
-                                                    <td>
-                                                        <?php echo $i; $i++;?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $product['Product']['name'] ?>
-                                                    </td>
-                                                    <td>
-                                                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg'?>">
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $product['orders_products']['product_qty'] ?>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $i; $i++; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $product['Product']['name'] ?>
+                                                </td>
+                                                <td>
+                                                    <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg' ?>">
+                                                </td>
+                                                <td>
+                                                    <?php echo $product['orders_products']['product_qty'] ?>
+                                                </td>
+                                            </tr>
                                             <?php
                                         }
                                     ?>
@@ -203,3 +203,4 @@
             }
         }
     </script>
+</div>
