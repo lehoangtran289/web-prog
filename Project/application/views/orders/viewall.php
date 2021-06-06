@@ -111,6 +111,7 @@
     </div>
     <table>
         <tr>
+            <th>#</th>
             <th>Date</th>
             <th>Total Bill</th>
             <th>Phone</th>
@@ -120,9 +121,12 @@
             <th>Detail</th>
         </tr>
         <?php
-            foreach ($orders as $order) {
-                ?>
+            $j = 1;
+            foreach ($orders as $order) {?>
                 <tr>
+                    <td>
+                        <?php echo $j; $j++;?>
+                    </td>
                     <td>
                         <?php echo $order['Order']['date'] ?>
                     </td>
@@ -149,13 +153,18 @@
                                 <span class="close" id="close-<?php echo $order['Order']['id'] ?>">&times;</span>
                                 <table>
                                     <tr>
+                                        <th>#</th>
                                         <th>Product</th>
                                         <th>Image</th>
                                         <th>Quantity</th>
                                     </tr>
                                     <?php
+                                        $i = 1;
                                         foreach ($order['Product'] as $product) { ?>
                                                 <tr>
+                                                    <td>
+                                                        <?php echo $i; $i++;?>
+                                                    </td>
                                                     <td>
                                                         <?php echo $product['Product']['name'] ?>
                                                     </td>
