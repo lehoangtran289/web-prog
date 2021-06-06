@@ -64,7 +64,6 @@
             $products = $this->Product->search();
             $totalPages = $this->Product->totalPages();
             if ($pageNumber > $totalPages || $pageNumber <= 0) {
-//                header('Location: ' . BASE_PATH . '/public/404.php');
                 $this->set('msg', "No products found");
             }
             $categories = performAction('categories', 'findAll', array());
