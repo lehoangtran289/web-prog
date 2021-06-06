@@ -18,7 +18,7 @@
         justify-content: left;
     }
 
-    .filter {
+    .filter-list {
         flex-basis: 30%;
         padding: 10px;
         min-width: 200px;
@@ -34,8 +34,6 @@
         margin: 10px auto 0;
         width: 100%;
     }
-
-    
 </style>
 
 <!-- JS code -->
@@ -122,7 +120,7 @@
     <div class="row">
 
         <!-- Filters section -->
-        <div class="filter">
+        <div class="filter-list">
             <h2 style="text-transform: uppercase; font-size: 22px;">Filters</h2>
             <form id="searchForm" method="POST" action="<?php
                                                         if (!empty($name)) {
@@ -144,6 +142,27 @@
                     }
                     ?>
 
+                </div>
+
+                <!-- Price filter -->
+                <div class="filter-box">
+                    <h4>Price</h4>
+                    <div class="radio-row">
+                        <input type="radio" id="priceRange1" name="radio-group">
+                        <label for="priceRange1">$0 - $500</label>
+                    </div>
+                    <div class="radio-row">
+                        <input type="radio" id="priceRange2" name="radio-group">
+                        <label for="priceRange2">$500 - $1000</label>
+                    </div>
+                    <div class="radio-row">
+                        <input type="radio" id="priceRange3" name="radio-group">
+                        <label for="priceRange3">$1000 - $2000</label>
+                    </div>
+                    <div class="radio-row">
+                        <input type="radio" id="priceRange4" name="radio-group">
+                        <label for="priceRange4">> $2000</label>
+                    </div>
                 </div>
 
                 <!-- Sort filter -->

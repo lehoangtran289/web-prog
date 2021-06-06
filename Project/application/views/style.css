@@ -37,6 +37,7 @@ input[type="checkbox"] {
     border: solid 1px #cccccc;
     margin-right: 8px;
     position: relative;
+    cursor: pointer;
 }
 
 input[type="checkbox"]:checked:before {
@@ -49,6 +50,66 @@ input[type="checkbox"]:checked:before {
     left: 2px;
 }
 
+
+/* Custom radio */
+
+input[type="radio"]:checked,
+input[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="radio"]:checked+label,
+input[type="radio"]:not(:checked)+label {
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+}
+
+input[type="radio"]:checked+label:before,
+input[type="radio"]:not(:checked)+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+
+input[type="radio"]:checked+label:after,
+input[type="radio"]:not(:checked)+label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #ff523b;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+input[type="radio"]:not(:checked)+label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+input[type="radio"]:checked+label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+/* Custom select */
+
 select {
     width: 100%;
     border: 1px solid #1e1e1eec;
@@ -56,6 +117,7 @@ select {
     border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 select:focus {
@@ -273,6 +335,7 @@ select:focus {
     width: 100%;
 }
 
+.radio-row,
 .checkbox-row {
     margin: 8px auto 0;
     display: flex;
