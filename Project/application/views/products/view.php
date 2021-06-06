@@ -185,6 +185,7 @@
                     <th>Chipset</th>
                     <th>RAM</th>
                     <th>Display</th>
+                    <th>Resolution</th>
                     <th>Camera</th>
                     <th>Memory</th>
                     <th>Battery</th>
@@ -195,6 +196,7 @@
                     <td><?php echo $product['Product']['chipset'] ?></td>
                     <td><?php echo $product['Product']['ram'] ?></td>
                     <td><?php echo $product['Product']['display'] ?></td>
+                    <td><?php echo $product['Product']['resolution'] ?></td>
                     <td><?php echo $product['Product']['camera'] ?></td>
                     <td><?php echo $product['Product']['memory'] ?></td>
                     <td><?php echo $product['Product']['pin'] ?></td>
