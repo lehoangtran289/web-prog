@@ -4,8 +4,8 @@
     function chargeFee(fee) {
         var total_bill = <?php echo $_SESSION['order']['total_bill'] ?>;
         total_bill += fee;
-        html = "Total Bill:<br>$" + total_bill;
-        document.getElementsByClassName("total_bill_container")[0].innerHTML = html;
+        html = "<h1 style=\"color: #ff523b; font-weight: 600\">$" + total_bill + "</h1>";
+        document.getElementById("bill").innerHTML = html;
     }
 
     function validatePurchase() {
@@ -169,7 +169,7 @@
                             $method_id = $method['Shipment']['id'];
                         ?>
                             <input type="radio" name="shipment-method" onchange="chargeFee(<?php echo $method['Shipment']['fee'] ?>)" id="<?php echo $method['Shipment']['method'] ?>" value=<?php echo $method_id ?>>
-                            <label for="<?php echo $method['Shipment']['method'] ?>"><?php echo $method['Shipment']['method'] . "\nFee: " . $method['Shipment']['fee'] ?></label>
+                            <label for="<?php echo $method['Shipment']['method'] ?>"><?php echo $method['Shipment']['method'] . "<br>Fee: " . $method['Shipment']['fee'] ?></label>
                         <?php
                         }
                         ?>
@@ -185,6 +185,7 @@
                         ?>
                             <input type="radio" name="payment-method" id="<?php echo $method['Payment']['method'] ?>" value=<?php echo $method_id ?>>
                             <label for="<?php echo $method['Payment']['method'] ?>"><?php echo $method['Payment']['method'] ?></label>
+                            <br>
                         <?php
                         }
                         ?>
@@ -201,7 +202,7 @@
                     <input required type="text" name="phone" value="<?php echo $user['phone'] ?>" style="width: 100%;">
                 </div>
 
-                <div class="row">
+                <div class="row" id="bill">
                     <h1 style="color: #ff523b; font-weight: 600">$<?php echo $_SESSION['order']['total_bill'] ?></h1>
                 </div>
 
