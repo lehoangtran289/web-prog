@@ -61,7 +61,7 @@
     let bonk = () => {
         const img = document.getElementById("cheems");
         if (isBonk === 1) {
-            const audio = new Audio("<?php echo BASE_PATH . '/public/images/bonk.mp3' ?>");
+            const audio = new Audio("<?php echo BASE_PATH . '/public/images/bonk (1).mp3' ?>");
             audio.play();
             img.src = "<?php echo BASE_PATH . '/public/images/bonk.jpg' ?>";
             isBonk = 0;
