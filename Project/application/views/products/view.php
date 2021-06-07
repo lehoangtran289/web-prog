@@ -278,14 +278,14 @@
     </div>
     <div class="row">
         <?php
-        for ($i = 0; $i < count($relatedProducts); $i++) {
+            forEach($relatedProducts as $product) {
             ?>
             <div class="col-4" id="relatedProducts">
-                <a href="<?php echo BASE_PATH . '/products/view/' . $relatedProducts[$i]['Product']['id'] ?>">
-                    <img src="<?php echo BASE_PATH . '/public/images/' . $relatedProducts[$i]['Product']['image'] . '_0.jpg'; ?>">
+                <a href="<?php echo BASE_PATH . '/products/view/' . $product['Product']['id'] ?>">
+                    <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg'; ?>">
                 </a>
-                <h4><?php echo $relatedProducts[$i]['Product']['name']; ?></h4>
-                <p>$<?php echo $relatedProducts[$i]['Product']['price']; ?></p>
+                <h4><?php echo $product['Product']['name']; ?></h4>
+                <p>$<?php echo $product['Product']['price']; ?></p>
             </div>
             <?php
         }

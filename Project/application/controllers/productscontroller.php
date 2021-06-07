@@ -15,7 +15,7 @@
             $product = $this->Product->search();
             if(!$product)
                 header('Location: ' . BASE_PATH . '/public/404.php');
-            $relatedProducts = $this->Product->custom('SELECT * FROM products WHERE category_id = ' . $product['Product']['category_id'] . ' AND id != ' . $id);
+            $relatedProducts = $this->Product->custom('SELECT * FROM products WHERE category_id = ' . $product['Product']['category_id'] . ' AND id != ' . $id . ' order by price desc limit 4');
             $reviews = performAction('reviews', 'findAll', array($id));
             $this->set('reviews', $reviews);
             $this->set('product', $product);
