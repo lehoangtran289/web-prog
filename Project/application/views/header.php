@@ -182,51 +182,6 @@
             display: none;
         }
 
-        @media only screen and (max-width: 800px) {
-            .hero-image {
-                z-index: 0;
-            }
-
-            .header {
-                position: relative;
-                z-index: 2;
-            }
-
-            .nav-header-menu ul {
-                position: absolute;
-                top: 90px;
-                left: 0;
-                background: #1e1e1eec;
-                width: 100%;
-                padding-bottom: 20px;
-                overflow: hidden;
-                transition: max-height 0.5s;
-            }
-
-            .nav-header-menu ul li {
-                display: block;
-                margin-right: 50px;
-                margin-top: 10px;
-                margin-bottom: 10px;
-            }
-
-            .menu-icon {
-                display: block;
-                cursor: pointer;
-            }
-        }
-
-        @media only screen and (max-width: 600px) {
-            .row {
-                text-align: center;
-            }
-
-            .col-2,
-            .col-3, 
-            .col-4 {
-                flex-basis: 100%;
-            }
-        }
     </style>
 
     <script type="text/javascript">

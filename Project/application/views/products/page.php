@@ -1,10 +1,10 @@
 <style>
     .hero-image {
         background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url(<?php echo BASE_PATH . '/public/images/Banner_products.jpg' ?>);
+            url(<?php echo BASE_PATH . '/public/images/Banner_products.jpg' ?>);
         margin-bottom: 80px;
     }
-    
+
     .button {
         border-radius: 5px;
         width: 100%;
@@ -12,23 +12,24 @@
         text-transform: uppercase;
         font-weight: 700;
     }
-    
+
     .row {
         align-items: stretch;
     }
-    
+
     .filter-list {
         flex-basis: 30%;
         padding: 10px;
         min-width: 200px;
+        margin-bottom: 70px;
     }
-    
+
     .product-list {
         padding: 10px;
         flex-basis: 70%;
         min-width: 200px;
     }
-    
+
     .filter-box {
         margin: 10px auto 0;
         width: 100%;
@@ -38,11 +39,11 @@
 <!-- JS code -->
 <script>
     // SAVE FORM STATE WHEN RELOAD
-    window.onload = function () {
+    window.onload = function() {
         // orderBy input
         const orderBy = sessionStorage.getItem('orderBy');
         if (orderBy !== null) document.getElementById("orderBy").value = orderBy;
-        
+
         // brands
         const brands = JSON.parse(sessionStorage.getItem('brands'));
         if (brands) {
@@ -50,7 +51,7 @@
                 document.getElementById(item.id).checked = item.checked;
             })
         }
-        
+
         // price range
         const priceRange = sessionStorage.getItem('priceRange');
         if (priceRange !== null) {
@@ -61,10 +62,10 @@
             })
         }
     }
-    
-    window.onbeforeunload = function () {
+
+    window.onbeforeunload = function() {
         sessionStorage.setItem("orderBy", document.getElementById("orderBy").value);
-        
+
         // brands input
         const brands = document.querySelectorAll(".brcb");
         console.log(brands);
@@ -77,7 +78,7 @@
         });
         sessionStorage.setItem("brands", JSON.stringify(brandsData));
         console.log(JSON.stringify(brandsData));
-        
+
         // priceRange input
         const priceRange = document.getElementsByName('priceRange');
         priceRange.forEach(item => {
@@ -86,21 +87,21 @@
             }
         })
     }
-    
+
     // add filter when navigating between pages
     let processPaging = (url) => {
         console.log(document.getElementById("orderBy").value);
         let form = document.createElement("form");
         form.action = url;
         form.method = 'post';
-        
+
         // orderBy Filter
         let orderByInput = document.createElement('input');
         orderByInput.type = 'hidden';
         orderByInput.name = 'orderBy';
         orderByInput.value = document.getElementById("orderBy").value;
         form.appendChild(orderByInput);
-        
+
         // brands Filter
         if (sessionStorage.getItem('brands')) {
             const brands = JSON.parse(sessionStorage.getItem('brands'));
@@ -115,7 +116,7 @@
                 form.appendChild(brand);
             });
         }
-        
+
         // priceRange filter
         if (sessionStorage.getItem('priceRange')) {
             let priceRange = document.createElement('input');
@@ -124,7 +125,7 @@
             priceRange.value = sessionStorage.getItem('priceRange');
             form.appendChild(priceRange);
         }
-        
+
         document.getElementById('hidden_form_container').appendChild(form);
         console.log(form);
         form.submit();
@@ -144,33 +145,31 @@
 <!-- Products -->
 <div class="small-container">
     <div class="row">
-        
+
         <!-- Filters section -->
         <div class="filter-list">
             <h2 style="text-transform: uppercase; font-size: 22px;">Filters</h2>
             <form id="searchForm" method="POST" action="<?php
-                if (!empty($name)) {
-                    echo BASE_PATH . "/products/page/1/" . $name;
-                } else echo BASE_PATH . "/products/page"
-            ?>">
+                                                        if (!empty($name)) {
+                                                            echo BASE_PATH . "/products/page/1/" . $name;
+                                                        } else echo BASE_PATH . "/products/page"
+                                                        ?>">
                 <!-- Brand filter -->
                 <div class="filter-box">
                     <h4>Brands</h4>
                     <!--Product search-->
                     <?php
-                        foreach ($brands as $brand) {
-                            ?>
-                            <div class="checkbox-row">
-                                <input class="brcb" id="<?php echo $brand['Category']['id'] ?>" type="checkbox"
-                                       name="brands[]" value="<?php echo $brand['Category']['id'] ?>">
-                                <label for="<?php echo $brand['Category']['brand'] ?>"
-                                       class="checkmark"> <?php echo $brand['Category']['brand'] ?> </label>
-                            </div>
-                            <?php
-                        }
+                    foreach ($brands as $brand) {
+                    ?>
+                        <div class="checkbox-row">
+                            <input class="brcb" id="<?php echo $brand['Category']['id'] ?>" type="checkbox" name="brands[]" value="<?php echo $brand['Category']['id'] ?>">
+                            <label for="<?php echo $brand['Category']['brand'] ?>" class="checkmark"> <?php echo $brand['Category']['brand'] ?> </label>
+                        </div>
+                    <?php
+                    }
                     ?>
                 </div>
-                
+
                 <!-- Price filter -->
                 <div class="filter-box">
                     <h4>Price</h4>
@@ -195,67 +194,74 @@
                         <label for="priceRange4">> $2000</label>
                     </div>
                 </div>
-                
+
                 <!-- Sort filter -->
                 <div class="filter-box">
                     <h4>Sort</h4>
                     <!-- Order by price -->
-                    <select name="orderBy" id="orderBy">
-                        <option value="low">Sort by price (low -> high)</option>
-                        <option value="high">Sort by price (high -> low)</option>
-                    </select>
+                    <div class="select">
+                        <select name="orderBy" id="orderBy">
+                            <option value="low">Sort by price (low -> high)</option>
+                            <option value="high">Sort by price (high -> low)</option>
+                        </select>
+                    </div>
                 </div>
-                
-                <input type="submit" id="submit" value="Apply filter" class="button"/>
+
+                <input type="submit" id="submit" value="Apply filter" class="button" />
             </form>
         </div>
-        
+
         <!-- Product section -->
         <div class="product-list">
             <?php
-                if (isset($msg)) {
-                    echo "<h3 align='center'>" . $msg . "</h3>";
-                } else { ?>
-                    <div class="row" style="justify-content: flex-start;">
-                        <?php foreach ($products as $product) : ?>
-                            <div class="col-3" id="pagingProducts">
-                                <a href="<?php echo BASE_PATH . '/products/view/' . $product['Product']['id'] ?>">
-                                    <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg'; ?>">
-                                </a>
-                                <h4><?php echo $product['Product']['name']; ?></h4>
-                                <p>$<?php echo $product['Product']['price']; ?></p>
-                            </div>
-                        <?php endforeach ?>
-                    </div>
-                    <div class="row" style="justify-content: flex-start;">
-                        <!-- Page number -->
-                        <div class="pagination">
-                            <?php
-                                echo '<script>localStorage.setItem("currentPage", "' . $currentPageNumber . '")</script>';
-                                echo '<script>localStorage.setItem("totalPages", "' . $totalPages . '")</script>';
-                                
-                                $leftUrl = BASE_PATH . '/products/page/' . ($currentPageNumber - 1);
-                                $midUrls = array();
-                                for ($i = 1; $i <= $totalPages; $i++)
-                                    $midUrls[$i] = BASE_PATH . '/products/page/' . $i;
-                                $rightUrl = BASE_PATH . '/products/page/' . ($currentPageNumber + 1);
-                                
-                                if (!empty($name)) {
-                                    $leftUrl .= '/' . $name;
-                                    for ($i = 1; $i <= $totalPages; $i++)
-                                        $midUrls[$i] .= '/' . $name;
-                                    $rightUrl .= '/' . $name;
-                                }
-                                
-                                echo "<a onclick=\"processPaging('" . $leftUrl . "')\" id=\"left\"><span>&laquo;</span></a>";
-                                for ($i = 1; $i <= $totalPages; $i++)
-                                    echo "<a onclick=\"processPaging('" . $midUrls[$i] . "')\"><span>" . $i . "</span></a>";
-                                echo "<a onclick=\"processPaging('" . $rightUrl . "')\" id=\"right\"><span>&raquo;</span></a>";
-                            ?>
+            if (isset($msg)) {
+                echo "<h3 align='center'>" . $msg . "</h3>";
+            } else { ?>
+                <div class="row" style="justify-content: flex-start;">
+                    <?php foreach ($products as $product) : ?>
+                        <div class="col-3" id="pagingProducts">
+                            <a href="<?php echo BASE_PATH . '/products/view/' . $product['Product']['id'] ?>">
+                                <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg'; ?>">
+                            </a>
+                            <h4><?php echo $product['Product']['name']; ?></h4>
+                            <p>$<?php echo $product['Product']['price']; ?></p>
                         </div>
+                    <?php endforeach ?>
+                </div>
+                <div class="row" style="float:left;">
+                    <!-- Page number -->
+                    <div class="pagination">
+                        <?php
+                        echo '<script>localStorage.setItem("currentPage", "' . $currentPageNumber . '")</script>';
+                        echo '<script>localStorage.setItem("totalPages", "' . $totalPages . '")</script>';
+
+                        $leftUrl = BASE_PATH . '/products/page/' . ($currentPageNumber - 1);
+                        $midUrls = array();
+                        for ($i = 1; $i <= $totalPages; $i++)
+                            $midUrls[$i] = BASE_PATH . '/products/page/' . $i;
+                        $rightUrl = BASE_PATH . '/products/page/' . ($currentPageNumber + 1);
+
+                        if (!empty($name)) {
+                            $leftUrl .= '/' . $name;
+                            for ($i = 1; $i <= $totalPages; $i++)
+                                $midUrls[$i] .= '/' . $name;
+                            $rightUrl .= '/' . $name;
+                        }
+
+                        echo "<a onclick=\"processPaging('" . $leftUrl . "')\" id=\"left\"><span>&laquo;</span></a>";
+                        for ($i = 1; $i <= $totalPages; $i++) {
+                            if ($i == $currentPageNumber) {
+                                echo "<a onclick=\"processPaging('" . $midUrls[$i] . "')\"><span style=\"background: #ff523b;color: #fff;\">" . $i . "</span></a>";
+                            } else {
+                                echo "<a onclick=\"processPaging('" . $midUrls[$i] . "')\"><span>" . $i . "</span></a>";
+                            }
+                        }
+                        echo "<a onclick=\"processPaging('" . $rightUrl . "')\" id=\"right\"><span>&raquo;</span></a>";
+                        ?>
                     </div>
-                    <?php
-                }
+                </div>
+            <?php
+            }
             ?>
         </div>
     </div>
@@ -281,16 +287,16 @@
             leftArrow.style.display = 'inline';
         }
     }
-    
+
     showArrow();
-    
+
     //Get the button
     var mybutton = document.getElementById("myBtn");
-    
-    window.onscroll = function () {
+
+    window.onscroll = function() {
         scrollFunction()
     };
-    
+
     function scrollFunction() {
         if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
             mybutton.style.display = "block";
@@ -298,16 +304,16 @@
             mybutton.style.display = "none";
         }
     }
-    
+
     // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }
-    
+
     let radios = document.getElementsByName('priceRange');
     for (let i = 0; i < radios.length; i++) {
-        radios[i].onclick = function (e) {
+        radios[i].onclick = function(e) {
             if (e.ctrlKey) {
                 this.checked = false;
             }

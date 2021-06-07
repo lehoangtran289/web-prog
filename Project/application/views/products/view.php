@@ -36,9 +36,23 @@
         margin-left: 10px;
     }
 
+    .small-img-row {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .small-img-col {
+        flex-basis: 24%;
+        cursor: pointer;
+    }
+
     .table-details {
         width: 100%;
         border-collapse: collapse;
+        padding: 0;
+        margin: 0;
+        table-layout: fixed;
     }
 
     .table-details th {
@@ -52,6 +66,7 @@
     .table-details td {
         border: 1px solid #ddd;
         padding: 8px;
+        text-align: center;
     }
 
     .table-details td:hover {
@@ -150,9 +165,27 @@
     <!-- Product description -->
     <div class="small-container single-product">
         <div class="row">
+
+            <!-- Product images -->
             <div class="col-2">
                 <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg' ?>" width="100%" id="productImage">
+
+                <div class="small-img-row">
+                    <div class="small-img-col">
+                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg' ?>" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_1.jpg' ?>" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_2.jpg' ?>" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_3.jpg' ?>" class="small-img">
+                    </div>
+                </div>
             </div>
+
             <div class="col-2">
                 <div class="path">
                     <a href="<?php echo BASE_PATH . '/products/page' ?>">Products</a>
@@ -161,7 +194,7 @@
                 <h1><?php echo $product['Product']['name'] ?></h1>
                 <h4>$<?php echo $product['Product']['price'] ?></h4>
                 <?php
-                if($product['Product']['quantity'] == 0)
+                if ($product['Product']['quantity'] == 0)
                     echo '<h4 style="color: red">This product is out of stock!</h4>';
                 else
                     echo '<input type="submit" value="Add To Cart" class="button">';
@@ -180,28 +213,32 @@
         </div>
         <div class="row">
             <table class="table-details">
-                <tr>
-                    <th>Quantity</th>
-                    <th>OS</th>
-                    <th>Chipset</th>
-                    <th>RAM</th>
-                    <th>Display</th>
-                    <th>Resolution</th>
-                    <th>Camera</th>
-                    <th>Memory</th>
-                    <th>Battery</th>
-                </tr>
-                <tr>
-                    <td><?php echo $product['Product']['quantity'] ?></td>
-                    <td><?php echo $product['Product']['OS'] ?></td>
-                    <td><?php echo $product['Product']['chipset'] ?></td>
-                    <td><?php echo $product['Product']['ram'] ?></td>
-                    <td><?php echo $product['Product']['display'] ?></td>
-                    <td><?php echo $product['Product']['resolution'] ?></td>
-                    <td><?php echo $product['Product']['camera'] ?></td>
-                    <td><?php echo $product['Product']['memory'] ?></td>
-                    <td><?php echo $product['Product']['pin'] ?></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Quantity</th>
+                        <th>OS</th>
+                        <th>Chipset</th>
+                        <th>RAM</th>
+                        <th>Display</th>
+                        <th>Resolution</th>
+                        <th>Camera</th>
+                        <th>Memory</th>
+                        <th>Battery</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php echo $product['Product']['quantity'] ?></td>
+                        <td><?php echo $product['Product']['OS'] ?></td>
+                        <td><?php echo $product['Product']['chipset'] ?></td>
+                        <td><?php echo $product['Product']['ram'] ?></td>
+                        <td><?php echo $product['Product']['display'] ?></td>
+                        <td><?php echo $product['Product']['resolution'] ?></td>
+                        <td><?php echo $product['Product']['camera'] ?></td>
+                        <td><?php echo $product['Product']['memory'] ?></td>
+                        <td><?php echo $product['Product']['pin'] ?></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -239,7 +276,7 @@
                 <?php
                 foreach ($reviews as $review) {
                     $star = $review['Review']['rating'];
-                    ?>
+                ?>
                     <div class="user-review">
                         <div class="row">
                             <h4><?php echo $review['User']['name'] ?></h4>
@@ -247,13 +284,13 @@
                                 <?php
                                 for ($i = 1; $i <= 5; $i++) {
                                     if ($i <= $star) {
-                                        ?>
+                                ?>
                                         <span class="fa fa-star checked" style="color: #ff523b;"></span>
-                                        <?php
+                                    <?php
                                     } else {
-                                        ?>
+                                    ?>
                                         <span class="fa fa-star"></span>
-                                        <?php
+                                <?php
                                     }
                                 }
                                 ?>
@@ -263,7 +300,7 @@
                             <p><?php echo $review['Review']['content'] ?></p>
                         </div>
                     </div>
-                    <?php
+                <?php
                 }
                 ?>
             </div>
@@ -287,7 +324,7 @@
                 <h4><?php echo $product['Product']['name']; ?></h4>
                 <p>$<?php echo $product['Product']['price']; ?></p>
             </div>
-            <?php
+        <?php
         }
         ?>
     </div>
@@ -315,8 +352,25 @@
         return false;
     }
 
-    function hideOutOfStock()
-    {
+    function hideOutOfStock() {
         document.getElementById('oufOfStock').style.display = 'none';
+    }
+</script>
+
+<script>
+    var productImage = document.getElementById("productImage");
+    var smallImage = document.getElementsByClassName("small-img");
+
+    smallImage[0].onclick = function() {
+        productImage.src = smallImage[0].src;
+    }
+    smallImage[1].onclick = function() {
+        productImage.src = smallImage[1].src;
+    }
+    smallImage[2].onclick = function() {
+        productImage.src = smallImage[2].src;
+    }
+    smallImage[3].onclick = function() {
+        productImage.src = smallImage[3].src;
     }
 </script>

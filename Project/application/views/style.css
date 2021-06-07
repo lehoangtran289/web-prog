@@ -132,17 +132,68 @@ input[type="checkbox"] {
 /* Custom select */
 
 select {
-    width: 100%;
-    border: 1px solid #1e1e1eec;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: #f3f3f3;
+    background-image: none;
+}
+
+
+/* Remove IE arrow */
+
+select::-ms-expand {
+    display: none;
+}
+
+
+/* Custom Select */
+
+select {
+    flex: 1;
+    padding: 0 1em;
+    color: #1e1e1eec;
     cursor: pointer;
 }
 
-select:focus {
-    outline: none;
+.select {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    height: 2.8em;
+    line-height: 2.8;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+
+/* Arrow */
+
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #f3f3f3;
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+}
+
+
+/* Transition */
+
+.select:hover::after {
+    color: #ff523b;
 }
 
 
@@ -369,3 +420,90 @@ select:focus {
 
 
 /****************************************/
+
+
+/* Responsive layout */
+
+@media only screen and (max-width: 800px) {
+    .hero-image {
+        z-index: 0;
+    }
+    .header {
+        position: relative;
+        z-index: 2;
+    }
+    .nav-header-menu ul {
+        position: absolute;
+        top: 90px;
+        left: 0;
+        background: #1e1e1eec;
+        width: 100%;
+        padding-bottom: 20px;
+        overflow: hidden;
+        transition: max-height 0.5s;
+    }
+    .nav-header-menu ul li {
+        display: block;
+        margin-right: 50px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .row {
+        text-align: center;
+    }
+    .col-2,
+    .col-3,
+    .col-4 {
+        flex-basis: 100%;
+    }
+    .single-product .row {
+        text-align: left;
+    }
+    .single-product .col-2 {
+        padding: 20px 0;
+    }
+    .single-product h1 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+    .table-details {
+        border: 0;
+    }
+    .table-details thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    .table-details tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+    .table-details td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+    .table-details td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .table-details td:last-child {
+        border-bottom: 0;
+    }
+}
