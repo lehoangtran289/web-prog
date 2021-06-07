@@ -66,7 +66,8 @@
 
                 html += segment;
             });
-            html += "</table><div class=\"row\" style=\"margin-top: 40px;\"><h2>Total</h2><p>$" + total_bill + "</p>";
+            html += "</table><div class=\"row\" style=\"margin-top: 40px;\"><h2>Total</h2>"
+            html += "<p style=\"margin-left: 20px; color: #ff523b; text-transform: uppercase; font-size: 24px; font-weight: 700; transition: all .3s ease 0s;\">$"+ total_bill + "</p>";
             html += "<a href=\"<?php echo BASE_PATH . '/orders/index'; ?> \" class=\"button\" style=\"margin-left: auto;\">Buy</a></div>";
         }
         document.getElementsByClassName("small-container cart-page")[0].innerHTML = html;
