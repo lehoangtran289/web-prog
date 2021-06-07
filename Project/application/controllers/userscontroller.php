@@ -74,7 +74,11 @@
 
         function logout() {
             if (isset($_SESSION['user']))
+            {
                 unset($_SESSION['user']);
+                unset($_SESSION['cart']);
+            }
+
 //                redirectAction('products','index',array());
             echo '<script>localStorage.setItem("isLoggedIn", "none")</script>';
             echo '<script>location.href = "' . BASE_PATH .'"</script>';
