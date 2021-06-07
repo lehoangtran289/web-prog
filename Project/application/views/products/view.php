@@ -168,7 +168,7 @@
 
             <!-- Product images -->
             <div class="col-2">
-                <img style="width: 370px; height: 333px; margin-top: auto; margin-left: auto;margin-right: auto ; display: block;" src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg' ?>" id="productImage">
+                <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg' ?>" id="productImage">
 
                 <div class="small-img-row">
                     <?php
