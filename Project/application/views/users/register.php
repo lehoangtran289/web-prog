@@ -29,7 +29,7 @@
         width: 50%;
         height: 100%;
         justify-content: flex-end;
-        align-items: center;
+        /*align-items: center;*/
     }
 
     .form-box {
