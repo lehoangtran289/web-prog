@@ -88,7 +88,7 @@
 
     td img {
         width: 80px;
-        height: 80px;
+        /*height: 80px;*/
         margin-right: 10px;
     }
 
@@ -163,11 +163,11 @@
             <div class="col-2" style="padding: 0 60px; min-width: 200px">
                 <div class="method-box">
                     <h4>Shipment Method</h4>
-                    <div class="radio-row">
-                        <?php
-                        foreach ($shipment_methods as $method) {
-                            $method_id = $method['Shipment']['id'];
-                        ?>
+                    <?php
+                    foreach ($shipment_methods as $method) {
+                        $method_id = $method['Shipment']['id'];
+                    ?>
+                        <div class="radio-row">
                             <input type="radio" name="shipment-method" onchange="chargeFee(<?php echo $method['Shipment']['fee'] ?>)" id="<?php echo $method['Shipment']['method'] ?>" value=<?php echo $method_id ?>>
                             <label for="<?php echo $method['Shipment']['method'] ?>"><?php echo $method['Shipment']['method'] . "<br>Fee: " . $method['Shipment']['fee'] ?></label>
                         <?php
@@ -178,11 +178,11 @@
 
                 <div class="method-box">
                     <h4>Payment Method</h4>
-                    <div class="radio-row">
-                        <?php
-                        foreach ($payment_methods as $method) {
-                            $method_id = $method['Payment']['id'];
-                        ?>
+                    <?php
+                    foreach ($payment_methods as $method) {
+                        $method_id = $method['Payment']['id'];
+                    ?>
+                        <div class="radio-row">
                             <input type="radio" name="payment-method" id="<?php echo $method['Payment']['method'] ?>" value=<?php echo $method_id ?>>
                             <label for="<?php echo $method['Payment']['method'] ?>"><?php echo $method['Payment']['method'] ?></label>
                             <br>
