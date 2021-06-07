@@ -73,6 +73,7 @@
             width: 100%;
             height: 2.8rem;
             background: #f5f5f5;
+            color: #242222;
             outline: none;
             border: none;
             /*border-radius: 1.625rem;*/
