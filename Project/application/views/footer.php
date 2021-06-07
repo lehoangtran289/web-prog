@@ -5,6 +5,7 @@
     color: #8a8a8a;
     font-size: 14px;
     padding: 60px 0 20px;
+    margin-top: 3rem;
 }
 
 .footer p {
