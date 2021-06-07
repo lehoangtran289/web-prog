@@ -1,5 +1,4 @@
 <style>
-    
     .footer {
         background: #1e1e1eec;
         color: #8a8a8a;

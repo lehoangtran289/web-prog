@@ -1,79 +1,54 @@
 <style>
-    section {
-        position: relative;
-        margin-bottom: 2rem;
+    .update-page {
+        padding: 70px 0;
+        min-height: 50%;
+    }
+
+    .form-container {
+        background: #fff;
+        width: 350px;
+        height: 500px;
+        text-align: center;
+        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    .form-container form {
         width: 100%;
-        height: auto;
-        display: flex;
-    }
-
-    .image-box {
-        position: relative;
-        display: flex;
-        width: 50%;
-        /*height: 100%;*/
-        align-items: center;
-        justify-content: flex-end;
-    }
-
-    .image-box img {
-        width: 70%;
-        height: 70%;
+        max-width: 350px;
         position: absolute;
-        object-fit: cover;
-        border-radius: 25px;
+        padding-right: 20px;
+        padding-left: 20px;
+        margin-top: 15px;
     }
 
-    .content-box {
-        /*display: flex;*/
-        width: 50%;
-        height: 100%;
-        margin-top: 5%;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .form-box {
-        width: 50%;
-        margin-left: 50px;
-    }
-
-    .form-box h2 {
-        color: #555;
-        font-weight: 600;
-        font-size: 1.5em;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        border-bottom: 4px solid #ff523b;
+    .form-button {
+        width: 100%;
         display: inline-block;
-        letter-spacing: 1px;
+        padding-top: 20px;
+    }
+
+    .form-button h3 {
+        font-weight: 700;
+        padding: 6px 25px;
+        color: #1e1e1eec;
     }
 
     .input-box {
-        margin-bottom: 20px;
-    }
-
-    .input-box span {
-        font-size: 16px;
-        margin-bottom: 5px;
-        display: inline-block;
-        color: #607d8b;
-        font-weight: 300;
-        font-size: 16px;
-        letter-spacing: 1px;
+        margin-bottom: 15px;
     }
 
     .input-box input {
         width: 100%;
         padding: 10px 20px;
         outline: none;
-        font-weight: 400;
         border: 1px solid #607d8b;
-        font-size: 16px;
+        font-size: 14px;
+        font-weight: 600;
         letter-spacing: 1px;
-        color: #607d8b;
+        color: #ff523b;
         background: transparent;
-        border-radius: 30px;
+        border-radius: 5px;
     }
 
     .input-box input[type="submit"] {
@@ -81,70 +56,60 @@
         color: #fff;
         outline: none;
         border: none;
-        font-weight: 500;
+        font-weight: 600;
+        font-size: 14px;
         cursor: pointer;
+        text-transform: uppercase;
     }
 
     .input-box input[type="submit"]:hover {
         background: #563434;
     }
 
-    .input-box p {
-        color: #607d8b;
-    }
-
-    .input-box a {
+    .input-box a:hover {
         color: #ff523b;
-    }
-
-    .remember {
-        margin-bottom: 10px;
-        color: #607d8b;
-        font-weight: 400;
-        font-size: 14px;
     }
 </style>
 
-<section>
-    <div class="image-box">
-        <img src="<?php echo BASE_PATH . '/public/images/Update.jpg' ?>">
-    </div>
-
-    <div class="content-box">
-        <div class="form-box">
-            <h2>Update information</h2>
-            <form action="../users/update" method="post">
-                <div class="input-box">
-                    <span>Username</span>
-                    <input required type="text" id="username" name="username" value="<?php echo $currentUser['username'] ?>">
+<div class="update-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="<?php echo BASE_PATH . '/public/images/product-0.png' ?>">
+            </div>
+            <div class="col-2">
+                <div class="form-container">
+                    <div class="form-button">
+                        <h3>Your information</h3>
+                    </div>
+                    <form action="../users/update" method="post">
+                        <div class="input-box">
+                            <input required type="text" id="username" name="username" value="<?php echo $currentUser['username'] ?>" placeholder="Username">
+                        </div>
+                        <div class="input-box">
+                            <input required type="password" id="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="input-box">
+                            <input required type="text" id="name" name="name" value="<?php echo $currentUser['name'] ?>" placeholder="Name">
+                        </div>
+                        <div class="input-box">
+                            <input required type="email" id="email" name="email" value="<?php echo $currentUser['email'] ?>" placeholder="Email">
+                        </div>
+                        <div class="input-box">
+                            <input required type="text" id="address" name="address" value="<?php echo $currentUser['address'] ?>" placeholder="Address">
+                        </div>
+                        <div class="input-box">
+                            <input required type="tel" id="phone" name="phone" value="<?php echo $currentUser['phone'] ?>" placeholder="Phone">
+                        </div>
+                        <div class="input-box">
+                            <input type="submit" name="submit" value="Save changes">
+                        </div>
+                        <div class="input-box">
+                            <a href="<?php echo BASE_PATH . "/orders/viewall" ?>">Order History</a>
+                        </div>
+                    </form>
                 </div>
-                <div class="input-box">
-                    <span>Password</span>
-                    <input required type="password" id="password" name="password">
-                </div>
-                <div class="input-box">
-                    <span>Fullname</span>
-                    <input required type="text" id="name" name="name" value="<?php echo $currentUser['name'] ?>">
-                </div>
-                <div class="input-box">
-                    <span>Email</span>
-                    <input required type="email" id="email" name="email" value="<?php echo $currentUser['email'] ?>">
-                </div>
-                <div class="input-box">
-                    <span>Address</span>
-                    <input required type="text" id="address" name="address" value="<?php echo $currentUser['address'] ?>">
-                </div>
-                <div class="input-box">
-                    <span>Phone</span>
-                    <input required type="tel" id="phone" name="phone" value="<?php echo $currentUser['phone'] ?>">
-                </div>
-                <div class="input-box">
-                    <input type="submit" name="submit" value="Save changes">
-                </div>
-                <div class="input-box">
-                    <a href="<?php echo BASE_PATH . "/orders/viewall" ?>">Order History</a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-</section>
+</div>

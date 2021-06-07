@@ -23,7 +23,7 @@ session_start();
         position: absolute;
         padding-right: 20px;
         padding-left: 20px;
-        margin-top: 25px;
+        margin-top: 45px;
     }
 
     .form-button {
@@ -82,19 +82,8 @@ session_start();
         background: #563434;
     }
 
-    .form-row a {
-        margin-top: 20px;
-    }
-
     .form-row a:hover {
         color: #ff523b;
-    }
-
-    .remember-row {
-        margin-bottom: 10px;
-        color: #607d8b;
-        font-weight: 400;
-        font-size: 14px;
     }
 </style>
 
@@ -120,16 +109,10 @@ session_start();
                         <div class="form-row">
                             <input required type="password" name="password" placeholder="Password">
                         </div>
-                        <div class="remember-row">
-                            <div class="checkbox-row">
-                                <input type="checkbox" name="rememberMe">
-                                <label for="rememberMe">Remember me</label>
-                            </div>
-                        </div>
                         <div class="form-row">
                             <input type="submit" name="submit" value="Login">
                         </div>
-                        <div class="form-row">
+                        <div class="form-row" style="margin-top: 20px;">
                             <a href="<?php echo BASE_PATH ?>">Back to Home Page</a>
                         </div>
                     </form>
