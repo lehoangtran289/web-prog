@@ -3,103 +3,94 @@ session_start();
 ?>
 
 <style>
-    section {
-        position: relative;
+    .login-page {
+        padding: 70px 0;
+        min-height: 50%;
+    }
+
+    .form-container {
+        background: #fff;
+        width: 300px;
+        height: 400px;
+        text-align: center;
+        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    .form-container form {
         width: 100%;
-        height: 80vh;
-        display: flex;
-    }
-
-    .image-box {
-        position: relative;
-        display: flex;
-        width: 50%;
-        height: 100%;
-        align-items: center;
-        justify-content: flex-end;
-    }
-
-    .image-box img {
-        width: 70%;
-        height: 70%;
+        max-width: 300px;
         position: absolute;
-        object-fit: cover;
-        border-radius: 25px;
+        padding-right: 20px;
+        padding-left: 20px;
+        margin-top: 25px;
     }
 
-    .content-box {
-        display: flex;
-        width: 50%;
-        height: 100%;
-        justify-content: flex-start;
-        align-items: center;
+    .form-button {
+        margin-top: 10px;
+        width: 100%;
+        display: inline-block;
+        padding: 20px 0;
     }
 
-    .form-box {
-        width: 50%;
-        margin-left: 50px;
-    }
-
-    .form-box h2 {
+    .form-button span {
+        font-weight: 400;
+        padding: 6px 25px;
         color: #555;
-        font-weight: 600;
-        font-size: 1.5em;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        border-bottom: 4px solid #ff523b;
-        display: inline-block;
-        letter-spacing: 1px;
     }
 
-    .input-box {
-        margin-bottom: 20px;
+    #loginButton {
+        margin-left: auto;
+        margin-right: auto;
+        background: #ff523b;
+        border-radius: 5px;
+        color: white;
     }
 
-    .input-box span {
-        font-size: 16px;
-        margin-bottom: 5px;
-        display: inline-block;
-        color: #607d8b;
-        font-weight: 300;
-        font-size: 16px;
-        letter-spacing: 1px;
+    #registerButton:hover {
+        color: #ff523b;
     }
 
-    .input-box input {
+    .form-row {
+        margin-bottom: 15px;
+    }
+
+    .form-row input {
         width: 100%;
         padding: 10px 20px;
         outline: none;
-        font-weight: 400;
         border: 1px solid #607d8b;
-        font-size: 16px;
+        font-size: 14px;
         letter-spacing: 1px;
         color: #607d8b;
         background: transparent;
-        border-radius: 30px;
+        border-radius: 5px;
     }
 
-    .input-box input[type="submit"] {
+    .form-row input[type="submit"] {
         background: #ff523b;
         color: #fff;
         outline: none;
         border: none;
-        font-weight: 500;
+        font-weight: 600;
+        font-size: 14px;
         cursor: pointer;
+        text-transform: uppercase;
     }
 
-    .input-box input[type="submit"]:hover {
+    .form-row input[type="submit"]:hover {
         background: #563434;
     }
 
-    .input-box p {
-        color: #607d8b;
+    .form-row a {
+        margin-top: 20px;
     }
 
-    .input-box a {
+    .form-row a:hover {
         color: #ff523b;
     }
 
-    .remember {
+    .remember-row {
         margin-bottom: 10px;
         color: #607d8b;
         font-weight: 400;
@@ -107,33 +98,43 @@ session_start();
     }
 </style>
 
-<section>
-    <div class="image-box">
-        <img src="<?php echo BASE_PATH . '/public/images/Login.jpg' ?>">
-    </div>
-
-    <div class="content-box">
-        <div class="form-box">
-            <h2>Login</h2>
-            <form action="../users/login" method="POST">
-                <div class="input-box">
-                    <span>Username</span>
-                    <input required type="text" name="username">
+<div class="login-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="<?php echo BASE_PATH . '/public/images/product-0.png' ?>">
+            </div>
+            <div class="col-2">
+                <div class="form-container">
+                    <div class="form-button">
+                        <span id="loginButton">Login</span>
+                        <span><a href="../users/register" id="registerButton">Register</a></span>
+                    </div>
+                    <form action="../users/login" method="POST">
+                        <div class="form-row">
+                            <h3>Welcome back,</h3>
+                        </div>
+                        <div class="form-row">
+                            <input required type="text" name="username" placeholder="Username">
+                        </div>
+                        <div class="form-row">
+                            <input required type="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="remember-row">
+                            <div class="checkbox-row">
+                                <input type="checkbox" name="rememberMe">
+                                <label for="rememberMe">Remember me</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <input type="submit" name="submit" value="Login">
+                        </div>
+                        <div class="form-row">
+                            <a href="<?php echo BASE_PATH ?>">Back to Home Page</a>
+                        </div>
+                    </form>
                 </div>
-                <div class="input-box">
-                    <span>Password</span>
-                    <input required type="password" name="password">
-                </div>
-                <div class="remember">
-                    <label><input type="checkbox" name="rememberMe"> Remember me</label>
-                </div>
-                <div class="input-box">
-                    <input type="submit" name="submit" value="Login">
-                </div>
-                <div class="input-box">
-                    <p>Don't have an account? <a href="../users/register">Register</a></p>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-</section>
+</div>

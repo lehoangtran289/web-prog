@@ -29,8 +29,8 @@ input[type="text"] {
 
 input[type="text"]:focus {
     outline: none;
-    background: #ff523b;
-    color: #fff;
+    /* background: #ff523b;
+    color: #fff; */
 }
 
 
