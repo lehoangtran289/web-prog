@@ -79,8 +79,8 @@
                 <h3>Download Our App</h3>
                 <p>Download App for Android and Ios</p>
                 <div class="app-logo">
-                    <img src="<?php echo BASE_PATH . '/public/images/app-store.png' ?>">
-                    <img src="<?php echo BASE_PATH . '/public/images/play-store.png' ?>">
+                    <a href="https://youtu.be/dQw4w9WgXcQ?autoplay=1"><img src="<?php echo BASE_PATH . '/public/images/app-store.png' ?>"></a>
+                    <a href="https://youtu.be/dQw4w9WgXcQ?autoplay=1"><img src="<?php echo BASE_PATH . '/public/images/play-store.png' ?>"></a>
                 </div>
             </div>
             <div class="footer-col-2">
