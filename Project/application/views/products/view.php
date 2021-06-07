@@ -39,7 +39,7 @@
     .small-img-row {
         margin-top: 20px;
         display: flex;
-        justify-content: space-between;
+        /*justify-content: space-between;*/
     }
 
     .small-img-col {
@@ -171,18 +171,22 @@
                 <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg' ?>" width="100%" id="productImage">
 
                 <div class="small-img-row">
-                    <div class="small-img-col">
-                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_0.jpg' ?>" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_1.jpg' ?>" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_2.jpg' ?>" class="small-img">
-                    </div>
-                    <div class="small-img-col">
-                        <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_3.jpg' ?>" class="small-img">
-                    </div>
+                    <?php
+                        $fileList = glob(PUBLIC_PATH . '/images/*');
+                        $relatedImages = array();
+                        foreach ($fileList as $filename) {
+                            if (is_file($filename) && strpos($filename, $product['Product']['image'] . '_') == true) {
+                                $relatedImages[] = $filename;
+                            }
+                        }
+                        $totalImagesToDisplay = count($relatedImages) <= 4 ? count($relatedImages) : 4;
+                        for ($i = 0; $i < count($relatedImages); $i++) {?>
+                            <div class="small-img-col">
+                                <img src="<?php echo BASE_PATH . '/public/images/' . $product['Product']['image'] . '_' . $i .'.jpg' ?>" class="small-img">
+                            </div>
+                            <?php
+                        }
+                    ?>
                 </div>
             </div>
 
