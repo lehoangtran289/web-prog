@@ -88,7 +88,7 @@
 
     td img {
         width: 80px;
-        height: 80px;
+        /*height: 80px;*/
         margin-right: 10px;
     }
 
