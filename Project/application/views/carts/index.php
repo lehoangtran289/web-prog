@@ -55,18 +55,18 @@
                 total_bill += sub_total;
                 //console.log(typeof(info.Product));
                 let segment = '';
-                segment += "<tr><td><div class=\"cart-info\"><img src=\"<?php echo BASE_PATH . '/public/images/'?>"+  info.Product.image + "_0.jpg\">";
+                segment += "<tr><td><div class=\"cart-info\"><img src=\"<?php echo BASE_PATH . '/public/images/' ?>" + info.Product.image + "_0.jpg\">";
                 segment += "<div><p>" + info.Product.name + "</p></div></div></td>";
-                segment += "<td>$"+ info.Product.price+ "</td>";
+                segment += "<td>$" + info.Product.price + "</td>";
                 segment += "<td><button type=\"button\" onclick=\"decreaseQty(" + info.Product.id + ")\">-</button> ";
                 segment += info.buy_qty;
                 segment += " <button type=\"button\" onclick=\"increaseQty(" + info.Product.id + ")\">+</button></td>";
-                segment += "<td>$"+ sub_total + "</td>";
+                segment += "<td>$" + sub_total + "</td>";
                 segment += "<td><a href=\"\" onclick=\"removeItem(" + info.Product.id + ")\">Remove</a></td></tr>";
 
                 html += segment;
             });
-            html += "</table><div class=\"row\" style=\"margin-top: 40px;\"><h2>Total</h2><p>$" + total_bill +"</p>";
+            html += "</table><div class=\"row\" style=\"margin-top: 40px;\"><h2>Total</h2><p>$" + total_bill + "</p>";
             html += "<a href=\"<?php echo BASE_PATH . '/orders/index'; ?> \" class=\"button\" style=\"margin-left: auto;\">Buy</a></div>";
         }
         document.getElementsByClassName("small-container cart-page")[0].innerHTML = html;
@@ -85,17 +85,9 @@
         transition: all .3s ease 0s;
     }
 
-    .row p {
-        margin-left: 20px;
-        color: #ff523b;
-        text-transform: uppercase;
-        font-size: 24px;
-        font-weight: 700;
-        transition: all .3s ease 0s;
-    }
-
     .cart-page {
         margin: 80px auto;
+        min-height: 50%;
     }
 
     .cart-info {
@@ -181,7 +173,7 @@
                 <tr>
                     <td>
                         <div class="cart-info">
-                            <img src="<?php echo BASE_PATH . '/public/images/' . $item['Product']['image'] . '_0.jpg'?>">
+                            <img src="<?php echo BASE_PATH . '/public/images/' . $item['Product']['image'] . '_0.jpg' ?>">
                             <div>
                                 <p><?php echo $item['Product']['name'] ?></p>
                             </div>
@@ -210,7 +202,9 @@
 
         <div class="row" style="margin-top: 40px;">
             <h2>Total</h2>
-            <p>$<?php echo $totalPrice ?></p>
+            <p style="margin-left: 20px; color: #ff523b; text-transform: uppercase; font-size: 24px; font-weight: 700; transition: all .3s ease 0s;">
+                $<?php echo $totalPrice ?>
+            </p>
             <a href="<?php echo BASE_PATH . '/orders/index'; ?> " class="button" style="margin-left: auto;">Buy</a>
         </div>
     <?php

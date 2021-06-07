@@ -49,6 +49,12 @@
 
 
 </script>
+
+<div class="small-container">
+<div>
+    
+</div>
+</div>
 <form action="<?php echo BASE_PATH ?>/orders/confirmPurchase" method="POST" onsubmit="return validatePurchase()">
 <table>
     <tr>

@@ -58,7 +58,7 @@ ul {
 
 <div class="footer">
     <div class="container">
-        <div class="row">
+        <div class="row" style="justify-content: center;">
             <div class="footer-col-1">
                 <h3>Download Our App</h3>
                 <p>Download App for Android and Ios</p>
@@ -81,7 +81,7 @@ ul {
             </div>
         </div>
         <hr>
-        <p style="text-align: center;">Copyright 2021 - J Henlo Cheems</p>
+        <p style="text-align: center;">@Copyright 2021 - J Henlo Cheems</p>
     </div>
 </div>
 

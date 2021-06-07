@@ -216,7 +216,7 @@
                 if (isset($msg)) {
                     echo "<h3 align='center'>" . $msg . "</h3>";
                 } else { ?>
-                    <div class="row">
+                    <div class="row" style="justify-content: flex-start;">
                         <?php foreach ($products as $product) : ?>
                             <div class="col-3" id="pagingProducts">
                                 <a href="<?php echo BASE_PATH . '/products/view/' . $product['Product']['id'] ?>">
@@ -227,7 +227,7 @@
                             </div>
                         <?php endforeach ?>
                     </div>
-                    <div class="row">
+                    <div class="row" style="justify-content: flex-start;">
                         <!-- Page number -->
                         <div class="pagination">
                             <?php
