@@ -62,7 +62,7 @@ create table if not exists products
     chipset     varchar(256),
     ram         varchar(20),
     display     varchar(30),
-    resolution  varchar(30),
+    resolution  varchar(50),
     camera      varchar(100),
     memory      varchar(30),
     pin         varchar(20),
@@ -102,8 +102,8 @@ insert into products(name, quantity, category_id, os, chipset, ram, display, res
 insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Samsung Galaxy A02s 4GB/64GB ',13,2,'Android 10','Snapdragon 450 8 nhân','4 GB','PLS TFT LCD 6.5','HD+ (720 x 1600 Pixels)','Chính 13 MP & Phụ 2 MP, 2 MP, 5 MP','64 GB','5000 mAh','product-26','Bảo hành chính hãng 12 tháng. Bao xài đổi trả trong 15 ngày đầu.',129);
 insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Samsung Galaxy S20 FE 256GB ',17,2,'Android 11','Snapdragon 865 8 nhân','8 GB','Super AMOLED','Full HD+ (1080 x 2400 Pixels)','Chính 12 MP & Phụ 12 MP, 8 MP, 32 MP','256 GB','4500 mAh','product-27','Bảo hành 12 tháng chính hãng. bao xài đổi trả trong vòng 15 ngày đầu.',608);
 insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Xiaomi Redmi Note 10 6GB/128GB ',13,3,'Android 11','Snapdragon 678 8 nhân','6 GB','AMOLED 6.43','Full HD+ (1080 x 2400 Pixels)','Chính 48 MP & Phụ 8 MP, 2 MP, 2 MP, 13 MP','128 GB','5000 mAh','product-28','Bảo hành chính hãng 18 tháng. Bao xài đổi trả trong 15 ngày.',195);
-insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Xiaomi Mi 10T Pro 5G - 8GB/128GB',12,3,'Android 10','Snapdragon 865 8 nhân','8 GB','IPS LCD 6.67','Full HD+ (1080 x 2440 Pixels)','Tần số quét 144Hz, Chính 108 MP & Phụ 13 MP, 5 MP, 20 MP','128 GB','5000 mAh','product-29','Bảo hành 24 tháng chính hãng, bao xài đổi trả trong 15 ngày đầu.',433);
-insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Xiaomi Mi 10T Pro 5G - 8GB/256GB',18,3,'Android 10','Snapdragon 865 8 nhân','8 GB','IPS LCD 6.67','Tần số quét 144Hz','Full HD+ (1080 x 2440 Pixels), Chính 108 MP & Phụ 13 MP, 5 MP, 20 MP','256 GB','5000 mAh','product-30','Bảo hành 24 tháng chính hãng, bao xài đổi trả trong 15 ngày đầu.',476);
+insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Xiaomi Mi 10T Pro 5G - 8GB/128GB',12,3,'Android 10','Snapdragon 865 8 nhân','8 GB','IPS LCD 6.67','Full HD+ (1080 x 2440 Pixels), Tần số quét 144Hz','Chính 108 MP & Phụ 13 MP, 5 MP, 20 MP','128 GB','5000 mAh','product-29','Bảo hành 24 tháng chính hãng, bao xài đổi trả trong 15 ngày đầu.',433);
+insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Xiaomi Mi 10T Pro 5G - 8GB/256GB',18,3,'Android 10','Snapdragon 865 8 nhân','8 GB','IPS LCD 6.67','Full HD+ (1080 x 2440 Pixels), Tần số quét 144Hz','Chính 108 MP & Phụ 13 MP, 5 MP, 20 MP','256 GB','5000 mAh','product-30','Bảo hành 24 tháng chính hãng, bao xài đổi trả trong 15 ngày đầu.',476);
 insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Xiaomi Redmi 9T 4GB/64GB  DGW',18,3,'Android 10','Snapdragon 662 8 nhân','4 GB','IPS LCD','Full HD+ (1080 x 2340 Pixels)','Chính 48 MP & Phụ 8 MP, 2 MP, 2 MP, 8 MP','64 GB','6000 mAh','product-31','Bảo hành chính hãng 18 tháng. Bao xài đổi trả trong 15 ngày đầu.',147);
 insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Xiaomi Redmi Note 10S ',25,3,'Android 11','MediaTek Helio G95 8 nhân','8 GB','AMOLED','Full HD+ (1080 x 2400 Pixels)','Chính 64 MP & Phụ 8 MP, 2 MP, 2 MP, 13 MP','128 GB','5000 mAh','product-32','Bảo hành chính hãng 18 tháng. Bao xài đổi trả trong 15 ngày đầu.',282);
 insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Xiaomi Redmi Note 10 5G ',7,3,'Android 11','MediaTek Dimensity 700 8 nhân','4 GB','IPS LCD','Full HD+ (1080 x 2400 Pixels)','Chính 48 MP & Phụ 2 MP, 2 MP, 8 MP','128 GB','5000 mAh','product-33','Bảo hành chính hãng 18 tháng. Bao xài đổi trả trong 15 ngày đầu.',216);
@@ -120,7 +120,6 @@ insert into products(name, quantity, category_id, os, chipset, ram, display, res
 insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('OPPO A15s ',14,4,'Android 10','MediaTek Helio P35 8 nhân','4 GB','LCD 6.52','HD+ (720 x 1600 Pixels)','Chính 13 MP & Phụ 2 MP, 2 MP, 8 MP','64 GB','4230 mAh','product-44','Bảo hành 12 tháng chính hãng',154);
 insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('Oppo A93 - 8GB/128GB ',12,4,'Android 10','MediaTek Helio P95 8 nhân','8 GB','AMOLED','Full HD+ (1080 x 2400 Pixels)','Chính 48 MP & Phụ 8 MP, 2 MP, 2 MP, Chính 16 MP & Phụ 2 MP','128 GB','4000 mAh','product-45','Bảo hành 12 tháng chính hãng, bao xài đổi trả 15 ngày đầu.',241);
 insert into products(name, quantity, category_id, os, chipset, ram, display, resolution,             camera, memory, pin, image, description, price) values ('OPPO A15 ',19,4,'Android 10','MediaTek Helio P35 8 nhân','3 GB','IPS LCD 6.52','HD+ (720 x 1600 Pixels)','Chính 13 MP & Phụ 2 MP, 2 MP, 8 MP','32 GB','4230 mAh','product-46','Bảo hành chính hãng 12 tháng. Bao xài đổi trả 15 ngày đầu.',132);
-
 
 create table if not exists reviews
 (
@@ -168,7 +167,8 @@ create table if not exists shipments
     updated_at  datetime on update current_timestamp
 );
 insert into shipments(method, fee, description)
-values ('By bike', '5', 'Delivery by bike');
+values ('By bike', '5', 'Delivery by bike'),
+        ('Pick up in store', '0', 'Pick up in store');
 
 create table if not exists payments
 (
