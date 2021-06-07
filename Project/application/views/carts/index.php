@@ -61,7 +61,7 @@
                 segment += "<td><button type=\"button\" onclick=\"decreaseQty(" + info.Product.id + ")\">-</button> ";
                 segment += info.buy_qty;
                 segment += " <button type=\"button\" onclick=\"increaseQty(" + info.Product.id + ")\">+</button></td>";
-                segment += "<td>$" + sub_total + "</td>";
+                segment += "<td>$ " + sub_total + "</td>";
                 segment += "<td><a href=\"\" onclick=\"removeItem(" + info.Product.id + ")\">Remove</a></td></tr>";
 
                 html += segment;
