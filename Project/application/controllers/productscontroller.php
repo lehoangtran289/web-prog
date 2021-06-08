@@ -58,7 +58,7 @@
                 $this->set('name', $name);
             }
             $this->Product->setPage($pageNumber);
-            $this->Product->setLimit('12');
+            $this->Product->setLimit('9');
             $this->Product->greater('quantity', 0);
             
             $products = $this->Product->search();

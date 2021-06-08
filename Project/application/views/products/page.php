@@ -24,15 +24,22 @@
         margin-bottom: 70px;
     }
 
+    .filter-box {
+        margin: 10px auto 0;
+        width: 100%;
+    }
+
     .product-list {
         padding: 10px;
         flex-basis: 70%;
         min-width: 200px;
     }
 
-    .filter-box {
-        margin: 10px auto 0;
-        width: 100%;
+    #pagingProducts {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
 

@@ -1,4 +1,9 @@
 <style>
+    #productImage {
+        width: auto;
+        height: 500px;
+    }
+
     .button {
         margin-bottom: 30px;
     }
@@ -45,6 +50,11 @@
     .small-img-col {
         flex-basis: 24%;
         cursor: pointer;
+    }
+
+    .small-img-col img {
+        max-width: 100px;
+        max-height: 100px;
     }
 
     .table-details {
