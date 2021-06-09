@@ -82,15 +82,11 @@
         }
         
         function is_bought($user_id, $product_id) {
-            $this->Order->where('user_id', $user_id);
-            $this->Order->showHasMany();
-            $products = $this->Order->search();
-            foreach($products as $product) {
-                if ($product["Orders_product"][0]['Orders_product']['product_id'] == $product_id) {
-                    return true;
-                }
-            }
-            return False;
+            $result = $this->Order->custom("select * from orders as o, orders_products as od where o.id = od.order_id and user_id=".$user_id." and product_id=".$product_id);
+            pprint($result);
+            if (count($result) == 0) 
+                return false;
+            return true;
         }
 
         function afterAction() {
