@@ -5,6 +5,7 @@ To run this website, you need to:
 - Add config.php file to config folder
   Content of config.php as follow:
     
+    ```
     define("PUBLIC_PATH", dirname(__FILE__) . "/../public");
 
     const DEVELOPMENT_ENVIRONMENT = 'true'
@@ -17,5 +18,6 @@ To run this website, you need to:
     const BASE_PATH = '';
     
     const PAGINATE_LIMIT = '5';
+    ```
     
 - Add folder tmp/cache to the Project
