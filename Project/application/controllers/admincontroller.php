@@ -117,10 +117,10 @@
                 // save multiple images
                 $total_count = count($_FILES['image']['name']);
                 for ($i = 0; $i < $total_count; $i++) {
-                    if ($_FILES['image']['size'][$i] > 1024 * 1024) {
-                        echo "<script type='text/javascript'>alert('File too large! Upload failed');</script>";
-                        return;
-                    }
+//                    if ($_FILES['image']['size'][$i] > 1024 * 1024) {
+//                        echo "<script type='text/javascript'>alert('File too large! Upload failed');</script>";
+//                        return;
+//                    }
                     $tmpFile = $_FILES['image']['tmp_name'][$i];
                     if ($tmpFile != "") {
                         $newFilePath = PUBLIC_PATH . "/images/" . $add_product->image . "_" . $i . ".jpg";
@@ -163,10 +163,10 @@
                 // save multiple images
                 $total_count = count($_FILES['image']['name']);
                 for ($i = 0; $i < $total_count; $i++) {
-                    if ($_FILES['image']['size'][$i] > 1024 * 1024) {
-                        echo "<script type='text/javascript'>alert('File too large!! Upload failed');</script>";
-                        return;
-                    }
+//                    if ($_FILES['image']['size'][$i] > 1024 * 1024) {
+//                        echo "<script type='text/javascript'>alert('File too large!! Upload failed');</script>";
+//                        return;
+//                    }
                     $tmpFile = $_FILES['image']['tmp_name'][$i];
                     if ($tmpFile != "") {
                         $newFilePath = PUBLIC_PATH . "/images/" . $updated_product->image . "_" . $i . ".jpg";

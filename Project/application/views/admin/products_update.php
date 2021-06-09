@@ -37,7 +37,7 @@
                     </tr>
                     <tr class="input-box">
                         <td>Quantity</td>
-                        <td><input type="number" name="quantity" value="<?php echo $product['Product']['name'] ?>"></td>
+                        <td><input type="number" name="quantity" value="<?php echo $product['Product']['quantity'] ?>"></td>
                     </tr>
                     <tr class="input-box">
                         <td>Category</td>

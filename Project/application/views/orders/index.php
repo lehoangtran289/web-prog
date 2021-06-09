@@ -171,7 +171,7 @@
                         ?>
                             <div class="radio-row">
                                 <input type="radio" name="shipment-method" onchange="chargeFee(<?php echo $method['Shipment']['fee'] ?>)" id="<?php echo $method['Shipment']['method'] ?>" value=<?php echo $method_id ?>>
-                                <label for="<?php echo $method['Shipment']['method'] ?>"><?php echo $method['Shipment']['method'] . "<br>Fee: " . $method['Shipment']['fee'] ?></label>
+                                <label for="<?php echo $method['Shipment']['method'] ?>"><?php echo $method['Shipment']['method'] . " - Fee: " . $method['Shipment']['fee'] ?></label>
                             </div>
                         <?php
                         }

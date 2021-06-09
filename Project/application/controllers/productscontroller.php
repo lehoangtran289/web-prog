@@ -8,6 +8,7 @@
         }
         
         function view($id = null) {
+            $id = (int) $id;
             $this->Product->id = $id;
             $this->Product->showHasOne();
             $this->Product->showHMABTM();
@@ -23,6 +24,7 @@
         }
         
         function page($pageNumber = 1, $name = '') {
+            $pageNumber = (int) $pageNumber;
             // handle filters
             if (isset($_POST['orderBy'])) {
                 if ($_POST['orderBy'] == 'low') $this->Product->orderBy('price', 'ASC');
