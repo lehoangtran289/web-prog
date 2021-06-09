@@ -2,6 +2,8 @@
     #productImage {
         width: auto;
         height: 500px;
+        display: block;
+        margin: auto;
     }
 
     .button {
@@ -44,17 +46,28 @@
     .small-img-row {
         margin-top: 20px;
         display: flex;
-        /*justify-content: space-between;*/
+        justify-content: center;
     }
 
     .small-img-col {
         flex-basis: 24%;
         cursor: pointer;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        padding: 10px 0;
+        margin: 0 5px;
     }
 
     .small-img-col img {
         max-width: 100px;
         max-height: 100px;
+        display: block;
+        margin: auto;
+        transition: 0.3s;
+    }
+
+    .small-img-col img:hover {
+        transform: scale(1.3);
     }
 
     .table-details {
